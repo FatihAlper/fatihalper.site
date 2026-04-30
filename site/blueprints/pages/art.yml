@@ -1,0 +1,48 @@
+title: Art
+icon: heart
+
+tabs:
+  content:
+    label: Content
+    icon: heart
+    sections:
+      art:
+        type: pages
+        headline: Art projects
+        layout: cards
+        templates:
+          - art-project
+        sort: date desc
+
+  settings:
+    label: Archive Settings
+    icon: settings
+    fields:
+      description:
+        label: Archive description
+        type: textarea
+        size: small
+
+  seo:
+    label: SEO
+    icon: search
+    columns:
+      main:
+        width: 2/3
+        fields:
+          seo_title:
+            label: SEO title
+            type: text
+          seo_description:
+            label: SEO description
+            type: textarea
+            size: small
+          og_image:
+            label: OG image
+            type: files
+            max: 1
+      files:
+        width: 1/3
+        sections:
+          files:
+            type: files

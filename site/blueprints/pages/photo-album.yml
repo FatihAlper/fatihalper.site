@@ -1,0 +1,98 @@
+title: Fotoğraf albümü
+icon: camera
+
+tabs:
+  content:
+    label: Albüm
+    icon: camera
+    columns:
+      main:
+        width: 2/3
+        sections:
+          intro:
+            type: fields
+            fields:
+              subtitle:
+                label: Alt başlık
+                type: text
+              date:
+                label: Tarih
+                type: date
+                width: 1/2
+              location:
+                label: Konum
+                type: text
+                width: 1/2
+              statement:
+                label: Albüm notu / statement
+                type: writer
+                help: Frontend'de albüm başlığı altında gösterilir.
+
+          gallery_section:
+            type: fields
+            headline: Galeri
+            fields:
+              gallery:
+                label: Fotoğraflar
+                type: files
+                layout: cards
+                query: page.images
+                uploads:
+                  template: photo
+                info: "{{ file.camera }} {{ file.lens }}"
+                help: Fotoğraf dosyası metadata alanları lightbox'a aktarılır.
+                image:
+                  ratio: 1/1
+                  cover: true
+
+      sidebar:
+        width: 1/3
+        sections:
+          cover_section:
+            type: fields
+            headline: Albüm kartı
+            fields:
+              cover:
+                extends: fields/cover-image
+                label: Kapak görseli
+                help: Boşsa kartlarda ilk galeri görseli kullanılır.
+              tags:
+                extends: fields/content-tags
+
+          gear:
+            type: fields
+            headline: Varsayılan ekipman
+            fields:
+              camera:
+                label: Kamera
+                type: text
+              lens:
+                label: Lens
+                type: text
+              film_stock:
+                label: Film / sensör
+                type: text
+
+  seo:
+    label: SEO
+    icon: search
+    columns:
+      main:
+        width: 2/3
+        sections:
+          seo_fields:
+            type: fields
+            fields:
+              seo_title:
+                extends: fields/seo-title
+              seo_description:
+                extends: fields/seo-description
+              og_image:
+                extends: fields/og-image
+      files:
+        width: 1/3
+        sections:
+          files:
+            type: files
+            headline: Dosyalar
+            template: photo

@@ -1,0 +1,332 @@
+title: Home
+icon: home
+options:
+  changeTemplate: false
+  delete: false
+
+tabs:
+  hero:
+    label: Hero
+    icon: text
+    fields:
+      hero_kicker:
+        label: Kicker
+        type: text
+        width: 1/2
+      hero_animation_enabled:
+        label: Enable hero animation
+        type: toggle
+        default: true
+        width: 1/2
+      hero_text:
+        label: Hero text
+        type: textarea
+        buttons: false
+      hero_background_color:
+        label: Background color
+        type: color
+        default: "#260c1a"
+        width: 1/2
+      hero_background_image:
+        label: Background image
+        type: files
+        max: 1
+        width: 1/2
+      hero_enable_grain:
+        label: Grain overlay
+        type: toggle
+        default: false
+        width: 1/2
+
+  marquee:
+    label: Marquee Gallery
+    icon: images
+    fields:
+      show_marquee_gallery:
+        label: Show marquee gallery
+        type: toggle
+        default: true
+        width: 1/2
+      marquee_mode:
+        label: Source mode
+        type: select
+        default: latest
+        width: 1/2
+        options:
+          latest: Latest photography
+          curated: Curated selection
+      marquee_speed:
+        label: Speed
+        type: select
+        default: medium
+        width: 1/2
+        options:
+          slow: Slow
+          medium: Medium
+          fast: Fast
+      marquee_direction:
+        label: Direction
+        type: select
+        default: left
+        width: 1/2
+        options:
+          left: Left
+          right: Right
+      marquee_items:
+        label: Curated images
+        type: structure
+        help: Used only when Source mode is Curated.
+        fields:
+          image:
+            label: Image
+            type: files
+            max: 1
+          title:
+            label: Title
+            type: text
+            width: 1/2
+          link:
+            label: Link
+            type: url
+            width: 1/2
+
+  rooms:
+    label: Rooms
+    icon: grid
+    fields:
+      show_rooms:
+        label: Show rooms
+        type: toggle
+        default: true
+      rooms:
+        label: Rooms
+        type: structure
+        help: Leave empty to use the default listed section pages.
+        fields:
+          title:
+            label: Title
+            type: text
+          description:
+            label: Description
+            type: textarea
+            size: small
+          link:
+            label: Link
+            type: url
+            width: 1/2
+          accent_color:
+            label: Accent color
+            type: color
+            width: 1/2
+
+  featured:
+    label: Featured Object
+    icon: star
+    fields:
+      featured_page:
+        label: Featured page
+        type: pages
+        max: 1
+      featured_label:
+        label: Label
+        type: text
+        default: "Vitrindeki Nesne"
+        width: 1/2
+      featured_image_override:
+        label: Image override
+        type: files
+        max: 1
+        width: 1/2
+      featured_description_override:
+        label: Description override
+        type: textarea
+        size: small
+
+  recent:
+    label: Recently Catalogued
+    icon: clock
+    fields:
+      show_recently_catalogued:
+        label: Show recently catalogued
+        type: toggle
+        default: true
+        width: 1/2
+      recent_title:
+        label: Section title
+        type: text
+        default: "Son Kataloglananlar"
+        width: 1/2
+      recent_limit:
+        label: Item limit
+        type: number
+        default: 6
+        min: 1
+        max: 24
+        width: 1/2
+
+  tag_wall:
+    label: Tag Wall
+    icon: tag
+    fields:
+      show_tag_wall:
+        label: Show tag wall
+        type: toggle
+        default: true
+        width: 1/2
+      tag_wall_title:
+        label: Section title
+        type: text
+        default: "Zihinsel Harita"
+        width: 1/2
+      tag_wall_mode:
+        label: Tag source
+        type: select
+        default: from_tags
+        width: 1/2
+        options:
+          from_tags: Collect from content
+          manual: Manual tags
+      manual_tags:
+        label: Manual tags
+        type: tags
+
+  manifesto:
+    label: Manifesto Strip
+    icon: quote
+    fields:
+      show_manifesto_strip:
+        label: Show manifesto strip
+        type: toggle
+        default: true
+        width: 1/2
+      manifesto_quotes:
+        label: Dialogues / quotes
+        type: structure
+        help: One entry is picked randomly on every uncached page load. Use Text for the quote/dialogue and Source for the film name.
+        fields:
+          text:
+            label: Text
+            type: textarea
+            buttons: false
+            help: HTML is allowed for character names and line breaks.
+          source:
+            label: Source / film
+            type: text
+            width: 1/2
+      manifesto_text:
+        label: Fallback text
+        type: textarea
+        help: Used only when no dialogue / quote entries are defined.
+      manifesto_font_size:
+        label: Font size
+        type: select
+        default: small
+        width: 1/2
+        options:
+          small: Small
+          medium: Medium
+          large: Large
+          display: Display
+      manifesto_link_text:
+        label: Link label
+        type: text
+        default: "Hakkinda"
+        width: 1/2
+      manifesto_link:
+        label: Link URL
+        type: url
+        width: 1/2
+
+  design:
+    label: Design
+    icon: palette
+    columns:
+      hero:
+        width: 1/3
+        sections:
+          hero_design:
+            type: fields
+            headline: Hero design
+            fields:
+              hero_min_height:
+                label: Hero minimum height
+                type: text
+                placeholder: "360px"
+              hero_text_max_width:
+                label: Hero text max width
+                type: text
+                placeholder: "900px"
+              hero_overlay_opacity:
+                label: Hero overlay opacity
+                type: number
+                min: 0
+                max: 1
+                step: 0.05
+                default: 0.4
+      marquee:
+        width: 1/3
+        sections:
+          marquee_design:
+            type: fields
+            headline: Marquee design
+            fields:
+              marquee_height:
+                label: Marquee height
+                type: text
+                placeholder: "clamp(190px, 26dvh, 320px)"
+              marquee_gap:
+                label: Item gap
+                type: text
+                placeholder: "2rem"
+              marquee_item_ratio:
+                label: Item aspect ratio
+                type: text
+                placeholder: "4/3"
+      wall:
+        width: 1/3
+        sections:
+          wall_design:
+            type: fields
+            headline: Tag wall design
+            fields:
+              tag_wall_limit:
+                label: Auto tag limit
+                type: number
+                min: 1
+                max: 100
+                default: 40
+              tag_wall_alignment:
+                label: Alignment
+                type: select
+                default: center
+                options:
+                  left: Left
+                  center: Center
+                  right: Right
+
+  seo:
+    label: SEO
+    icon: search
+    columns:
+      main:
+        width: 2/3
+        sections:
+          seo_fields:
+            type: fields
+            fields:
+              seo_title:
+                label: SEO title
+                type: text
+              seo_description:
+                label: SEO description
+                type: textarea
+                size: small
+              og_image:
+                label: OG image
+                type: files
+                max: 1
+      files:
+        width: 1/3
+        sections:
+          files:
+            type: files

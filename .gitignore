@@ -1,0 +1,36 @@
+.env
+.env.*
+!.env.example
+site/config/.license
+
+# Site-owned identity/content. Keep these on hosting/local only.
+content/
+*.sqlite
+*.db
+
+# User uploads, generated media and runtime state.
+media/
+site/accounts/
+site/cache/
+site/sessions/
+site/logs/
+
+# Private deploy bundles and local server output.
+_deploy*/
+*.zip
+*.log
+
+# Personal/raw media assets if they are ever placed outside content/media.
+*.psd
+*.ai
+*.sketch
+*.fig
+*.indd
+*.mp4
+*.mov
+*.mp3
+*.wav
+
+.DS_Store
+Thumbs.db
+desktop.ini

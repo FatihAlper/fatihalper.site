@@ -1,0 +1,134 @@
+title: Exhibit kaydı
+icon: heart
+
+tabs:
+  content:
+    label: İçerik
+    icon: heart
+    columns:
+      main:
+        width: 2/3
+        fields:
+          body:
+            extends: fields/editor-body
+            label: Eser açıklaması
+            help: Frontend'de sağ bilgi kolonunda gösterilir. Eski `statement` alanı boş olmayan kayıtlar için fallback olarak korunur.
+          gallery:
+            label: Görsel galeri
+            type: files
+            layout: cards
+            query: page.images
+            uploads:
+              template: art-image
+            help: Eser görselleri ve lightbox bilgileri.
+            image:
+              ratio: 4/3
+              cover: true
+          tags:
+            extends: fields/content-tags
+
+      sidebar:
+        width: 1/3
+        fields:
+          cover:
+            label: Kapak görseli
+            type: files
+            max: 1
+            layout: cards
+            query: page.images
+            uploads:
+              template: art-image
+            help: Liste kartları, önizleme ve SEO için kullanılır; galeride tekrar edilmez.
+            image:
+              ratio: 4/3
+              cover: true
+          curator_note:
+            label: Küratör notu
+            type: writer
+            help: Frontend'de eser başlığının hemen altında kısa not olarak gösterilir.
+          date:
+            label: Katalog tarihi
+            type: date
+            default: today
+
+  details:
+    label: Kısa detaylar
+    icon: list-bullet
+    fields:
+      year:
+        label: Yapım yılı
+        type: number
+        width: 1/3
+      production_duration:
+        label: Yapım süresi
+        type: text
+        width: 1/3
+        help: "Örnek: 4 ay, 2 hafta, 2024-2026."
+      materials:
+        label: Malzeme / yüzey
+        type: text
+        width: 1/3
+        help: Eski `paper` alanı frontend fallback olarak korunur.
+      technique:
+        label: Teknik
+        type: text
+        width: 1/2
+      dimensions:
+        label: Boyut
+        type: text
+        width: 1/2
+      edition:
+        label: Edisyon
+        type: text
+        width: 1/3
+      inventory_code:
+        label: Arşiv numarası
+        type: text
+        width: 1/3
+      status:
+        label: Durum
+        type: select
+        width: 1/3
+        options:
+          draft: Taslak / üretimde
+          completed: Tamamlandı
+          exhibited: Sergilendi
+          archived: Arşivde
+          unavailable: Mevcut değil
+
+  legacy:
+    label: Eski alanlar
+    icon: layers
+    fields:
+      statement:
+        label: Eski statement fallback
+        type: writer
+        help: Yeni kayıtlarda body alanını tercih edin.
+      paper:
+        label: Eski malzeme fallback
+        type: text
+        help: Yeni kayıtlarda materials alanını tercih edin.
+
+  seo:
+    label: SEO
+    icon: search
+    columns:
+      main:
+        width: 2/3
+        sections:
+          seo_fields:
+            type: fields
+            fields:
+              seo_title:
+                extends: fields/seo-title
+              seo_description:
+                extends: fields/seo-description
+              og_image:
+                extends: fields/og-image
+      files:
+        width: 1/3
+        sections:
+          files:
+            type: files
+            headline: Dosyalar
+            template: art-image

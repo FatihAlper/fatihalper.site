@@ -1,0 +1,203 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kirby-site\n"
+"Language: tr\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "nav.home"
+msgstr "Giriş"
+
+msgid "nav.about"
+msgstr "Hakkımda"
+
+msgid "nav.aria.home"
+msgstr "Ana sayfa"
+
+msgid "nav.aria.menu"
+msgstr "Menü"
+
+msgid "footer.rss"
+msgstr "RSS"
+
+msgid "archive.empty"
+msgstr "Bu bölümde henüz katalog kaydı yok."
+
+msgid "content.type.writing"
+msgstr "Yazı"
+
+msgid "content.type.essay"
+msgstr "Deneme"
+
+msgid "content.type.article"
+msgstr "Makale"
+
+msgid "content.type.note"
+msgstr "Not"
+
+msgid "content.type.book"
+msgstr "Kitap"
+
+msgid "content.type.film"
+msgstr "Film"
+
+msgid "content.type.playlist"
+msgstr "Müzik"
+
+msgid "content.type.photo"
+msgstr "Fotoğraf"
+
+msgid "content.type.art"
+msgstr "Sanat"
+
+msgid "content.type.catalog"
+msgstr "Katalog Kaydı"
+
+msgid "meta.camera"
+msgstr "Kamera"
+
+msgid "meta.lens"
+msgstr "Lens"
+
+msgid "meta.film"
+msgstr "Film"
+
+msgid "meta.track"
+msgstr "Parça"
+
+msgid "meta.genre"
+msgstr "Tür"
+
+msgid "meta.duration"
+msgstr "Süre"
+
+msgid "meta.author"
+msgstr "Yazar"
+
+msgid "meta.year"
+msgstr "Yıl"
+
+msgid "meta.publisher"
+msgstr "Yayınevi"
+
+msgid "meta.page"
+msgstr "Sayfa"
+
+msgid "meta.director"
+msgstr "Yönetmen"
+
+msgid "meta.technique"
+msgstr "Teknik"
+
+msgid "meta.dimensions"
+msgstr "Boyut"
+
+msgid "meta.material"
+msgstr "Malzeme"
+
+msgid "meta.tags"
+msgstr "Etiket"
+
+msgid "playlist.archive"
+msgstr "Müzik Arşivi"
+
+msgid "playlist.platform"
+msgstr "Platform"
+
+msgid "playlist.track_count"
+msgstr "Parça Sayısı"
+
+msgid "playlist.listen"
+msgstr "Platformda Dinle"
+
+msgid "cta.read"
+msgstr "Oku"
+
+msgid "cta.review"
+msgstr "İncele"
+
+msgid "cta.listen"
+msgstr "Dinle"
+
+msgid "cta.view"
+msgstr "Gör"
+
+msgid "cta.explore"
+msgstr "Keşfet"
+
+msgid "cta.details"
+msgstr "Detaylar"
+
+msgid "unit.track"
+msgstr "parça"
+
+msgid "unit.minute.short"
+msgstr "dk"
+
+msgid "unit.page.short"
+msgstr "sf."
+
+msgid "book.catalog"
+msgstr "Edebi Katalog"
+
+msgid "art.archive"
+msgstr "Sanat Arşivi"
+
+msgid "art.production_duration"
+msgstr "Yapım Süresi"
+
+msgid "art.production_year"
+msgstr "Yapım yılı"
+
+msgid "art.material_surface"
+msgstr "Malzeme / yüzey"
+
+msgid "art.description"
+msgstr "Eser açıklaması"
+
+msgid "art.edition"
+msgstr "Edisyon"
+
+msgid "art.inventory_code"
+msgstr "Arşiv numarası"
+
+msgid "art.status"
+msgstr "Durum"
+
+msgid "art.status_draft"
+msgstr "Taslak / üretimde"
+
+msgid "art.status_completed"
+msgstr "Tamamlandı"
+
+msgid "art.status_exhibited"
+msgstr "Sergilendi"
+
+msgid "art.status_archived"
+msgstr "Arşivde"
+
+msgid "art.status_unavailable"
+msgstr "Mevcut değil"
+
+msgid "tags.label"
+msgstr "Etiket"
+
+msgid "tags.title"
+msgstr "Etiketler"
+
+msgid "tags.search"
+msgstr "Etiket ara"
+
+msgid "tags.placeholder"
+msgstr "Etiket adı"
+
+msgid "home.recently_catalogued"
+msgstr "Son Kataloglananlar"
+
+msgid "language.switch"
+msgstr "Dil seçimi"
+
+msgid "language.tr"
+msgstr "Türkçe"
+
+msgid "language.en"
+msgstr "İngilizce"

@@ -1,0 +1,104 @@
+<?php
+/**
+ * Marquee Gallery
+ * 
+ * Reads mode from home page blueprint (pages/home.yml).
+ * Supports 'latest' (auto from the photography section) and 'curated' (manual selection) modes.
+ */
+$home = page('home');
+$legacyMode = site()->marquee_gallery_source()->value();
+$mode = $home->marquee_mode()
+    ->or($legacyMode === 'selected_files' ? 'curated' : $legacyMode)
+    ->or('latest')
+    ->value();
+$speed = $home->marquee_speed()->or(site()->marquee_speed())->or('medium')->value();
+$direction = $home->marquee_direction()->or('left')->value();
+$style = '';
+if ($home->marquee_height()->isNotEmpty()) {
+    $style .= "--home-marquee-height: {$home->marquee_height()};";
+}
+if ($home->marquee_gap()->isNotEmpty()) {
+    $style .= "--home-marquee-gap: {$home->marquee_gap()};";
+}
+if ($home->marquee_item_ratio()->isNotEmpty()) {
+    $style .= "--home-marquee-item-ratio: {$home->marquee_item_ratio()};";
+}
+$items = [];
+
+if ($mode === 'curated' && $home->marquee_items()->isNotEmpty()) {
+    // Curated: manual structure field from Panel
+    foreach ($home->marquee_items()->toStructure() as $entry) {
+        $img = $entry->image()->toFile();
+        if ($img) {
+            $items[] = [
+                'image' => $img,
+                'title' => $entry->title()->or($img->title())->or($img->caption())->or($img->alt())->or($img->filename()),
+                'link'  => $entry->link()->or('#')
+            ];
+        }
+    }
+} elseif ($mode === 'curated' && site()->marquee_gallery_files()->isNotEmpty()) {
+    foreach (site()->marquee_gallery_files()->toFiles() as $img) {
+        $items[] = [
+            'image' => $img,
+            'title' => $img->title()->or($img->caption())->or($img->alt())->or($img->filename()),
+            'link'  => '#'
+        ];
+    }
+} else {
+    // Latest: pull gallery images from the photography section, newest files first.
+    $parent = site()->children()->listed()->filterBy('intendedTemplate', 'photography')->first()
+        ?? page('photography')
+        ?? page('kadraj');
+
+    if ($parent) {
+        foreach ($parent->children()->listed() as $album) {
+            $images = $album->gallery()->toFiles();
+            if ($images->isEmpty()) {
+                $images = $album->images()->filterBy('template', 'photo');
+            }
+
+            foreach ($images as $img) {
+                $items[] = [
+                    'image' => $img,
+                    'title' => $img->title()->or($img->caption())->or($img->alt())->or($img->name())->value(),
+                    'link'  => $album->url(),
+                    'time'  => $img->modified() ?: 0
+                ];
+            }
+        }
+
+        usort($items, function ($a, $b) {
+            return $b['time'] <=> $a['time'];
+        });
+    }
+}
+
+if (count($items) === 0) return;
+?>
+<section class="home-marquee-gallery" aria-label="Görsel galeri" style="<?= esc($style, 'attr') ?>">
+  <div class="home-marquee-gallery__wrapper">
+    <div class="home-marquee-gallery__track speed-<?= $speed ?> <?= $direction === 'right' ? 'dir-right' : '' ?>">
+      <?php
+      // Duplicate items for seamless infinite scroll
+      $displayItems = array_merge($items, $items);
+      foreach ($displayItems as $item):
+        if ($img = $item['image']):
+      ?>
+        <a href="<?= $item['link'] ?>" class="home-marquee-gallery__item">
+          <?php snippet('components/picture', [
+            'file' => $img,
+            'crop' => [500, 350],
+            'ratio' => '4/3',
+            'alt' => $item['title'],
+            'lazy' => true,
+            'sizes' => '(min-width: 900px) 420px, 70vw'
+          ]) ?>
+          <div class="overlay">
+            <span><?= $item['title'] ?></span>
+          </div>
+        </a>
+      <?php endif; endforeach ?>
+    </div>
+  </div>
+</section>

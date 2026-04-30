@@ -1,0 +1,217 @@
+title: Playlist
+icon: music
+
+tabs:
+  content:
+    label: Playlist
+    icon: music
+    columns:
+      main:
+        width: 2/3
+        fields:
+          playlist_title:
+            label: Playlist başlığı
+            type: text
+            width: 1/2
+            help: Boşsa Kirby sayfa başlığı kullanılır.
+          date:
+            label: Katalog tarihi
+            type: date
+            default: today
+            required: true
+            width: 1/2
+          description:
+            label: Kısa açıklama
+            type: textarea
+            size: small
+            buttons: false
+            maxlength: 320
+          body:
+            extends: fields/editor-body
+            label: Notlar
+          tracks:
+            label: Parçalar
+            type: structure
+            help: Frontend tarafından kullanılan manuel parça listesi.
+            empty: Manuel liste için parça ekleyin
+            fields:
+              position:
+                label: Sıra
+                type: number
+                width: 1/6
+              title:
+                label: Parça başlığı
+                type: text
+                width: 1/3
+              artist:
+                label: Sanatçı
+                type: text
+                width: 1/3
+              album:
+                label: Albüm
+                type: text
+                width: 1/3
+              duration:
+                label: Süre
+                type: text
+                placeholder: "4:32"
+                width: 1/6
+              spotify_url:
+                label: Spotify linki
+                type: url
+                width: 1/2
+              duration_ms:
+                label: Süre (ms)
+                type: text
+                disabled: true
+                width: 1/2
+
+      sidebar:
+        width: 1/3
+        fields:
+          cover:
+            extends: fields/cover-image
+            label: Kapak görseli
+            image:
+              ratio: 1/1
+              cover: true
+          show_cover:
+            label: Frontend'de kapak görselini göster
+            type: toggle
+            default: true
+            help: Kapalıysa manuel kapak ve Spotify kapak görseli frontend'de gösterilmez.
+          mood_tags:
+            extends: fields/mood-tags
+          platform:
+            label: Platform
+            type: select
+            default: spotify
+            options:
+              spotify: Spotify
+              apple: Apple Music
+              youtube: YouTube
+              tidal: Tidal
+          spotify_url:
+            label: Spotify Playlist URL / URI / ID
+            type: text
+            help: Spotify playlist URL, URI veya ID girin. Sync sonrası canonical Spotify linki olarak tutulur.
+          spotify_sync_status:
+            label: Spotify sync durumu
+            type: info
+            theme: info
+            text: |
+              {{ page.spotifySyncStatus }}
+          spotify_sync_requested:
+            label: Spotify'dan senkronize et
+            type: toggle
+            default: false
+            help: Açıp kaydedince Spotify metadata ve parçalar çekilir; işlemden sonra tekrar kapanır.
+          spotify_force_refresh:
+            label: Force refresh / manuel alanları yenile
+            type: toggle
+            default: false
+            help: Kapalıyken dolu manuel alanlar ezilmez. Açıkken Spotify verisi başlık, açıklama, track listesi, süre ve sayıyı yeniler.
+          spotify_tracks_json_template:
+            label: JSON parça listesi şablonu
+            type: info
+            theme: passive
+            text: |
+              Ekran görüntüsünü bir LLM'e verip sadece aşağıdaki JSON formatında çıktı isteyin. Sonucu alttaki JSON alanına yapıştırıp "JSON'dan parça listesini içe aktar" seçeneğini açarak kaydedin.
+
+              ```json
+              {
+                "tracks": [
+                  {
+                    "position": 1,
+                    "title": "Parça adı",
+                    "artist": "Sanatçı",
+                    "album": "Albüm adı",
+                    "duration": "4:32"
+                  }
+                ]
+              }
+              ```
+          spotify_tracks_json:
+            label: Spotify parça JSON'u
+            type: textarea
+            size: medium
+            buttons: false
+            font: monospace
+            help: JSON yalnızca panelde tutulur; frontend doğrudan bu alanı göstermez. İçe aktarım sonrası frontend manuel Parçalar alanını kullanır.
+          spotify_json_import_requested:
+            label: JSON'dan parça listesini içe aktar
+            type: toggle
+            default: false
+            help: Açıp kaydedince JSON, Parçalar alanına aktarılır ve işlemden sonra tekrar kapanır.
+          spotify_playlist_id:
+            label: Spotify Playlist ID
+            type: text
+            disabled: true
+            width: 1/2
+          spotify_last_synced_at:
+            label: Son sync zamanı
+            type: date
+            time: true
+            disabled: true
+            width: 1/2
+          spotify_cover_url:
+            label: Spotify kapak URL
+            type: url
+            disabled: true
+          spotify_last_error:
+            label: Son sync hatası
+            type: textarea
+            size: small
+            disabled: true
+          spotify_skip_notes:
+            label: Atlanan Spotify item notları
+            type: textarea
+            size: small
+            disabled: true
+          track_count:
+            label: Parça sayısı ezmesi
+            type: number
+            width: 1/2
+            help: Boşsa manuel parça listesinden hesaplanır.
+          duration:
+            label: Toplam süre
+            type: text
+            width: 1/2
+
+  embed:
+    label: Embed
+    icon: code
+    fields:
+      embed_info:
+        label: Embed kullanımı
+        type: info
+        text: |
+          Sağlayıcı embed kodunu buraya yapıştırın. Manuel metadata ve parça listesi Playlist sekmesinde kalır.
+      embed_code:
+        label: Embed kodu
+        type: textarea
+        size: medium
+
+  seo:
+    label: SEO
+    icon: search
+    columns:
+      main:
+        width: 2/3
+        sections:
+          seo_fields:
+            type: fields
+            fields:
+              seo_title:
+                extends: fields/seo-title
+              seo_description:
+                extends: fields/seo-description
+              og_image:
+                extends: fields/og-image
+      files:
+        width: 1/3
+        sections:
+          files:
+            type: files
+            headline: Dosyalar
+            template: photo

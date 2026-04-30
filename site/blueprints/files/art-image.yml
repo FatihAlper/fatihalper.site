@@ -1,0 +1,103 @@
+title: Eser görseli
+icon: image
+
+accept:
+  type: image
+
+fields:
+  content_headline:
+    label: Görsel bilgisi
+    type: headline
+  image_title:
+    label: Görsel başlığı
+    type: text
+    width: 1/2
+  alt:
+    label: Alt metin
+    type: text
+    width: 1/2
+  image_caption:
+    label: Kısa açıklama
+    type: textarea
+    size: small
+  image_role:
+    label: Görsel niteliği
+    type: text
+    width: 1/2
+    placeholder: Detay, kurulum, doküman, yakın plan
+  image_date:
+    label: Görsel tarihi
+    type: date
+    width: 1/2
+  technical_note:
+    label: Teknik not
+    type: text
+    width: 1/2
+  material_note:
+    label: Malzeme notu
+    type: text
+    width: 1/2
+
+  lightbox_headline:
+    label: Lightbox
+    type: headline
+    numbered: false
+  lightbox_enabled:
+    label: Lightbox'ta göster
+    type: toggle
+    default: true
+    width: 1/2
+  lightbox_caption:
+    label: Lightbox açıklaması
+    type: textarea
+    size: small
+    help: Boşsa kısa açıklama kullanılır.
+
+  optimization_headline:
+    label: Görsel optimizasyonu
+    type: headline
+    numbered: false
+  image_optimization_enabled:
+    label: ImageX ile optimize et
+    type: toggle
+    default: true
+    width: 1/2
+  image_loading:
+    label: Yükleme modu
+    type: select
+    default: default
+    width: 1/2
+    options:
+      default: Site varsayılanı
+      lazy: Lazy
+      eager: Eager / öncelikli
+  image_srcset:
+    label: Srcset profili
+    type: select
+    default: auto
+    width: 1/2
+    options:
+      auto: Automatic
+      default: Default content
+      card: Cards and thumbnails
+      wide: Wide content
+      hero: Full width / hero
+  image_ratio:
+    label: Render oranı
+    type: select
+    default: auto
+    width: 1/2
+    options:
+      auto: Automatic
+      intrinsic: Original ratio
+      1/1: Square
+      4/3: Landscape 4:3
+      3/2: Photo 3:2
+      16/9: Wide 16:9
+      2/3: Portrait 2:3
+      3/4: Portrait 3:4
+  image_sizes:
+    label: Sizes attribute override
+    type: text
+    width: 1/1
+    placeholder: "(min-width: 900px) 800px, 100vw"

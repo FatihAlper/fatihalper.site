@@ -1,0 +1,11 @@
+name: HTML embed
+icon: code
+preview: fields
+wysiwyg: true
+fields:
+  code:
+    label: Embed HTML
+    type: textarea
+    buttons: false
+    font: monospace
+    placeholder: Paste iframe or embed HTML here.

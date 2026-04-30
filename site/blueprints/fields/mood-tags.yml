@@ -1,0 +1,3 @@
+label: Mood tags
+type: tags
+help: Playlist discovery tags. These feed the tag index through `mood_tags`.

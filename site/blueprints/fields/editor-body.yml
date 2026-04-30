@@ -1,0 +1,16 @@
+label: Body
+type: blocks
+help: Shared long-form content field. Keep the field name as `body` for frontend compatibility and future custom block editors.
+fieldsets:
+  - heading
+  - text
+  - list
+  - quote
+  - image
+  - gallery
+  - video
+  - table
+  - markdown
+  - embed
+  - code
+  - line

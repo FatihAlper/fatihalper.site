@@ -1,0 +1,11 @@
+label: OG image
+type: files
+max: 1
+layout: cards
+query: page.images
+uploads:
+  template: photo
+image:
+  ratio: 16/9
+  cover: true
+help: Optional social image. Empty values fall back to cover/poster/backdrop/site defaults.

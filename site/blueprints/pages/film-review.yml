@@ -1,0 +1,145 @@
+title: Film kaydı
+icon: video
+
+tabs:
+  film:
+    label: Film
+    icon: video
+    columns:
+      main:
+        width: 2/3
+        fields:
+          tmdb_info:
+            label: TMDB akışı
+            type: info
+            theme: info
+            text: |
+              TMDB ID boş metadata, poster ve backdrop değerlerini tamamlayabilir. Manuel alanlar site ayarındaki öncelik açıkken editoryal kaynak olarak kalır.
+          film_title:
+            label: Film başlığı
+            type: text
+            width: 1/2
+            help: Boşsa Kirby sayfa başlığı kullanılır.
+          original_title:
+            label: Orijinal başlık
+            type: text
+            width: 1/2
+          tmdb_id:
+            label: TMDB ID
+            type: text
+            width: 1/2
+            help: "Örnek: 398173"
+          rating:
+            extends: fields/rating-5
+            label: Puan
+            width: 1/4
+          date:
+            label: İzleme / katalog tarihi
+            type: date
+            default: today
+            required: true
+            width: 1/4
+
+      sidebar:
+        width: 1/3
+        fields:
+          poster:
+            label: Manuel poster
+            type: files
+            max: 1
+            layout: cards
+            query: page.images
+            uploads:
+              template: photo
+            image:
+              ratio: 2/3
+              cover: true
+            help: Boşsa TMDB poster değeri kullanılır.
+          backdrop:
+            label: Manuel backdrop
+            type: files
+            max: 1
+            layout: cards
+            query: page.images
+            uploads:
+              template: photo
+            image:
+              ratio: 16/9
+              cover: true
+            help: Boşsa TMDB backdrop değeri kullanılır.
+
+  metadata:
+    label: Metadata
+    icon: list-bullet
+    fields:
+      director:
+        label: Yönetmen
+        type: text
+        width: 1/2
+      release_year:
+        label: Yayın yılı
+        type: number
+        width: 1/4
+      runtime:
+        label: Süre
+        type: number
+        after: dk
+        width: 1/4
+      countries:
+        label: Ülkeler
+        type: text
+        width: 1/2
+        help: Boşsa TMDB üretim ülkeleri kullanılır.
+      genres:
+        label: Türler
+        type: text
+        width: 1/2
+        help: Boşsa TMDB türleri kullanılır.
+
+  review:
+    label: İnceleme
+    icon: text
+    columns:
+      main:
+        width: 2/3
+        fields:
+          body:
+            extends: fields/editor-body
+            label: İnceleme gövdesi
+      sidebar:
+        width: 1/3
+        fields:
+          short_review:
+            label: Kısa yorum / teaser
+            type: textarea
+            size: small
+            buttons: false
+            maxlength: 360
+            placeholder: Bu film hakkında kısa bir düşünce...
+            help: Arşiv kartlarında ve tam incelemenin başında "spot" olarak gösterilir.
+          tags:
+            extends: fields/content-tags
+
+  seo:
+    label: SEO
+    icon: search
+    columns:
+      main:
+        width: 2/3
+        sections:
+          seo_fields:
+            type: fields
+            fields:
+              seo_title:
+                extends: fields/seo-title
+              seo_description:
+                extends: fields/seo-description
+              og_image:
+                extends: fields/og-image
+      files:
+        width: 1/3
+        sections:
+          files:
+            type: files
+            headline: Dosyalar
+            template: photo

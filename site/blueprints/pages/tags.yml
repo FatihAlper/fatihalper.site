@@ -1,0 +1,38 @@
+title: Tags
+icon: tag
+
+options:
+  changeSlug: false
+  changeStatus: true
+  delete: false
+
+tabs:
+  content:
+    label: Content
+    icon: text
+    fields:
+      intro:
+        label: Intro
+        type: textarea
+        size: small
+      description:
+        label: Description
+        type: textarea
+        size: small
+        help: Optional fallback text for SEO and the tag landing page.
+
+  seo:
+    label: SEO
+    icon: search
+    fields:
+      seo_title:
+        label: SEO title
+        type: text
+      seo_description:
+        label: SEO description
+        type: textarea
+        size: small
+      og_image:
+        label: OG image
+        type: files
+        max: 1

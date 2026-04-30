@@ -1,0 +1,1075 @@
+title: Site
+
+tabs:
+  dashboard:
+    label: Pano
+    icon: dashboard
+    columns:
+      main:
+        width: 2/3
+        sections:
+          dashboard_stats:
+            type: info
+            theme: info
+            headline: Arşiv Durumu
+            text: |
+              {{ site.panelArchiveStats }}
+
+          recent_drafts:
+            type: pages
+            headline: Yayında olmayan taslaklar
+            create: false
+            status: draft
+            search: true
+            limit: 5
+            layout: table
+            empty: Yayına hazır taslak bulunamadı.
+            columns:
+              title:
+                label: Başlık
+              intendedTemplate:
+                label: Tür
+              modified:
+                label: Son Güncelleme
+                display: d.m.Y H:i
+
+          seo_health:
+            type: info
+            theme: notice
+            headline: SEO ve Metadata Uyarıları
+            text: |
+              {{ site.panelSeoWarnings }}
+
+          media_health:
+            type: info
+            headline: Medya ve Sistem Bilgisi
+            text: |
+              {{ site.panelMediaSummary }}
+
+      sidebar:
+        width: 1/3
+        sections:
+          quick_access:
+            type: info
+            theme: positive
+            headline: Hızlı Erişim
+            text: |
+              İçerik üretmek için [İçerik Üretimi](/panel/site?tab=archive_desk) sekmesini kullanın.
+              
+              - [Ana Sayfa Düzeni](/panel/pages/home)
+              - [Tüm Yazılar](/panel/pages/fragmanlar)
+              - [Sinema Arşivi](/panel/pages/perde)
+              - [Görsel Arşiv](/panel/pages/kadraj)
+              - [Site Ayarları](/panel/site?tab=identity)
+
+          environment_info:
+            type: info
+            headline: Ortam Bilgisi
+            text: |
+              {{ site.panelEnvironmentSummary }}
+
+          google_analytics:
+            type: info
+            theme: info
+            headline: Google Analytics Status
+            text: |
+              {{ site.panelGoogleAnalyticsSummary }}
+
+  homepage:
+    label: Ana Sayfa
+    icon: home
+    columns:
+      main:
+        width: 2/3
+        sections:
+          homepage_intro:
+            type: info
+            theme: info
+            headline: Ana sayfa editörü
+            text: |
+              Hero yazısı, arka planı, marquee galeri, oda kartları, vitrindeki nesne, son kataloglananlar, tag wall ve quote/manifesto şeridi `home` sayfasının kendi blueprint'i üzerinden yönetilir.
+
+              Düzenlemek için aşağıdaki Ana Sayfa kaydını açın.
+
+          homepage_page:
+            type: pages
+            headline: Ana Sayfa
+            status: all
+            create: false
+            search: false
+            limit: 1
+            templates:
+              - home
+            layout: list
+            image: false
+            empty: Home sayfası bulunamadı.
+
+      sidebar:
+        width: 1/3
+        sections:
+          homepage_map:
+            type: info
+            theme: passive
+            headline: Paneldeki bölümler
+            text: |
+              - Hero: hero yazısı, kicker, arka plan, grain
+              - Marquee Gallery: otomatik/manuel galeri ve hareket ayarları
+              - Tag Wall: otomatik veya manuel etiket duvarı
+              - Manifesto Strip: quote/dialogue listesi ve fallback metni
+              - Design: hero, marquee ve tag wall görünüm ayarları
+
+  archive_desk:
+    label: İçerik Üretimi
+    icon: edit
+    columns:
+      main:
+        width: 2/3
+        sections:
+          archive_desk_intro:
+            type: info
+            headline: Arşiv Masası
+            text: |
+              Tüm içerik tipleri burada üretilir. Yapı gelecekte özel bir sol Panel alanına taşınabilecek şekilde `contentTypeRegistry()` ile belgelenmiştir.
+
+          content_type_writing:
+            type: pages
+            headline: Yazılar / Fragmanlar
+            parent: site.find('fragmanlar')
+            status: all
+            search: true
+            limit: 8
+            layout: table
+            create: writing
+            templates:
+              - writing
+            sort: date desc
+            empty: Henüz yazı yok
+            columns:
+              title:
+                label: Başlık
+              writing_type:
+                label: Tür
+              date:
+                label: Tarih
+                display: d.m.Y
+              status:
+                label: Durum
+
+          content_type_film_review:
+            type: pages
+            headline: Film Kayıtları / Perde
+            parent: site.find('perde')
+            status: all
+            search: true
+            limit: 8
+            layout: table
+            create: film-review
+            templates:
+              - film-review
+            sort: date desc
+            empty: Henüz film kaydı yok
+            columns:
+              title:
+                label: Başlık
+              rating:
+                label: Puan
+              date:
+                label: Tarih
+                display: d.m.Y
+              status:
+                label: Durum
+
+          content_type_photo_album:
+            type: pages
+            headline: Fotoğraf Albümleri / Kadraj
+            parent: site.find('kadraj')
+            status: all
+            search: true
+            limit: 8
+            layout: cards
+            create: photo-album
+            templates:
+              - photo-album
+            sort: date desc
+            empty: Henüz fotoğraf albümü yok
+            image:
+              query: page.cover.toFile
+              ratio: 4/3
+              cover: true
+
+      sidebar:
+        width: 1/3
+        sections:
+          archive_desk_map:
+            type: info
+            theme: info
+            headline: İçerik tipi haritası
+            text: |
+              writing → fragmanlar / writing
+              book-review → marginalia / book-review
+              film-review → perde / film-review
+              playlist → rezonans / playlist
+              photo-album → kadraj / photo-album
+              art-project → exhibit / art-project
+
+          content_type_book_review:
+            type: pages
+            headline: Kitap Kayıtları
+            parent: site.find('marginalia')
+            status: all
+            search: true
+            limit: 6
+            layout: cards
+            create: book-review
+            templates:
+              - book-review
+            sort: date desc
+            empty: Henüz kitap kaydı yok
+            image:
+              query: page.cover.toFile
+              ratio: 2/3
+              cover: true
+
+          content_type_playlist:
+            type: pages
+            headline: Playlistler
+            parent: site.find('rezonans')
+            status: all
+            search: true
+            limit: 6
+            layout: cards
+            create: playlist
+            templates:
+              - playlist
+            sort: date desc
+            empty: Henüz playlist yok
+            image:
+              query: page.cover.toFile
+              ratio: 1/1
+              cover: true
+
+          content_type_art_project:
+            type: pages
+            headline: Exhibit Kayıtları
+            parent: site.find('exhibit')
+            status: all
+            search: true
+            limit: 6
+            layout: cards
+            create: art-project
+            templates:
+              - art-project
+            sort: date desc
+            empty: Henüz exhibit kaydı yok
+            image:
+              query: page.cover.toFile
+              ratio: 4/3
+              cover: true
+
+  translations:
+    label:
+      tr: Çeviriler
+      en: Translations
+    icon: globe
+    columns:
+      main:
+        width: 2/3
+        sections:
+          language_settings:
+            type: fields
+            fields:
+              content_language:
+                label:
+                  tr: Varsayılan frontend dili
+                  en: Default frontend language
+                type: select
+                default: tr
+                width: 1/2
+                options:
+                  tr: Türkçe
+                  en: English
+                help:
+                  tr: Site arayüz metinleri varsayılan olarak bu dilde gösterilir. Panel dili için Hesap > Dil ayarını kullanın. URL'de ?lang=en veya ?lang=tr ile frontend test edilebilir.
+                  en: Frontend interface text is shown in this language by default. For the Panel language, use Account > Language. Test the frontend with ?lang=en or ?lang=tr.
+              site_i18n_overrides:
+                label:
+                  tr: PO metin ezmeleri
+                  en: PO text overrides
+                type: structure
+                help:
+                  tr: site/translations/*.po dosyalarındaki varsayılan frontend metinlerini Panel üzerinden değiştirir.
+                  en: Overrides default frontend strings from site/translations/*.po in the Panel.
+                columns:
+                  key:
+                    width: 1/3
+                  text_tr:
+                    width: 1/3
+                  text_en:
+                    width: 1/3
+                fields:
+                  key:
+                    label:
+                      tr: Anahtar
+                      en: Key
+                    type: select
+                    required: true
+                    options:
+                      nav.home: nav.home
+                      nav.about: nav.about
+                      nav.aria.home: nav.aria.home
+                      nav.aria.menu: nav.aria.menu
+                      footer.rss: footer.rss
+                      archive.empty: archive.empty
+                      content.type.writing: content.type.writing
+                      content.type.essay: content.type.essay
+                      content.type.article: content.type.article
+                      content.type.note: content.type.note
+                      content.type.book: content.type.book
+                      content.type.film: content.type.film
+                      content.type.playlist: content.type.playlist
+                      content.type.photo: content.type.photo
+                      content.type.art: content.type.art
+                      content.type.catalog: content.type.catalog
+                      meta.camera: meta.camera
+                      meta.lens: meta.lens
+                      meta.film: meta.film
+                      meta.track: meta.track
+                      meta.genre: meta.genre
+                      meta.duration: meta.duration
+                      meta.author: meta.author
+                      meta.year: meta.year
+                      meta.publisher: meta.publisher
+                      meta.page: meta.page
+                      meta.director: meta.director
+                      meta.technique: meta.technique
+                      meta.dimensions: meta.dimensions
+                      meta.material: meta.material
+                      meta.tags: meta.tags
+                      playlist.archive: playlist.archive
+                      playlist.platform: playlist.platform
+                      playlist.track_count: playlist.track_count
+                      playlist.listen: playlist.listen
+                      cta.read: cta.read
+                      cta.review: cta.review
+                      cta.listen: cta.listen
+                      cta.view: cta.view
+                      cta.explore: cta.explore
+                      cta.details: cta.details
+                      unit.track: unit.track
+                      unit.minute.short: unit.minute.short
+                      unit.page.short: unit.page.short
+                      book.catalog: book.catalog
+                      art.archive: art.archive
+                      art.production_duration: art.production_duration
+                      art.production_year: art.production_year
+                      art.material_surface: art.material_surface
+                      art.description: art.description
+                      art.edition: art.edition
+                      art.inventory_code: art.inventory_code
+                      art.status: art.status
+                      art.status_draft: art.status_draft
+                      art.status_completed: art.status_completed
+                      art.status_exhibited: art.status_exhibited
+                      art.status_archived: art.status_archived
+                      art.status_unavailable: art.status_unavailable
+                      tags.label: tags.label
+                      tags.title: tags.title
+                      tags.search: tags.search
+                      tags.placeholder: tags.placeholder
+                      home.recently_catalogued: home.recently_catalogued
+                  text_tr:
+                    label:
+                      tr: Türkçe
+                      en: Turkish
+                    type: text
+                    width: 1/2
+                  text_en:
+                    label: English
+                    type: text
+                    width: 1/2
+      sidebar:
+        width: 1/3
+        sections:
+          po_info:
+            type: info
+            theme: info
+            headline:
+              tr: PO entegrasyonu
+              en: PO integration
+            text:
+              tr: Varsayılan metinler site/translations/tr.po ve site/translations/en.po dosyalarından okunur. Bu ekrandaki ezmeler dosyalardaki değerlerden önceliklidir. Bu ayar Panel dilini değiştirmez; Panel dili kullanıcı hesabındaki Dil ayarından gelir.
+              en: Default strings are read from site/translations/tr.po and site/translations/en.po. Overrides on this screen take priority. This setting does not change the Panel language; the Panel language comes from the user account Language setting.
+
+  identity:
+    label:
+      tr: Kimlik
+      en: Identity
+    icon: user
+    columns:
+      main:
+        width: 2/3
+        sections:
+          localized_identity:
+            type: fields
+            headline:
+              tr: İki dilli kimlik
+              en: Bilingual identity
+            fields:
+              site_title_tr:
+                label:
+                  tr: Site başlığı
+                  en: Site title - Turkish
+                type: text
+                width: 1/2
+              site_title_en:
+                label:
+                  tr: Site başlığı - İngilizce
+                  en: Site title
+                type: text
+                width: 1/2
+              site_subtitle_tr:
+                label:
+                  tr: Site alt başlığı
+                  en: Site subtitle - Turkish
+                type: text
+                width: 1/2
+              site_subtitle_en:
+                label:
+                  tr: Site alt başlığı - İngilizce
+                  en: Site subtitle
+                type: text
+                width: 1/2
+              site_description_tr:
+                label:
+                  tr: Site açıklaması
+                  en: Site description - Turkish
+                type: textarea
+                size: small
+                width: 1/2
+              site_description_en:
+                label:
+                  tr: Site açıklaması - İngilizce
+                  en: Site description
+                type: textarea
+                size: small
+                width: 1/2
+              site_author_tr:
+                label:
+                  tr: Site yazarı
+                  en: Site author - Turkish
+                type: text
+                width: 1/2
+              site_author_en:
+                label:
+                  tr: Site yazarı - İngilizce
+                  en: Site author
+                type: text
+                width: 1/2
+
+          legacy_identity:
+            type: fields
+            headline:
+              tr: Geriye uyumluluk alanları
+              en: Compatibility fallbacks
+            fields:
+              site_title:
+                label:
+                  tr: Eski site başlığı
+                  en: Legacy site title
+                type: text
+                width: 1/2
+                help:
+                  tr: TR/EN alanları boşsa fallback olarak kullanılır.
+                  en: Used as fallback when TR/EN fields are empty.
+              site_subtitle:
+                label:
+                  tr: Eski site alt başlığı
+                  en: Legacy site subtitle
+                type: text
+                width: 1/2
+              site_description:
+                label:
+                  tr: Eski site açıklaması
+                  en: Legacy site description
+                type: textarea
+                size: small
+                help:
+                  tr: SEO ve editoryal bağlam için son fallback açıklama.
+                  en: Final fallback description for SEO and editorial context.
+              site_author:
+                label:
+                  tr: Eski site yazarı
+                  en: Legacy site author
+                type: text
+                width: 1/2
+
+      sidebar:
+        width: 1/3
+        sections:
+          logo_assets:
+            type: fields
+            headline:
+              tr: Logo
+              en: Logo
+            fields:
+              logo:
+                label:
+                  tr: Birincil logo
+                  en: Primary logo
+                type: files
+                max: 1
+                uploads:
+                  accept: .svg, .png, .jpg, .jpeg
+                help:
+                  tr: Header öncelikle bunu kullanır.
+                  en: Header uses this first.
+              site_logo:
+                label:
+                  tr: Uyumluluk logosu
+                  en: Compatibility logo
+                type: files
+                max: 1
+                uploads:
+                  accept: .svg, .png, .jpg, .jpeg
+                help:
+                  tr: Eski içerik fallback alanı. Yeni düzenlemelerde Birincil logo tercih edilir.
+                  en: Existing content fallback. Prefer Primary logo for new edits.
+
+          identity_media:
+            type: fields
+            headline:
+              tr: Profil ve ikonlar
+              en: Profile and icons
+            fields:
+              profile_image:
+                label:
+                  tr: Profil görseli
+                  en: Profile image
+                type: files
+                max: 1
+              favicon:
+                label: Favicon
+                type: files
+                max: 1
+                uploads:
+                  accept: .ico, .png, .svg
+
+          logo_design:
+            type: fields
+            headline:
+              tr: Header logo görünümü
+              en: Header logo display
+            fields:
+              logo_color:
+                label:
+                  tr: SVG logo rengi
+                  en: SVG logo color
+                type: color
+                default: "#DDD96A"
+              logo_size_mobile:
+                label:
+                  tr: Mobil boyut
+                  en: Mobile size
+                type: number
+                after: px
+                default: 48
+                width: 1/2
+              logo_size_tablet:
+                label:
+                  tr: Tablet boyut
+                  en: Tablet size
+                type: number
+                after: px
+                default: 52
+                width: 1/2
+              logo_size_desktop:
+                label:
+                  tr: Masaüstü boyut
+                  en: Desktop size
+                type: number
+                after: px
+                default: 56
+
+  navigation:
+    label: Navigasyon
+    icon: list-bullet
+    columns:
+      main:
+        width: 1/1
+        sections:
+          nav_fields:
+            type: fields
+            fields:
+              show_home_link:
+                label: Ana sayfa linkini göster
+                type: toggle
+                default: true
+                width: 1/2
+              show_about_link:
+                label: Hakkımda linkini göster
+                type: toggle
+                default: false
+                width: 1/2
+              main_navigation:
+                label: Ana navigasyon
+                type: structure
+                fields:
+                  label:
+                    label: Varsayılan etiket
+                    type: text
+                    width: 1/2
+                  label_tr:
+                    label: Etiket - Türkçe
+                    type: text
+                    width: 1/2
+                  label_en:
+                    label: Label - English
+                    type: text
+                    width: 1/2
+                  link:
+                    label: İç sayfa
+                    type: pages
+                    max: 1
+                    width: 1/2
+                  external_url:
+                    label: Dış URL
+                    type: url
+                    width: 1/2
+                  open_in_new_tab:
+                    label: Yeni sekmede aç
+                    type: toggle
+                    default: false
+                    width: 1/2
+
+  social:
+    label: Sosyal
+    icon: share
+    columns:
+      main:
+        width: 1/1
+        sections:
+          social_fields:
+            type: fields
+            fields:
+              social_links:
+                label: Sosyal linkler
+                type: structure
+                fields:
+                  platform:
+                    label: Platform
+                    type: text
+                    width: 1/2
+                  label:
+                    label: Erişilebilir etiket
+                    type: text
+                    width: 1/2
+                  label_tr:
+                    label: Etiket - Türkçe
+                    type: text
+                    width: 1/2
+                  label_en:
+                    label: Label - English
+                    type: text
+                    width: 1/2
+                  url:
+                    label: URL
+                    type: url
+                  icon_name:
+                    label: FontAwesome ikon sınıfı
+                    type: text
+                    placeholder: "fab fa-instagram"
+                    width: 1/2
+                  icon_svg:
+                    label: Özel SVG ikon
+                    type: files
+                    max: 1
+                    width: 1/2
+                    uploads:
+                      accept: .svg
+                  icon_color:
+                    label: İkon rengi
+                    type: color
+                    width: 1/2
+                  icon_size:
+                    label: İkon boyutu
+                    type: number
+                    after: px
+                    width: 1/2
+                  visible:
+                    label: Görünür
+                    type: toggle
+                    default: true
+
+  footer:
+    label: Alt bilgi
+    icon: text
+    columns:
+      main:
+        width: 1/1
+        sections:
+          footer_fields:
+            type: fields
+            fields:
+              footer_text:
+                label: Alt bilgi metni
+                type: text
+                help: Boş bırakılırsa site alt başlığı kullanılır.
+              footer_text_tr:
+                label: Alt bilgi metni - Türkçe
+                type: text
+                width: 1/2
+              footer_text_en:
+                label: Footer text - English
+                type: text
+                width: 1/2
+              copyright_text:
+                label: Telif metni ezmesi
+                type: text
+                help: Opsiyonel. Boş bırakılırsa otomatik yıl ve yazar satırı kullanılır.
+              copyright_text_tr:
+                label: Telif metni - Türkçe
+                type: text
+                width: 1/2
+              copyright_text_en:
+                label: Copyright text - English
+                type: text
+                width: 1/2
+              rss_enabled:
+                label: RSS linkini göster
+                type: toggle
+                default: true
+
+  seo:
+    label: SEO
+    icon: search
+    columns:
+      main:
+        width: 1/1
+        sections:
+          seo_defaults:
+            type: fields
+            fields:
+              default_seo_title:
+                label: Varsayılan SEO başlığı
+                type: text
+              default_seo_title_tr:
+                label: Varsayılan SEO başlığı - Türkçe
+                type: text
+                width: 1/2
+              default_seo_title_en:
+                label: Default SEO title - English
+                type: text
+                width: 1/2
+              default_seo_description:
+                label: Varsayılan meta açıklaması
+                type: textarea
+                size: small
+              default_seo_description_tr:
+                label: Varsayılan meta açıklaması - Türkçe
+                type: textarea
+                size: small
+                width: 1/2
+              default_seo_description_en:
+                label: Default meta description - English
+                type: textarea
+                size: small
+                width: 1/2
+              default_og_image:
+                label: Varsayılan OG görseli
+                type: files
+                max: 1
+              canonical_base_url:
+                label: Canonical base URL
+                type: url
+                placeholder: "https://example.com"
+              twitter_card_type:
+                label: Twitter card türü
+                type: select
+                default: summary_large_image
+                options:
+                  summary: Summary
+                  summary_large_image: Summary large image
+
+  design:
+    label: Tasarım
+    icon: palette
+    columns:
+      main:
+        width: 1/1
+        sections:
+          color_tokens:
+            type: fields
+            headline: Global renkler
+            fields:
+              color_background:
+                label: Arka plan
+                type: color
+                default: "#260c1a"
+                width: 1/2
+              color_text:
+                label: Metin
+                type: color
+                default: "#f5e9e2"
+                width: 1/2
+              color_muted:
+                label: Soluk metin
+                type: color
+                default: "#bca9a8"
+                width: 1/2
+              color_accent:
+                label: Vurgu
+                type: color
+                default: "#c9a45c"
+                width: 1/2
+              color_accent_secondary:
+                label: İkincil vurgu
+                type: color
+                default: "#8f2f4a"
+                width: 1/2
+
+          layout_tokens:
+            type: fields
+            headline: Global yerleşim
+            fields:
+              header_style:
+                label: Header stili
+                type: select
+                width: 1/2
+                options:
+                  static: Static
+                  sticky: Sabit
+              enable_soft_hover:
+                label: Yumuşak hover efektleri
+                type: toggle
+                default: true
+                width: 1/2
+              site_max_width:
+                label: Site maksimum genişliği
+                type: text
+                placeholder: "1200px"
+                width: 1/2
+              content_max_width_ch:
+                label: Okuma genişliği
+                type: number
+                after: ch
+                default: 68
+                width: 1/2
+              section_spacing:
+                label: Bölüm boşluğu
+                type: text
+                placeholder: "4rem"
+                width: 1/2
+              card_radius:
+                label: Kart köşe yarıçapı
+                type: number
+                after: px
+                default: 0
+                width: 1/2
+              card_border_opacity:
+                label: Kart kenarlık opaklığı
+                type: number
+                step: 0.05
+                min: 0
+                max: 1
+                default: 0.1
+                width: 1/2
+
+  media:
+    label: Medya
+    icon: image
+    columns:
+      main:
+        width: 2/3
+        sections:
+          imagex_info:
+            type: info
+            theme: info
+            headline: ImageX / WebP
+            text: |
+              Yüklenen JPEG, PNG ve WebP görseller, şablonlar proje picture bileşenini kullandığında ImageX üzerinden işlenir. SVG, GIF ve uzak görseller kendi markup yapısını korur.
+
+          imagex_defaults:
+            type: fields
+            headline: Optimizasyon varsayılanları
+            fields:
+              image_optimization_enabled:
+                label: ImageX optimizasyonunu etkinleştir
+                type: toggle
+                default: true
+                width: 1/2
+              image_default_loading:
+                label: Varsayılan yükleme modu
+                type: select
+                default: lazy
+                width: 1/2
+                options:
+                  lazy: Lazy
+                  eager: Eager / öncelikli
+              image_default_srcset:
+                label: Varsayılan srcset profili
+                type: select
+                default: default
+                width: 1/2
+                options:
+                  default: Varsayılan içerik
+                  card: Kartlar ve küçük görseller
+                  wide: Geniş içerik
+                  hero: Tam genişlik / hero
+              image_default_sizes:
+                label: Varsayılan sizes niteliği
+                type: text
+                width: 1/2
+                placeholder: "(min-width: 900px) 800px, 100vw"
+
+      sidebar:
+        width: 1/3
+        sections:
+          imagex_profiles:
+            type: info
+            headline: Srcset profilleri
+            text: |
+              card: 320 / 600 / 900px
+              default: 360 / 720 / 1080 / 1440px
+              wide: 640 / 960 / 1280 / 1920px
+              hero: 960 / 1440 / 1920 / 2400px
+
+  integrations:
+    label: Entegrasyonlar
+    icon: settings
+    columns:
+      main:
+        width: 1/1
+        sections:
+          tmdb_security:
+            type: info
+            theme: info
+            headline: TMDB ortam ayarı
+            text: |
+              TMDB_API_KEY ve TMDB_ACCESS_TOKEN değerlerini proje kökündeki .env dosyasına ekleyin. Bu gizli değerler Panel içeriğinde saklanmaz.
+
+          tmdb_config:
+            type: fields
+            headline: TMDB davranışı
+            fields:
+              tmdb_enabled:
+                label: Entegrasyon aktif
+                type: toggle
+                default: true
+                width: 1/2
+              tmdb_cache_enabled:
+                label: Cache aktif
+                type: toggle
+                default: true
+                width: 1/2
+              tmdb_cache_ttl:
+                label: Cache TTL
+                type: number
+                after: minutes
+                placeholder: 10080
+                width: 1/2
+              tmdb_language:
+                label: Dil
+                type: select
+                default: tr-TR
+                width: 1/2
+                options:
+                  tr-TR: Türkçe
+                  en-US: English
+              tmdb_image_size:
+                label: Görsel boyutu
+                type: select
+                default: w500
+                width: 1/2
+                options:
+                  w500: Standart
+                  original: Original
+              tmdb_manual_override_priority:
+                label: Manuel alanlar öncelikli
+                type: toggle
+                default: true
+                width: 1/2
+
+          spotify_status:
+            type: info
+            theme: info
+            headline: Spotify bağlantı durumu
+            text: |
+              {{ site.spotifyIntegrationStatus }}
+              
+              Not: Client credentials playlist metadata için yeterlidir. Spotify track listesi için .env içinde SPOTIFY_REFRESH_TOKEN gerekir.
+
+          spotify_config:
+            type: fields
+            headline: Spotify davranışı
+            fields:
+              spotify_enabled:
+                label: Entegrasyon aktif
+                type: toggle
+                default: true
+                width: 1/2
+              spotify_cache_ttl:
+                label: Cache TTL
+                type: number
+                after: minutes
+                default: 360
+                width: 1/2
+              spotify_market:
+                label: Market
+                type: text
+                default: TR
+                maxlength: 2
+                width: 1/2
+                help: "Public playlist item availability için ISO ülke kodu. Örnek: TR, US."
+              spotify_test_connection_requested:
+                label: Bağlantıyı test et
+                type: toggle
+                default: false
+                width: 1/2
+                help: Açıp kaydedince .env içindeki client credentials ile token testi yapılır ve tekrar kapanır.
+              spotify_last_tested_at:
+                label: Son test zamanı
+                type: date
+                time: true
+                disabled: true
+                width: 1/2
+              spotify_last_error:
+                label: Son Spotify hatası
+                type: textarea
+                size: small
+                disabled: true
+                width: 1/2
+
+          google_analytics_config:
+            type: fields
+            headline: Google Analytics
+            fields:
+              ga_enabled:
+                label: GA4 frontend ölçümünü etkinleştir
+                type: toggle
+                default: false
+                width: 1/2
+              ga_force_local:
+                label: Local/dev ortamda da çalıştır
+                type: toggle
+                default: false
+                width: 1/2
+                help: Production dışındaki ortamlarda test gerektiğinde açın.
+              ga_measurement_id:
+                label: GA4 Measurement ID
+                type: text
+                placeholder: G-XXXXXXXXXX
+                width: 1/2
+              ga_report_url:
+                label: Analytics hızlı rapor linki
+                type: url
+                width: 1/2
+                help: Panel Pano'da bağlantı durumu ve hızlı erişim için kullanılır.
+              ga_consent_mode:
+                label: Consent modu
+                type: select
+                default: denied
+                width: 1/2
+                options:
+                  denied: Varsayılan kapalı
+                  granted: Varsayılan açık
+                help: İleride cookie/consent katmanı eklendiğinde aynı alan kullanılabilir.

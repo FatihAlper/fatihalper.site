@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=$HOME/public_html/
+    - /bin/rsync -a --delete --exclude='.git' --exclude='.env' --exclude='content' --exclude='media' --exclude='site/accounts' --exclude='site/cache' --exclude='site/sessions' --exclude='site/logs' ./ $DEPLOYPATH

@@ -1,0 +1,6 @@
+label: SEO description
+type: textarea
+size: small
+buttons: false
+maxlength: 320
+help: Optional meta description. Empty values fall back to summaries or site defaults.

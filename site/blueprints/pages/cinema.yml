@@ -1,0 +1,54 @@
+title: Cinema
+icon: video
+
+tabs:
+  content:
+    label: Content
+    icon: video
+    sections:
+      cinema:
+        type: pages
+        headline: Films
+        layout: cards
+        search: true
+        empty: No film reviews yet
+        templates:
+          - film-review
+        sort: date desc
+        image:
+          query: page.poster.toFile
+          ratio: 2/3
+          cover: true
+
+  settings:
+    label: Archive Settings
+    icon: settings
+    fields:
+      description:
+        label: Archive description
+        type: textarea
+        size: small
+
+  seo:
+    label: SEO
+    icon: search
+    columns:
+      main:
+        width: 2/3
+        fields:
+          seo_title:
+            label: SEO title
+            type: text
+          seo_description:
+            label: SEO description
+            type: textarea
+            size: small
+          og_image:
+            label: OG image
+            type: files
+            max: 1
+      files:
+        width: 1/3
+        sections:
+          files:
+            type: files

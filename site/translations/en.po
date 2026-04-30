@@ -1,0 +1,203 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kirby-site\n"
+"Language: en\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "nav.home"
+msgstr "Home"
+
+msgid "nav.about"
+msgstr "About"
+
+msgid "nav.aria.home"
+msgstr "Home"
+
+msgid "nav.aria.menu"
+msgstr "Menu"
+
+msgid "footer.rss"
+msgstr "RSS"
+
+msgid "archive.empty"
+msgstr "There are no catalog entries in this section yet."
+
+msgid "content.type.writing"
+msgstr "Writing"
+
+msgid "content.type.essay"
+msgstr "Essay"
+
+msgid "content.type.article"
+msgstr "Article"
+
+msgid "content.type.note"
+msgstr "Note"
+
+msgid "content.type.book"
+msgstr "Book"
+
+msgid "content.type.film"
+msgstr "Film"
+
+msgid "content.type.playlist"
+msgstr "Music"
+
+msgid "content.type.photo"
+msgstr "Photography"
+
+msgid "content.type.art"
+msgstr "Art"
+
+msgid "content.type.catalog"
+msgstr "Catalog Entry"
+
+msgid "meta.camera"
+msgstr "Camera"
+
+msgid "meta.lens"
+msgstr "Lens"
+
+msgid "meta.film"
+msgstr "Film"
+
+msgid "meta.track"
+msgstr "Track"
+
+msgid "meta.genre"
+msgstr "Genre"
+
+msgid "meta.duration"
+msgstr "Duration"
+
+msgid "meta.author"
+msgstr "Author"
+
+msgid "meta.year"
+msgstr "Year"
+
+msgid "meta.publisher"
+msgstr "Publisher"
+
+msgid "meta.page"
+msgstr "Pages"
+
+msgid "meta.director"
+msgstr "Director"
+
+msgid "meta.technique"
+msgstr "Technique"
+
+msgid "meta.dimensions"
+msgstr "Dimensions"
+
+msgid "meta.material"
+msgstr "Material"
+
+msgid "meta.tags"
+msgstr "Tags"
+
+msgid "playlist.archive"
+msgstr "Music Archive"
+
+msgid "playlist.platform"
+msgstr "Platform"
+
+msgid "playlist.track_count"
+msgstr "Track Count"
+
+msgid "playlist.listen"
+msgstr "Listen on Platform"
+
+msgid "cta.read"
+msgstr "Read"
+
+msgid "cta.review"
+msgstr "Review"
+
+msgid "cta.listen"
+msgstr "Listen"
+
+msgid "cta.view"
+msgstr "View"
+
+msgid "cta.explore"
+msgstr "Explore"
+
+msgid "cta.details"
+msgstr "Details"
+
+msgid "unit.track"
+msgstr "tracks"
+
+msgid "unit.minute.short"
+msgstr "min"
+
+msgid "unit.page.short"
+msgstr "pp."
+
+msgid "book.catalog"
+msgstr "Literary Catalog"
+
+msgid "art.archive"
+msgstr "Art Archive"
+
+msgid "art.production_duration"
+msgstr "Production Duration"
+
+msgid "art.production_year"
+msgstr "Production year"
+
+msgid "art.material_surface"
+msgstr "Material / surface"
+
+msgid "art.description"
+msgstr "Artwork description"
+
+msgid "art.edition"
+msgstr "Edition"
+
+msgid "art.inventory_code"
+msgstr "Archive number"
+
+msgid "art.status"
+msgstr "Status"
+
+msgid "art.status_draft"
+msgstr "Draft / in progress"
+
+msgid "art.status_completed"
+msgstr "Completed"
+
+msgid "art.status_exhibited"
+msgstr "Exhibited"
+
+msgid "art.status_archived"
+msgstr "Archived"
+
+msgid "art.status_unavailable"
+msgstr "Unavailable"
+
+msgid "tags.label"
+msgstr "Tag"
+
+msgid "tags.title"
+msgstr "Tags"
+
+msgid "tags.search"
+msgstr "Search tags"
+
+msgid "tags.placeholder"
+msgstr "Tag name"
+
+msgid "home.recently_catalogued"
+msgstr "Recently Catalogued"
+
+msgid "language.switch"
+msgstr "Language switcher"
+
+msgid "language.tr"
+msgstr "Turkish"
+
+msgid "language.en"
+msgstr "English"

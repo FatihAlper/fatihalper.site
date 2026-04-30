@@ -1,0 +1,54 @@
+title: Photography
+icon: image
+
+tabs:
+  content:
+    label: Content
+    icon: image
+    sections:
+      photography:
+        type: pages
+        headline: Photo albums
+        layout: cards
+        search: true
+        empty: No photo albums yet
+        templates:
+          - photo-album
+        sort: date desc
+        image:
+          query: page.cover.toFile
+          ratio: 4/3
+          cover: true
+
+  settings:
+    label: Archive Settings
+    icon: settings
+    fields:
+      description:
+        label: Archive description
+        type: textarea
+        size: small
+
+  seo:
+    label: SEO
+    icon: search
+    columns:
+      main:
+        width: 2/3
+        fields:
+          seo_title:
+            label: SEO title
+            type: text
+          seo_description:
+            label: SEO description
+            type: textarea
+            size: small
+          og_image:
+            label: OG image
+            type: files
+            max: 1
+      files:
+        width: 1/3
+        sections:
+          files:
+            type: files
