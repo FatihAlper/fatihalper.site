@@ -275,11 +275,31 @@ function initManifestoStrip() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const interval = Number.parseInt(strip.dataset.interval || '6500', 10);
   let index = Math.max(0, items.findIndex(item => item.classList.contains('is-active')));
+  const initialIndex = nextManifestoIndex(items.length, index);
 
   function show(nextIndex) {
     items[index].classList.remove('is-active');
     index = nextIndex % items.length;
     items[index].classList.add('is-active');
+  }
+
+  function nextManifestoIndex(count, fallbackIndex) {
+    try {
+      const storageKey = 'fa_manifesto_strip_index';
+      const storedIndex = Number.parseInt(window.sessionStorage.getItem(storageKey) || '', 10);
+      const nextIndex = Number.isFinite(storedIndex)
+        ? (storedIndex + 1) % count
+        : (fallbackIndex + 1) % count;
+
+      window.sessionStorage.setItem(storageKey, String(nextIndex));
+      return nextIndex;
+    } catch (error) {
+      return fallbackIndex;
+    }
+  }
+
+  if (initialIndex !== index) {
+    show(initialIndex);
   }
 
   if (prefersReducedMotion) return;
