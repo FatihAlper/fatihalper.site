@@ -83,11 +83,14 @@ $trackCount = $page->track_count()->isNotEmpty() ? $page->track_count()->value()
                 <?php else: ?>
                   <span class="track-title"><?= $track->title() ?></span>
                 <?php endif ?>
-                <?php if ($track->artist()->isNotEmpty()): ?>
-                  <span class="track-artist"><?= $track->artist() ?></span>
-                <?php endif ?>
-                <?php if ($track->album()->isNotEmpty()): ?>
-                  <span class="track-artist"><?= $track->album() ?></span>
+                <?php
+                  $trackMeta = array_filter([
+                    $track->artist()->isNotEmpty() ? $track->artist()->value() : null,
+                    $track->album()->isNotEmpty() ? $track->album()->value() : null
+                  ]);
+                ?>
+                <?php if ($trackMeta !== []): ?>
+                  <span class="track-artist"><?= esc(implode(' — ', $trackMeta)) ?></span>
                 <?php endif ?>
               </div>
             </div>
