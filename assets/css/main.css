@@ -2177,6 +2177,26 @@ picture {
   border-top: 1px solid var(--color-border);
 }
 
+.home-manifesto-strip__items {
+  display: grid;
+  width: min(100%, 860px);
+}
+
+.home-manifesto-strip__item {
+  grid-area: 1 / 1;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.35rem);
+  transition: opacity 0.45s ease, visibility 0.45s ease, transform 0.45s ease;
+}
+
+.home-manifesto-strip__item.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 .home-manifesto-strip__text {
   font-family: var(--font-serif);
   font-size: clamp(1.35rem, 2.4vw, 2rem);
@@ -2185,6 +2205,8 @@ picture {
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.32;
+  border: 0;
+  padding: 0;
 }
 
 .home-manifesto-strip--font-small .home-manifesto-strip__text {

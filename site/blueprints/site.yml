@@ -56,7 +56,9 @@ tabs:
             text: |
               İçerik üretmek için [İçerik Üretimi](/panel/site?tab=archive_desk) sekmesini kullanın.
               
+              - [Sayfalar](/panel/site?tab=pages)
               - [Ana Sayfa Düzeni](/panel/pages/home)
+              - [Error Sayfası](/panel/pages/error)
               - [Tüm Yazılar](/panel/pages/fragmanlar)
               - [Sinema Arşivi](/panel/pages/perde)
               - [Görsel Arşiv](/panel/pages/kadraj)
@@ -75,48 +77,61 @@ tabs:
             text: |
               {{ site.panelGoogleAnalyticsSummary }}
 
-  homepage:
-    label: Ana Sayfa
-    icon: home
+  pages:
+    label: Sayfalar
+    icon: page
     columns:
       main:
         width: 2/3
         sections:
-          homepage_intro:
+          pages_intro:
             type: info
             theme: info
-            headline: Ana sayfa editörü
+            headline: Sayfa yönetimi
             text: |
-              Hero yazısı, arka planı, marquee galeri, oda kartları, vitrindeki nesne, son kataloglananlar, tag wall ve quote/manifesto şeridi `home` sayfasının kendi blueprint'i üzerinden yönetilir.
+              Ana sayfa, error sayfası, tag sayfası ve ana arşiv kapıları burada yönetilir.
 
-              Düzenlemek için aşağıdaki Ana Sayfa kaydını açın.
+              İçerik üretimi için bu sekme yerine `İçerik Üretimi` sekmesini kullanın.
 
-          homepage_page:
+          all_pages:
             type: pages
-            headline: Ana Sayfa
+            headline: Tüm Sayfalar
             status: all
             create: false
-            search: false
-            limit: 1
-            templates:
-              - home
-            layout: list
+            search: true
+            limit: 30
+            layout: table
             image: false
-            empty: Home sayfası bulunamadı.
+            empty: Sayfa bulunamadı.
+            columns:
+              title:
+                label: Başlık
+              intendedTemplate:
+                label: Şablon
+              status:
+                label: Durum
+              modified:
+                label: Son güncelleme
+                display: d.m.Y H:i
 
       sidebar:
         width: 1/3
         sections:
+          page_shortcuts:
+            type: info
+            theme: positive
+            headline: Hızlı sayfa bağlantıları
+            text: |
+              - [Ana Sayfa](/panel/pages/home)
+              - [Error Sayfası](/panel/pages/error)
+              - [Tag Sayfası](/panel/pages/tags)
+
           homepage_map:
             type: info
             theme: passive
-            headline: Paneldeki bölümler
+            headline: Ana sayfa alanları
             text: |
-              - Hero: hero yazısı, kicker, arka plan, grain
-              - Marquee Gallery: otomatik/manuel galeri ve hareket ayarları
-              - Tag Wall: otomatik veya manuel etiket duvarı
-              - Manifesto Strip: quote/dialogue listesi ve fallback metni
-              - Design: hero, marquee ve tag wall görünüm ayarları
+              Ana sayfa kaydını açtığınızda hero, arka plan, marquee galeri, oda kartları, tag wall ve manifesto şeridi kendi blueprint'i içinde düzenlenir.
 
   archive_desk:
     label: İçerik Üretimi

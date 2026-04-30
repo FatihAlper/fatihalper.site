@@ -401,11 +401,12 @@ function faSpotifyImportTracksJson(Page $page, bool $force = false): array
         $content['duration'] = $normalized['duration'];
     }
 
-    $page->update($content);
+    $updatedPage = $page->update($content);
 
     return [
         'ok' => true,
         'message' => sprintf('JSON içe aktarımı tamamlandı: %d parça.', $normalized['track_count']),
+        'page' => $updatedPage,
     ];
 }
 
@@ -466,7 +467,7 @@ function faSpotifySyncPlaylist(Page $page, bool $force = false): array
     if ($data['duration'] !== '' && ($page->duration()->isEmpty() || $force)) {
         $content['duration'] = $data['duration'];
     }
-    $page->update($content);
+    $updatedPage = $page->update($content);
 
     return [
         'ok' => true,
@@ -475,6 +476,7 @@ function faSpotifySyncPlaylist(Page $page, bool $force = false): array
             $data['track_count'],
             $result['cached'] ? ' (cache)' : ''
         ),
+        'page' => $updatedPage,
     ];
 }
 
@@ -536,30 +538,39 @@ Kirby::plugin('site/spotify-integration', [
 
             $syncing = true;
             try {
+                $workingPage = page($newPage->id()) ?? $newPage;
+
                 if ($wantsSpotifySync) {
-                    $result = faSpotifySyncPlaylist($newPage, $newPage->spotify_force_refresh()->toBool(false));
+                    $result = faSpotifySyncPlaylist($workingPage, $workingPage->spotify_force_refresh()->toBool(false));
                     if ($result['ok'] !== true) {
-                        $newPage->update([
+                        $workingPage = page($workingPage->id()) ?? $workingPage;
+                        $workingPage = $workingPage->update([
                             'spotify_last_error' => $result['error'] ?? 'Spotify sync başarısız.',
                             'spotify_sync_requested' => false,
                             'spotify_force_refresh' => false,
                         ]);
+                    } elseif (($result['page'] ?? null) instanceof Page) {
+                        $workingPage = $result['page'];
                     }
                 }
 
                 if ($wantsJsonImport) {
-                    $latestPage = page($newPage->id()) ?? $newPage;
-                    $result = faSpotifyImportTracksJson($latestPage, $latestPage->spotify_force_refresh()->toBool(false));
+                    $workingPage = page($workingPage->id()) ?? $workingPage;
+                    $result = faSpotifyImportTracksJson($workingPage, $workingPage->spotify_force_refresh()->toBool(false));
                     if ($result['ok'] !== true) {
-                        $latestPage->update([
+                        $workingPage = page($workingPage->id()) ?? $workingPage;
+                        $workingPage = $workingPage->update([
                             'spotify_last_error' => $result['error'] ?? 'JSON içe aktarımı başarısız.',
                             'spotify_json_import_requested' => false,
                             'spotify_force_refresh' => false,
                         ]);
+                    } elseif (($result['page'] ?? null) instanceof Page) {
+                        $workingPage = $result['page'];
                     }
                 }
             } catch (Throwable $e) {
-                $newPage->update([
+                $errorPage = page($newPage->id()) ?? $newPage;
+                $errorPage->update([
                     'spotify_last_error' => $e->getMessage(),
                     'spotify_sync_requested' => false,
                     'spotify_json_import_requested' => false,
