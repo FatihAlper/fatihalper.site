@@ -3,7 +3,7 @@
   "description": "Reusable Kirby TMDB integration with environment-based secrets and cache-aware movie metadata helpers.",
   "type": "kirby-plugin",
   "version": "0.1b",
-  "license": "proprietary",
+  "license": "GPL-3.0-or-later",
   "require": {
     "getkirby/cms": "^5.0"
   }

@@ -1,6 +1,7 @@
 # Kirby Archive Helpers
 
 Version: `0.1b`
+License: `GPL-3.0-or-later`
 
 Reusable project helper module for archive-style Kirby sites.
 

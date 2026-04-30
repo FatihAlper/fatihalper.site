@@ -1,6 +1,7 @@
 # Kirby PO Translations
 
 Version: `0.1b`
+License: `GPL-3.0-or-later`
 
 Reusable lightweight PO translation bridge for bilingual Kirby sites.
 

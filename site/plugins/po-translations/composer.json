@@ -3,7 +3,7 @@
   "description": "Reusable lightweight PO translation bridge for bilingual Kirby sites with Panel-managed overrides.",
   "type": "kirby-plugin",
   "version": "0.1b",
-  "license": "proprietary",
+  "license": "GPL-3.0-or-later",
   "require": {
     "getkirby/cms": "^5.0"
   }

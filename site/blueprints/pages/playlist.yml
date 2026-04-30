@@ -161,12 +161,6 @@ tabs:
                     type: text
                     placeholder: "4:32"
                     width: 1/6
-                  spotify_url:
-                    label:
-                      tr: Spotify linki
-                      en: Spotify link
-                    type: url
-                    width: 1/2
                   duration_ms:
                     label:
                       tr: Süre (ms)

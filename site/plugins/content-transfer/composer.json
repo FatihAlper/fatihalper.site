@@ -3,9 +3,11 @@
   "description": "Kirby Panel content import/export module with ZIP export, guarded ZIP import and automatic pre-import backups.",
   "type": "kirby-plugin",
   "version": "0.1b",
-  "license": "proprietary",
+  "license": "GPL-3.0-or-later",
   "require": {
-    "getkirby/cms": "^5.0",
-    "ext-zip": "*"
+    "getkirby/cms": "^5.0"
+  },
+  "suggest": {
+    "ext-zip": "Preferred ZIP engine. The plugin falls back to PharData when ZipArchive is not available."
   }
 }

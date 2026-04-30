@@ -3,7 +3,7 @@
   "description": "Reusable Kirby Spotify playlist metadata and JSON track import module with environment-based secrets.",
   "type": "kirby-plugin",
   "version": "0.1b",
-  "license": "proprietary",
+  "license": "GPL-3.0-or-later",
   "require": {
     "getkirby/cms": "^5.0"
   }

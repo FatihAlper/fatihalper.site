@@ -1,6 +1,7 @@
 # Kirby Content Transfer
 
 Version: `0.1b`
+License: `GPL-3.0-or-later`
 
 Panel-driven content import/export module.
 
@@ -12,6 +13,7 @@ Panel-driven content import/export module.
 - Path traversal protection
 - Optional overwrite mode
 - Automatic backup before import
+- Uses `ZipArchive` when available and falls back to `PharData`
 
 ## Kirby plugin id
 

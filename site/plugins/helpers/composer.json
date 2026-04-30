@@ -3,7 +3,7 @@
   "description": "Reusable Kirby helpers for archive content metadata, dashboard summaries, tags and shared frontend utilities.",
   "type": "kirby-plugin",
   "version": "0.1b",
-  "license": "proprietary",
+  "license": "GPL-3.0-or-later",
   "require": {
     "getkirby/cms": "^5.0"
   }

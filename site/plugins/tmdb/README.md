@@ -1,6 +1,7 @@
 # Kirby TMDB Integration
 
 Version: `0.1b`
+License: `GPL-3.0-or-later`
 
 Reusable TMDB metadata module for Kirby film entries.
 

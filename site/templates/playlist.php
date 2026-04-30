@@ -78,11 +78,7 @@ $trackCount = $page->track_count()->isNotEmpty() ? $page->track_count()->value()
             <div class="track-info">
               <span class="track-number"><?php printf('%02d', $track->position()->isNotEmpty() ? $track->position()->toInt() : $index + 1); ?></span>
               <div>
-                <?php if ($track->spotify_url()->isNotEmpty()): ?>
-                  <a class="track-title" href="<?= esc($track->spotify_url(), 'attr') ?>" target="_blank" rel="noopener"><?= $track->title() ?></a>
-                <?php else: ?>
-                  <span class="track-title"><?= $track->title() ?></span>
-                <?php endif ?>
+                <span class="track-title"><?= $track->title() ?></span>
                 <?php
                   $trackMeta = array_filter([
                     $track->artist()->isNotEmpty() ? $track->artist()->value() : null,

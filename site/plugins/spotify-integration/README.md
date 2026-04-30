@@ -1,6 +1,7 @@
 # Kirby Spotify Integration
 
 Version: `0.1b`
+License: `GPL-3.0-or-later`
 
 Reusable Spotify module for Kirby playlist entries.
 
