@@ -1,0 +1,10 @@
+{
+  "name": "fatihalper/kirby-tmdb-integration",
+  "description": "Reusable Kirby TMDB integration with environment-based secrets and cache-aware movie metadata helpers.",
+  "type": "kirby-plugin",
+  "version": "0.1b",
+  "license": "proprietary",
+  "require": {
+    "getkirby/cms": "^5.0"
+  }
+}

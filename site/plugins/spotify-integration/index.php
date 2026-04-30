@@ -3,6 +3,7 @@
 use Kirby\Cms\App as Kirby;
 use Kirby\Cms\Page;
 
+const FA_SPOTIFY_INTEGRATION_VERSION = '0.1b';
 const FA_SPOTIFY_API_BASE = 'https://api.spotify.com/v1';
 const FA_SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token';
 
@@ -511,11 +512,13 @@ function faSpotifySiteStatus(): string
     return implode("\n", $lines);
 }
 
-Kirby::plugin('site/spotify-integration', [
+Kirby::plugin('fatihalper/spotify-integration', [
     'options' => [
+        'version' => FA_SPOTIFY_INTEGRATION_VERSION,
         'expires' => 360,
     ],
     'siteMethods' => [
+        'spotifyIntegrationVersion' => fn (): string => FA_SPOTIFY_INTEGRATION_VERSION,
         'spotifyIntegrationStatus' => fn (): string => faSpotifySiteStatus(),
     ],
     'pageMethods' => [

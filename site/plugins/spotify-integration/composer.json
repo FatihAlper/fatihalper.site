@@ -1,0 +1,10 @@
+{
+  "name": "fatihalper/kirby-spotify-integration",
+  "description": "Reusable Kirby Spotify playlist metadata and JSON track import module with environment-based secrets.",
+  "type": "kirby-plugin",
+  "version": "0.1b",
+  "license": "proprietary",
+  "require": {
+    "getkirby/cms": "^5.0"
+  }
+}

@@ -2,6 +2,8 @@
 
 use Kirby\Cms\App as Kirby;
 
+const FA_ARCHIVE_HELPERS_VERSION = '0.1b';
+
 /**
  * Site Helpers Plugin
  * 
@@ -11,8 +13,17 @@ use Kirby\Cms\App as Kirby;
 
 require_once __DIR__ . '/helpers.php';
 
-Kirby::plugin('site/helpers', [
+Kirby::plugin('fatihalper/archive-helpers', [
+    'options' => [
+        'version' => FA_ARCHIVE_HELPERS_VERSION,
+    ],
     'siteMethods' => [
+        'archiveHelpersVersion' => function (): string {
+            return FA_ARCHIVE_HELPERS_VERSION;
+        },
+        'panelArchiveReports' => function (): array {
+            return dashboardArchiveReports();
+        },
         'panelArchiveStats' => function (): string {
             return dashboardContentStats();
         },

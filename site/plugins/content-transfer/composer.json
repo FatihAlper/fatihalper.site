@@ -1,0 +1,11 @@
+{
+  "name": "fatihalper/kirby-content-transfer",
+  "description": "Kirby Panel content import/export module with ZIP export, guarded ZIP import and automatic pre-import backups.",
+  "type": "kirby-plugin",
+  "version": "0.1b",
+  "license": "proprietary",
+  "require": {
+    "getkirby/cms": "^5.0",
+    "ext-zip": "*"
+  }
+}

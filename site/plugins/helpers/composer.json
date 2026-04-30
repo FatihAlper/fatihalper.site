@@ -1,0 +1,10 @@
+{
+  "name": "fatihalper/kirby-archive-helpers",
+  "description": "Reusable Kirby helpers for archive content metadata, dashboard summaries, tags and shared frontend utilities.",
+  "type": "kirby-plugin",
+  "version": "0.1b",
+  "license": "proprietary",
+  "require": {
+    "getkirby/cms": "^5.0"
+  }
+}

@@ -23,19 +23,18 @@ tabs:
                 Monitor editorial production, pages, SEO, media health and integrations from one place. Use the Content Studio tab for day-to-day publishing.
 
           dashboard_stats:
-            type: info
-            theme: info
+            type: stats
+            size: small
             headline:
               tr: Arşiv durumu
               en: Archive status
-            text: |
-              {{ site.panelArchiveStats }}
+            reports: site.panelArchiveReports
 
           recent_drafts:
             type: pages
             headline:
-              tr: Üzerinde çalışılan taslaklar
-              en: Drafts in progress
+              tr: Kök sayfa taslakları
+              en: Root page drafts
             create: false
             status: draft
             search: true
@@ -59,6 +58,48 @@ tabs:
                   tr: Son güncelleme
                   en: Last update
                 display: d.m.Y H:i
+
+          gallery_drafts:
+            type: pages
+            headline:
+              tr: Taslak galeri ve albümler
+              en: Draft galleries and albums
+            parent: site.find('kadraj')
+            status: draft
+            create: false
+            search: true
+            limit: 8
+            layout: cards
+            templates:
+              - photo-album
+            empty:
+              tr: Taslak fotoğraf albümü yok.
+              en: No draft photo albums.
+            image:
+              query: page.cover.toFile
+              ratio: 4/3
+              cover: true
+
+          exhibit_drafts:
+            type: pages
+            headline:
+              tr: Taslak exhibit galerileri
+              en: Draft exhibit galleries
+            parent: site.find('exhibit')
+            status: draft
+            create: false
+            search: true
+            limit: 6
+            layout: cards
+            templates:
+              - art-project
+            empty:
+              tr: Taslak exhibit kaydı yok.
+              en: No draft exhibit entries.
+            image:
+              query: page.cover.toFile
+              ratio: 4/3
+              cover: true
 
           editorial_alerts:
             type: info
@@ -1330,6 +1371,82 @@ tabs:
                 size: small
                 disabled: true
                 width: 1/2
+
+          content_transfer_status:
+            type: info
+            theme: info
+            headline:
+              tr: İçerik import/export
+              en: Content import/export
+            text: |
+              {{ site.contentTransferStatus }}
+
+          content_transfer_tools:
+            type: fields
+            headline:
+              tr: İçerik transfer araçları
+              en: Content transfer tools
+            fields:
+              content_transfer_export_requested:
+                label:
+                  tr: Content ZIP export oluştur
+                  en: Create content ZIP export
+                type: toggle
+                default: false
+                width: 1/2
+                help:
+                  tr: Açıp kaydedince content/ klasöründen indirilebilir ZIP hazırlanır.
+                  en: Turn on and save to create a downloadable ZIP from content/.
+              content_transfer_import_requested:
+                label:
+                  tr: Seçili ZIP'i içe aktar
+                  en: Import selected ZIP
+                type: toggle
+                default: false
+                width: 1/2
+                help:
+                  tr: Import mevcut içerik üzerine yazmadan çalışır; overwrite açılırsa aynı path'ler değiştirilir.
+                  en: Import skips existing files unless overwrite is enabled.
+              content_transfer_import_file:
+                label:
+                  tr: Import ZIP dosyası
+                  en: Import ZIP file
+                type: files
+                max: 1
+                layout: list
+                query: site.files
+                uploads:
+                  accept: application/zip
+                width: 1/2
+              content_transfer_overwrite:
+                label:
+                  tr: Var olan dosyaların üzerine yaz
+                  en: Overwrite existing files
+                type: toggle
+                default: false
+                width: 1/2
+              content_transfer_last_export_file:
+                label:
+                  tr: Son export dosyası
+                  en: Last export file
+                type: text
+                disabled: true
+                width: 1/2
+              content_transfer_last_import_at:
+                label:
+                  tr: Son import zamanı
+                  en: Last import time
+                type: date
+                time: true
+                disabled: true
+                width: 1/2
+              content_transfer_last_status:
+                label:
+                  tr: Son transfer sonucu
+                  en: Last transfer result
+                type: textarea
+                size: small
+                disabled: true
 
       sidebar:
         width: 1/3

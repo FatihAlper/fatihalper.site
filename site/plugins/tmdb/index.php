@@ -3,6 +3,8 @@
 use Kirby\Cms\App as Kirby;
 use Kirby\Http\Remote;
 
+const FA_TMDB_INTEGRATION_VERSION = '0.1b';
+
 if (!function_exists('tmdbFetchJson')) {
     function tmdbFetchJson(string $url, array $headers = []): array|null {
         $headers = array_values(array_filter($headers));
@@ -140,12 +142,16 @@ if (!function_exists('tmdbGenres')) {
     }
 }
 
-Kirby::plugin('site/tmdb', [
+Kirby::plugin('fatihalper/tmdb-integration', [
     'options' => [
+        'version' => FA_TMDB_INTEGRATION_VERSION,
         'cache' => true,
         'expires' => 10080, // minutes (1 week)
         'language' => 'tr-TR',
         'image_size' => 'w500'
+    ],
+    'siteMethods' => [
+        'tmdbIntegrationVersion' => fn (): string => FA_TMDB_INTEGRATION_VERSION,
     ],
     'pageMethods' => [
         'tmdb' => function () {

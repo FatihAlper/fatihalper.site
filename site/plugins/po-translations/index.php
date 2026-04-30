@@ -11,6 +11,8 @@
 use Kirby\Cms\App as Kirby;
 use Kirby\Http\Url;
 
+const FA_PO_TRANSLATIONS_VERSION = '0.1b';
+
 function fa_po_unquote(string $value): string
 {
     $value = trim($value);
@@ -191,9 +193,13 @@ function fa_language_url(string $locale): string
     return Url::build(['query' => $query]);
 }
 
-Kirby::plugin('site/po-translations', [
+Kirby::plugin('fatihalper/po-translations', [
     'translations' => fa_po_catalogs(),
     'options' => [
+        'version' => FA_PO_TRANSLATIONS_VERSION,
         'locale' => 'tr'
-    ]
+    ],
+    'siteMethods' => [
+        'poTranslationsVersion' => fn (): string => FA_PO_TRANSLATIONS_VERSION,
+    ],
 ]);

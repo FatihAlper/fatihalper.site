@@ -163,49 +163,108 @@ function dashboardContentPages(): array {
     return $pages;
 }
 
-function dashboardContentStats(): string {
-    $lines = [];
-    $total = $listed = $drafts = $unlisted = 0;
-    $latestModified = null;
+function dashboardContentMetrics(): array {
+    $metrics = [
+        'total' => 0,
+        'listed' => 0,
+        'drafts' => 0,
+        'unlisted' => 0,
+        'latest' => null,
+        'types' => [],
+    ];
 
     foreach (contentTypeRegistry() as $type => $definition) {
         $parent = page($definition['parent']);
-        $children = $parent ? $parent->childrenAndDrafts()->filterBy('intendedTemplate', $definition['template']) : new Kirby\Cms\Pages([]);
-        $typeTotal = $children->count();
-        $typeListed = $children->listed()->count();
-        $typeDrafts = $children->drafts()->count();
-        $typeUnlisted = $children->unlisted()->count();
+        $children = $parent
+            ? $parent->childrenAndDrafts()->filterBy('intendedTemplate', $definition['template'])
+            : new Kirby\Cms\Pages([]);
 
-        $total += $typeTotal;
-        $listed += $typeListed;
-        $drafts += $typeDrafts;
-        $unlisted += $typeUnlisted;
+        $typeMetrics = [
+            'label' => $definition['label'],
+            'total' => $children->count(),
+            'listed' => $children->listed()->count(),
+            'drafts' => $children->drafts()->count(),
+            'unlisted' => $children->unlisted()->count(),
+            'latest' => $children->sortBy('date', 'desc', 'modified', 'desc')->first(),
+        ];
+
+        $metrics['total'] += $typeMetrics['total'];
+        $metrics['listed'] += $typeMetrics['listed'];
+        $metrics['drafts'] += $typeMetrics['drafts'];
+        $metrics['unlisted'] += $typeMetrics['unlisted'];
+        $metrics['types'][$type] = $typeMetrics;
 
         foreach ($children as $page) {
-            if ($latestModified === null || $page->modified() > $latestModified->modified()) {
-                $latestModified = $page;
+            if ($metrics['latest'] === null || $page->modified() > $metrics['latest']->modified()) {
+                $metrics['latest'] = $page;
             }
         }
+    }
 
-        $latest = $children->sortBy('date', 'desc', 'modified', 'desc')->limit(3)->pluck('title');
+    return $metrics;
+}
+
+function dashboardArchiveReports(): array {
+    $metrics = dashboardContentMetrics();
+    $latest = $metrics['latest'];
+    $mediaSize = dashboardDirectorySize(kirby()->root('media'));
+
+    return [
+        [
+            'label' => ['tr' => 'Toplam içerik', 'en' => 'Total entries'],
+            'value' => (string)$metrics['total'],
+            'info' => $latest ? 'Son: ' . $latest->title()->value() : 'Son kayıt yok',
+            'icon' => 'archive',
+            'theme' => 'positive',
+        ],
+        [
+            'label' => ['tr' => 'Yayında', 'en' => 'Published'],
+            'value' => (string)$metrics['listed'],
+            'info' => $metrics['unlisted'] . ' görünmez / unlisted',
+            'icon' => 'check',
+            'theme' => 'info',
+        ],
+        [
+            'label' => ['tr' => 'Taslak', 'en' => 'Drafts'],
+            'value' => (string)$metrics['drafts'],
+            'info' => 'Kadraj ve exhibit taslakları ayrı kartlarda listelenir',
+            'icon' => 'edit',
+            'theme' => $metrics['drafts'] > 0 ? 'notice' : 'passive',
+        ],
+        [
+            'label' => ['tr' => 'Generated media', 'en' => 'Generated media'],
+            'value' => dashboardFormatBytes($mediaSize),
+            'info' => 'media/ cache boyutu',
+            'icon' => 'image',
+            'theme' => 'passive',
+        ],
+    ];
+}
+
+function dashboardContentStats(): string {
+    $metrics = dashboardContentMetrics();
+    $lines = [];
+
+    foreach ($metrics['types'] as $typeMetrics) {
+        $latest = $typeMetrics['latest'];
         $lines[] = sprintf(
-            '%s: %d toplam / %d yayında / %d taslak / %d görünmez. Son: %s',
-            $definition['label'],
-            $typeTotal,
-            $typeListed,
-            $typeDrafts,
-            $typeUnlisted,
-            implode(', ', $latest) ?: 'yok'
+            '- **%s:** %d toplam / %d yayında / %d taslak / %d görünmez. Son: %s',
+            $typeMetrics['label'],
+            $typeMetrics['total'],
+            $typeMetrics['listed'],
+            $typeMetrics['drafts'],
+            $typeMetrics['unlisted'],
+            $latest ? $latest->title()->value() : 'yok'
         );
     }
 
     array_unshift($lines, sprintf(
-        "Toplam içerik: %d\nYayında: %d\nTaslak: %d\nGörünmez/unlisted: %d\nSon güncellenen: %s\n",
-        $total,
-        $listed,
-        $drafts,
-        $unlisted,
-        $latestModified ? $latestModified->title()->value() . ' (' . $latestModified->modified('d.m.Y H:i') . ')' : 'yok'
+        "**Toplam:** %d  \n**Yayında:** %d  \n**Taslak:** %d  \n**Görünmez/unlisted:** %d  \n**Son güncellenen:** %s\n",
+        $metrics['total'],
+        $metrics['listed'],
+        $metrics['drafts'],
+        $metrics['unlisted'],
+        $metrics['latest'] ? $metrics['latest']->title()->value() . ' (' . $metrics['latest']->modified('d.m.Y H:i') . ')' : 'yok'
     ));
 
     return implode("\n", $lines);

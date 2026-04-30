@@ -1,0 +1,10 @@
+{
+  "name": "fatihalper/kirby-po-translations",
+  "description": "Reusable lightweight PO translation bridge for bilingual Kirby sites with Panel-managed overrides.",
+  "type": "kirby-plugin",
+  "version": "0.1b",
+  "license": "proprietary",
+  "require": {
+    "getkirby/cms": "^5.0"
+  }
+}
