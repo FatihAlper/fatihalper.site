@@ -2165,27 +2165,39 @@ picture {
 
 /* Manifesto Strip */
 .home-manifesto-strip {
+  --home-manifesto-strip-height: clamp(230px, 30dvh, 340px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: clamp(0.6rem, 1.2vw, 1rem);
+  height: var(--home-manifesto-strip-height);
   padding-block: clamp(1.35rem, 2.8vw, 2.35rem);
   padding-inline: clamp(1.25rem, 3vw, 2.25rem);
   margin-top: clamp(0.75rem, 2.4vw, 2rem);
   text-align: center;
   border-top: 1px solid var(--color-border);
+  overflow: hidden;
 }
 
 .home-manifesto-strip__items {
   position: relative;
+  display: grid;
+  place-items: center;
+  flex: 1 1 auto;
   width: min(100%, 860px);
+  min-height: 0;
   touch-action: pan-y;
 }
 
 .home-manifesto-strip__item {
   position: absolute;
   inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
   width: 100%;
   margin: 0;
   opacity: 0;
@@ -2196,7 +2208,6 @@ picture {
 }
 
 .home-manifesto-strip__item.is-active {
-  position: relative;
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
