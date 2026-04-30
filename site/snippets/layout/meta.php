@@ -83,20 +83,16 @@ $gaMeasurementId = trim((string)$site->ga_measurement_id()->value());
 $gaEnabled = $site->ga_enabled()->toBool(false)
   && $gaMeasurementId !== ''
   && (option('site.production') === true || $site->ga_force_local()->toBool(false));
-$gaConsent = $site->ga_consent_mode()->or('denied')->value() === 'granted' ? 'granted' : 'denied';
 ?>
 <?php if ($gaEnabled): ?>
-<!-- Google Analytics -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?= esc($gaMeasurementId, 'attr') ?>"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {
-    'analytics_storage': '<?= $gaConsent ?>',
-    'ad_storage': 'denied'
-  });
   gtag('js', new Date());
-  gtag('config', '<?= esc($gaMeasurementId, 'js') ?>', { anonymize_ip: true });
+
+  gtag('config', '<?= esc($gaMeasurementId) ?>');
 </script>
 <?php endif ?>
 
