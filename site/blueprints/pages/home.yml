@@ -1,244 +1,430 @@
-title: Home
+title:
+  tr: Ana Sayfa
+  en: Home
 icon: home
 options:
   changeTemplate: false
   delete: false
 
 tabs:
-  hero:
-    label: Hero
-    icon: text
-    fields:
-      hero_kicker:
-        label: Kicker
-        type: text
-        width: 1/2
-      hero_animation_enabled:
-        label: Enable hero animation
-        type: toggle
-        default: true
-        width: 1/2
-      hero_text:
-        label: Hero text
-        type: textarea
-        buttons: false
-      hero_background_color:
-        label: Background color
-        type: color
-        default: "#260c1a"
-        width: 1/2
-      hero_background_image:
-        label: Background image
-        type: files
-        max: 1
-        width: 1/2
-      hero_enable_grain:
-        label: Grain overlay
-        type: toggle
-        default: false
-        width: 1/2
+  story:
+    label:
+      tr: Sahne
+      en: Stage
+    icon: wand
+    columns:
+      main:
+        width: 2/3
+        sections:
+          hero_panel:
+            type: fields
+            headline:
+              tr: İlk ekran
+              en: First viewport
+            fields:
+              hero_kicker:
+                label:
+                  tr: Üst etiket
+                  en: Kicker
+                type: text
+                width: 1/2
+              hero_animation_enabled:
+                label:
+                  tr: Hero animasyonu
+                  en: Hero animation
+                type: toggle
+                default: true
+                width: 1/2
+              hero_text:
+                label:
+                  tr: Hero metni
+                  en: Hero text
+                type: textarea
+                buttons: false
+                help:
+                  tr: Ana sayfanın ilk ve en büyük cümlesi. Kısa, atmosferik ve yön gösterici tutun.
+                  en: The first and largest statement on the home page. Keep it short, atmospheric and directional.
 
-  marquee:
-    label: Marquee Gallery
+      sidebar:
+        width: 1/3
+        sections:
+          hero_visuals:
+            type: fields
+            headline:
+              tr: Hero görsel tonu
+              en: Hero visual tone
+            fields:
+              hero_background_color:
+                label:
+                  tr: Arka plan rengi
+                  en: Background color
+                type: color
+                default: "#260c1a"
+                width: 1/2
+              hero_background_image:
+                label:
+                  tr: Arka plan görseli
+                  en: Background image
+                type: files
+                max: 1
+                width: 1/2
+              hero_enable_grain:
+                label:
+                  tr: Grain katmanı
+                  en: Grain overlay
+                type: toggle
+                default: false
+
+  motion:
+    label:
+      tr: Akış
+      en: Flow
     icon: images
-    fields:
-      show_marquee_gallery:
-        label: Show marquee gallery
-        type: toggle
-        default: true
-        width: 1/2
-      marquee_mode:
-        label: Source mode
-        type: select
-        default: latest
-        width: 1/2
-        options:
-          latest: Latest photography
-          curated: Curated selection
-      marquee_speed:
-        label: Speed
-        type: select
-        default: medium
-        width: 1/2
-        options:
-          slow: Slow
-          medium: Medium
-          fast: Fast
-      marquee_direction:
-        label: Direction
-        type: select
-        default: left
-        width: 1/2
-        options:
-          left: Left
-          right: Right
-      marquee_items:
-        label: Curated images
-        type: structure
-        help: Used only when Source mode is Curated.
-        fields:
-          image:
-            label: Image
-            type: files
-            max: 1
-          title:
-            label: Title
-            type: text
-            width: 1/2
-          link:
-            label: Link
-            type: url
-            width: 1/2
+    columns:
+      main:
+        width: 2/3
+        sections:
+          marquee_settings:
+            type: fields
+            headline:
+              tr: Marquee galeri
+              en: Marquee gallery
+            fields:
+              show_marquee_gallery:
+                label:
+                  tr: Marquee galeriyi göster
+                  en: Show marquee gallery
+                type: toggle
+                default: true
+                width: 1/2
+              marquee_mode:
+                label:
+                  tr: Kaynak modu
+                  en: Source mode
+                type: select
+                default: latest
+                width: 1/2
+                options:
+                  latest:
+                    tr: Son fotoğraflar
+                    en: Latest photography
+                  curated:
+                    tr: Kürasyon
+                    en: Curated selection
+              marquee_speed:
+                label:
+                  tr: Hız
+                  en: Speed
+                type: select
+                default: medium
+                width: 1/2
+                options:
+                  slow:
+                    tr: Yavaş
+                    en: Slow
+                  medium:
+                    tr: Orta
+                    en: Medium
+                  fast:
+                    tr: Hızlı
+                    en: Fast
+              marquee_direction:
+                label:
+                  tr: Yön
+                  en: Direction
+                type: select
+                default: left
+                width: 1/2
+                options:
+                  left:
+                    tr: Sola
+                    en: Left
+                  right:
+                    tr: Sağa
+                    en: Right
+              marquee_items:
+                label:
+                  tr: Kürasyon görselleri
+                  en: Curated images
+                type: structure
+                help:
+                  tr: Yalnızca kaynak modu Kürasyon seçildiğinde kullanılır.
+                  en: Used only when Source mode is Curated.
+                fields:
+                  image:
+                    label:
+                      tr: Görsel
+                      en: Image
+                    type: files
+                    max: 1
+                  title:
+                    label:
+                      tr: Başlık
+                      en: Title
+                    type: text
+                    width: 1/2
+                  link:
+                    label: Link
+                    type: url
+                    width: 1/2
 
-  rooms:
-    label: Rooms
-    icon: grid
-    fields:
-      show_rooms:
-        label: Show rooms
-        type: toggle
-        default: true
-      rooms:
-        label: Rooms
-        type: structure
-        help: Leave empty to use the default listed section pages.
-        fields:
-          title:
-            label: Title
-            type: text
-          description:
-            label: Description
-            type: textarea
-            size: small
-          link:
-            label: Link
-            type: url
-            width: 1/2
-          accent_color:
-            label: Accent color
-            type: color
-            width: 1/2
+      sidebar:
+        width: 1/3
+        sections:
+          rooms_panel:
+            type: fields
+            headline:
+              tr: Oda kartları
+              en: Room cards
+            fields:
+              show_rooms:
+                label:
+                  tr: Oda kartlarını göster
+                  en: Show room cards
+                type: toggle
+                default: true
+              rooms:
+                label:
+                  tr: Manuel oda kartları
+                  en: Manual room cards
+                type: structure
+                help:
+                  tr: Boşsa varsayılan ana bölüm sayfaları kullanılır.
+                  en: Leave empty to use the default section pages.
+                fields:
+                  title:
+                    label:
+                      tr: Başlık
+                      en: Title
+                    type: text
+                  description:
+                    label:
+                      tr: Açıklama
+                      en: Description
+                    type: textarea
+                    size: small
+                  link:
+                    label: Link
+                    type: url
+                    width: 1/2
+                  accent_color:
+                    label:
+                      tr: Vurgu rengi
+                      en: Accent color
+                    type: color
+                    width: 1/2
 
-  featured:
-    label: Featured Object
+  curation:
+    label:
+      tr: Kürasyon
+      en: Curation
     icon: star
-    fields:
-      featured_page:
-        label: Featured page
-        type: pages
-        max: 1
-      featured_label:
-        label: Label
-        type: text
-        default: "Vitrindeki Nesne"
-        width: 1/2
-      featured_image_override:
-        label: Image override
-        type: files
-        max: 1
-        width: 1/2
-      featured_description_override:
-        label: Description override
-        type: textarea
-        size: small
+    columns:
+      main:
+        width: 2/3
+        sections:
+          featured_object:
+            type: fields
+            headline:
+              tr: Vitrindeki nesne
+              en: Featured object
+            fields:
+              featured_page:
+                label:
+                  tr: Vitrin sayfası
+                  en: Featured page
+                type: pages
+                max: 1
+              featured_label:
+                label:
+                  tr: Etiket
+                  en: Label
+                type: text
+                default: "Vitrindeki Nesne"
+                width: 1/2
+              featured_image_override:
+                label:
+                  tr: Görsel ezmesi
+                  en: Image override
+                type: files
+                max: 1
+                width: 1/2
+              featured_description_override:
+                label:
+                  tr: Açıklama ezmesi
+                  en: Description override
+                type: textarea
+                size: small
 
-  recent:
-    label: Recently Catalogued
-    icon: clock
-    fields:
-      show_recently_catalogued:
-        label: Show recently catalogued
-        type: toggle
-        default: true
-        width: 1/2
-      recent_title:
-        label: Section title
-        type: text
-        default: "Son Kataloglananlar"
-        width: 1/2
-      recent_limit:
-        label: Item limit
-        type: number
-        default: 6
-        min: 1
-        max: 24
-        width: 1/2
+          recent_panel:
+            type: fields
+            headline:
+              tr: Son kataloglananlar
+              en: Recently catalogued
+            fields:
+              show_recently_catalogued:
+                label:
+                  tr: Bölümü göster
+                  en: Show section
+                type: toggle
+                default: true
+                width: 1/2
+              recent_title:
+                label:
+                  tr: Bölüm başlığı
+                  en: Section title
+                type: text
+                default: "Son Kataloglananlar"
+                width: 1/2
+              recent_limit:
+                label:
+                  tr: Kart limiti
+                  en: Item limit
+                type: number
+                default: 6
+                min: 1
+                max: 24
+                width: 1/2
 
-  tag_wall:
-    label: Tag Wall
-    icon: tag
-    fields:
-      show_tag_wall:
-        label: Show tag wall
-        type: toggle
-        default: true
-        width: 1/2
-      tag_wall_title:
-        label: Section title
-        type: text
-        default: "Zihinsel Harita"
-        width: 1/2
-      tag_wall_mode:
-        label: Tag source
-        type: select
-        default: from_tags
-        width: 1/2
-        options:
-          from_tags: Collect from content
-          manual: Manual tags
-      manual_tags:
-        label: Manual tags
-        type: tags
+      sidebar:
+        width: 1/3
+        sections:
+          tag_wall_panel:
+            type: fields
+            headline:
+              tr: Tag wall
+              en: Tag wall
+            fields:
+              show_tag_wall:
+                label:
+                  tr: Tag wall göster
+                  en: Show tag wall
+                type: toggle
+                default: true
+                width: 1/2
+              tag_wall_title:
+                label:
+                  tr: Bölüm başlığı
+                  en: Section title
+                type: text
+                default: "Zihinsel Harita"
+                width: 1/2
+              tag_wall_mode:
+                label:
+                  tr: Tag kaynağı
+                  en: Tag source
+                type: select
+                default: from_tags
+                width: 1/2
+                options:
+                  from_tags:
+                    tr: İçerikten topla
+                    en: Collect from content
+                  manual:
+                    tr: Manuel tagler
+                    en: Manual tags
+              manual_tags:
+                label:
+                  tr: Manuel tagler
+                  en: Manual tags
+                type: tags
 
   manifesto:
-    label: Manifesto Strip
+    label: Manifesto
     icon: quote
-    fields:
-      show_manifesto_strip:
-        label: Show manifesto strip
-        type: toggle
-        default: true
-        width: 1/2
-      manifesto_quotes:
-        label: Dialogues / quotes
-        type: structure
-        help: One entry is picked randomly on every uncached page load. Use Text for the quote/dialogue and Source for the film name.
-        fields:
-          text:
-            label: Text
-            type: textarea
-            buttons: false
-            help: HTML is allowed for character names and line breaks.
-          source:
-            label: Source / film
-            type: text
-            width: 1/2
-      manifesto_text:
-        label: Fallback text
-        type: textarea
-        help: Used only when no dialogue / quote entries are defined.
-      manifesto_font_size:
-        label: Font size
-        type: select
-        default: small
-        width: 1/2
-        options:
-          small: Small
-          medium: Medium
-          large: Large
-          display: Display
-      manifesto_link_text:
-        label: Link label
-        type: text
-        default: "Hakkinda"
-        width: 1/2
-      manifesto_link:
-        label: Link URL
-        type: url
-        width: 1/2
+    columns:
+      main:
+        width: 2/3
+        sections:
+          manifesto_content:
+            type: fields
+            headline:
+              tr: Diyalog şeridi
+              en: Dialogue strip
+            fields:
+              show_manifesto_strip:
+                label:
+                  tr: Manifesto şeridini göster
+                  en: Show manifesto strip
+                type: toggle
+                default: true
+                width: 1/2
+              manifesto_quotes:
+                label:
+                  tr: Diyaloglar / alıntılar
+                  en: Dialogues / quotes
+                type: structure
+                help:
+                  tr: Frontend tüm kayıtları carousel olarak dolaşır. Text alanında karakter adları için HTML kullanılabilir.
+                  en: The frontend cycles through all entries as a carousel. HTML is allowed in Text for character names.
+                fields:
+                  text:
+                    label:
+                      tr: Metin
+                      en: Text
+                    type: textarea
+                    buttons: false
+                    help:
+                      tr: Karakter adları ve satır kırılımları için HTML kullanılabilir.
+                      en: HTML is allowed for character names and line breaks.
+                  source:
+                    label:
+                      tr: Kaynak / film
+                      en: Source / film
+                    type: text
+                    width: 1/2
+              manifesto_text:
+                label:
+                  tr: Fallback metin
+                  en: Fallback text
+                type: textarea
+                help:
+                  tr: Diyalog listesi boşsa kullanılır.
+                  en: Used only when no dialogue entries exist.
+
+      sidebar:
+        width: 1/3
+        sections:
+          manifesto_display:
+            type: fields
+            headline:
+              tr: Görünüm
+              en: Display
+            fields:
+              manifesto_font_size:
+                label:
+                  tr: Yazı boyutu
+                  en: Font size
+                type: select
+                default: small
+                width: 1/2
+                options:
+                  small:
+                    tr: Küçük
+                    en: Small
+                  medium:
+                    tr: Orta
+                    en: Medium
+                  large:
+                    tr: Büyük
+                    en: Large
+                  display: Display
+              manifesto_link_text:
+                label:
+                  tr: Link etiketi
+                  en: Link label
+                type: text
+                default: "Hakkında"
+                width: 1/2
+              manifesto_link:
+                label: Link URL
+                type: url
+                width: 1/2
 
   design:
-    label: Design
+    label:
+      tr: Tasarım
+      en: Design
     icon: palette
     columns:
       hero:
@@ -246,18 +432,26 @@ tabs:
         sections:
           hero_design:
             type: fields
-            headline: Hero design
+            headline:
+              tr: Hero tasarımı
+              en: Hero design
             fields:
               hero_min_height:
-                label: Hero minimum height
+                label:
+                  tr: Hero minimum yüksekliği
+                  en: Hero minimum height
                 type: text
                 placeholder: "360px"
               hero_text_max_width:
-                label: Hero text max width
+                label:
+                  tr: Hero metin genişliği
+                  en: Hero text max width
                 type: text
                 placeholder: "900px"
               hero_overlay_opacity:
-                label: Hero overlay opacity
+                label:
+                  tr: Hero overlay opaklığı
+                  en: Hero overlay opacity
                 type: number
                 min: 0
                 max: 1
@@ -268,18 +462,26 @@ tabs:
         sections:
           marquee_design:
             type: fields
-            headline: Marquee design
+            headline:
+              tr: Marquee tasarımı
+              en: Marquee design
             fields:
               marquee_height:
-                label: Marquee height
+                label:
+                  tr: Marquee yüksekliği
+                  en: Marquee height
                 type: text
                 placeholder: "clamp(190px, 26dvh, 320px)"
               marquee_gap:
-                label: Item gap
+                label:
+                  tr: Görsel aralığı
+                  en: Item gap
                 type: text
                 placeholder: "2rem"
               marquee_item_ratio:
-                label: Item aspect ratio
+                label:
+                  tr: Görsel oranı
+                  en: Item aspect ratio
                 type: text
                 placeholder: "4/3"
       wall:
@@ -287,22 +489,34 @@ tabs:
         sections:
           wall_design:
             type: fields
-            headline: Tag wall design
+            headline:
+              tr: Tag wall tasarımı
+              en: Tag wall design
             fields:
               tag_wall_limit:
-                label: Auto tag limit
+                label:
+                  tr: Otomatik tag limiti
+                  en: Auto tag limit
                 type: number
                 min: 1
                 max: 100
                 default: 40
               tag_wall_alignment:
-                label: Alignment
+                label:
+                  tr: Hizalama
+                  en: Alignment
                 type: select
                 default: center
                 options:
-                  left: Left
-                  center: Center
-                  right: Right
+                  left:
+                    tr: Sol
+                    en: Left
+                  center:
+                    tr: Orta
+                    en: Center
+                  right:
+                    tr: Sağ
+                    en: Right
 
   seo:
     label: SEO

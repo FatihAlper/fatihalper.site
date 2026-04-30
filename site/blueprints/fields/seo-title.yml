@@ -1,3 +1,7 @@
-label: SEO title
+label:
+  tr: SEO basligi
+  en: SEO Title
 type: text
-help: Optional title override for search and social previews.
+help:
+  tr: Arama ve sosyal onizleme icin opsiyonel baslik override'i.
+  en: Optional title override for search and social previews.

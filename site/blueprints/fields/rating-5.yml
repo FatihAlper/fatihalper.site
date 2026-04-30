@@ -1,6 +1,10 @@
-label: Rating
+label:
+  tr: Puan
+  en: Rating
 type: range
 min: 0
 max: 5
 step: 0.5
-help: Shared 0-5 archive rating scale.
+help:
+  tr: Ortak 0-5 arsiv puanlama olcegi.
+  en: Shared 0-5 archive rating scale.

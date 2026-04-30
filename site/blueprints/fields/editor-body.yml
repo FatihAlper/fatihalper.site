@@ -1,6 +1,10 @@
-label: Body
+label:
+  tr: Govde
+  en: Body
 type: blocks
-help: Shared long-form content field. Keep the field name as `body` for frontend compatibility and future custom block editors.
+help:
+  tr: Ortak uzun form icerik alani. Frontend uyumlulugu icin alan anahtari `body` kalmalidir.
+  en: Shared long-form content field. Keep the field key as `body` for frontend compatibility and future custom block editors.
 fieldsets:
   - heading
   - text

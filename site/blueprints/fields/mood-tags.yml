@@ -1,3 +1,7 @@
-label: Mood tags
+label:
+  tr: Ruh hali etiketleri
+  en: Mood Tags
 type: tags
-help: Playlist discovery tags. These feed the tag index through `mood_tags`.
+help:
+  tr: Playlist kesif etiketleri. Etiket indeksini `mood_tags` uzerinden besler.
+  en: Playlist discovery tags. These feed the tag index through `mood_tags`.

@@ -1,3 +1,7 @@
-label: Tags
+label:
+  tr: Etiketler
+  en: Tags
 type: tags
-help: Public discovery tags. These feed the tag index.
+help:
+  tr: Kamusal kesif etiketleri. Etiket indeksi ve ilgili icerik akisini besler.
+  en: Public discovery tags. These feed the tag index and related content flows.

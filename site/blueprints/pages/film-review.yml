@@ -1,124 +1,219 @@
-title: Film kaydı
+title:
+  tr: Film kaydi
+  en: Film Entry
 icon: video
 
 tabs:
   film:
-    label: Film
+    label:
+      tr: Film / Core
+      en: Film
     icon: video
     columns:
       main:
         width: 2/3
-        fields:
-          tmdb_info:
-            label: TMDB akışı
-            type: info
-            theme: info
-            text: |
-              TMDB ID boş metadata, poster ve backdrop değerlerini tamamlayabilir. Manuel alanlar site ayarındaki öncelik açıkken editoryal kaynak olarak kalır.
-          film_title:
-            label: Film başlığı
-            type: text
-            width: 1/2
-            help: Boşsa Kirby sayfa başlığı kullanılır.
-          original_title:
-            label: Orijinal başlık
-            type: text
-            width: 1/2
-          tmdb_id:
-            label: TMDB ID
-            type: text
-            width: 1/2
-            help: "Örnek: 398173"
-          rating:
-            extends: fields/rating-5
-            label: Puan
-            width: 1/4
-          date:
-            label: İzleme / katalog tarihi
-            type: date
-            default: today
-            required: true
-            width: 1/4
+        sections:
+          tmdb_flow:
+            type: fields
+            fields:
+              tmdb_info:
+                label:
+                  tr: TMDB Akisi
+                  en: TMDB Flow
+                type: info
+                theme: info
+                text:
+                  tr: TMDB ID metadata, poster ve backdrop alanlarini tamamlayabilir. Manuel alanlar doluysa editoryal oncelik ayarina gore korunur.
+                  en: A TMDB ID can fill metadata, poster, and backdrop values. Manual fields are preserved according to the editorial priority setting.
+          identity:
+            type: fields
+            headline:
+              tr: Film Kimligi
+              en: Film Identity
+            fields:
+              film_title:
+                label:
+                  tr: Film basligi
+                  en: Film Title
+                type: text
+                width: 1/2
+                help:
+                  tr: Bos kalirsa Kirby sayfa basligi kullanilir.
+                  en: Falls back to the Kirby page title when empty.
+              original_title:
+                label:
+                  tr: Orijinal baslik
+                  en: Original Title
+                type: text
+                width: 1/2
+              tmdb_id:
+                label: TMDB ID
+                type: text
+                width: 1/2
+                help:
+                  tr: "Ornek: 398173"
+                  en: "Example: 398173"
+              rating:
+                extends: fields/rating-5
+                label:
+                  tr: Puan
+                  en: Rating
+                width: 1/4
+              date:
+                label:
+                  tr: Izleme / katalog tarihi
+                  en: Watch / Catalogue Date
+                type: date
+                default: today
+                required: true
+                width: 1/4
 
       sidebar:
         width: 1/3
-        fields:
-          poster:
-            label: Manuel poster
-            type: files
-            max: 1
-            layout: cards
-            query: page.images
-            uploads:
-              template: photo
-            image:
-              ratio: 2/3
-              cover: true
-            help: Boşsa TMDB poster değeri kullanılır.
-          backdrop:
-            label: Manuel backdrop
-            type: files
-            max: 1
-            layout: cards
-            query: page.images
-            uploads:
-              template: photo
-            image:
-              ratio: 16/9
-              cover: true
-            help: Boşsa TMDB backdrop değeri kullanılır.
+        sections:
+          artwork:
+            type: fields
+            headline:
+              tr: Gorsel Sunum
+              en: Visual Presentation
+            fields:
+              poster:
+                label:
+                  tr: Manuel poster
+                  en: Manual Poster
+                type: files
+                max: 1
+                layout: cards
+                query: page.images
+                uploads:
+                  template: photo
+                image:
+                  ratio: 2/3
+                  cover: true
+                help:
+                  tr: Bos kalirsa TMDB poster degeri kullanilir.
+                  en: Falls back to the TMDB poster when empty.
+              backdrop:
+                label:
+                  tr: Manuel backdrop
+                  en: Manual Backdrop
+                type: files
+                max: 1
+                layout: cards
+                query: page.images
+                uploads:
+                  template: photo
+                image:
+                  ratio: 16/9
+                  cover: true
+                help:
+                  tr: Bos kalirsa TMDB backdrop degeri kullanilir.
+                  en: Falls back to the TMDB backdrop when empty.
 
   metadata:
-    label: Metadata
+    label:
+      tr: Metadata
+      en: Metadata
     icon: list-bullet
-    fields:
-      director:
-        label: Yönetmen
-        type: text
-        width: 1/2
-      release_year:
-        label: Yayın yılı
-        type: number
-        width: 1/4
-      runtime:
-        label: Süre
-        type: number
-        after: dk
-        width: 1/4
-      countries:
-        label: Ülkeler
-        type: text
-        width: 1/2
-        help: Boşsa TMDB üretim ülkeleri kullanılır.
-      genres:
-        label: Türler
-        type: text
-        width: 1/2
-        help: Boşsa TMDB türleri kullanılır.
-
-  review:
-    label: İnceleme
-    icon: text
     columns:
       main:
         width: 2/3
         fields:
-          body:
-            extends: fields/editor-body
-            label: İnceleme gövdesi
-      sidebar:
+          director:
+            label:
+              tr: Yonetmen
+              en: Director
+            type: text
+            width: 1/2
+          release_year:
+            label:
+              tr: Yayin yili
+              en: Release Year
+            type: number
+            width: 1/4
+          runtime:
+            label:
+              tr: Sure
+              en: Runtime
+            type: number
+            after: dk
+            width: 1/4
+          countries:
+            label:
+              tr: Ulkeler
+              en: Countries
+            type: text
+            width: 1/2
+            help:
+              tr: Bos kalirsa TMDB uretim ulkeleri kullanilir.
+              en: Falls back to TMDB production countries when empty.
+          genres:
+            label:
+              tr: Turler
+              en: Genres
+            type: text
+            width: 1/2
+            help:
+              tr: Bos kalirsa TMDB turleri kullanilir.
+              en: Falls back to TMDB genres when empty.
+      guide:
         width: 1/3
         fields:
-          short_review:
-            label: Kısa yorum / teaser
-            type: textarea
-            size: small
-            buttons: false
-            maxlength: 360
-            placeholder: Bu film hakkında kısa bir düşünce...
-            help: Arşiv kartlarında ve tam incelemenin başında "spot" olarak gösterilir.
-          tags:
-            extends: fields/content-tags
+          metadata_note:
+            label:
+              tr: Editoryal Oncelik
+              en: Editorial Priority
+            type: info
+            theme: info
+            text:
+              tr: Manuel metadata dolduruldugunda film sayfasindaki okuma deneyimini daha kontrollu hale getirir.
+              en: Manual metadata gives tighter editorial control over the film page.
+
+  review:
+    label:
+      tr: Inceleme / Review
+      en: Review
+    icon: text
+    columns:
+      main:
+        width: 2/3
+        sections:
+          body_section:
+            type: fields
+            headline:
+              tr: Metin
+              en: Text
+            fields:
+              body:
+                extends: fields/editor-body
+                label:
+                  tr: Inceleme govdesi
+                  en: Review Body
+      sidebar:
+        width: 1/3
+        sections:
+          teaser:
+            type: fields
+            headline:
+              tr: Kart ve Etiketler
+              en: Card and Tags
+            fields:
+              short_review:
+                label:
+                  tr: Kisa yorum / teaser
+                  en: Short Review / Teaser
+                type: textarea
+                size: small
+                buttons: false
+                maxlength: 360
+                placeholder:
+                  tr: Bu film hakkinda kisa bir dusunce...
+                  en: A short thought about this film...
+                help:
+                  tr: Arsiv kartlarinda ve tam incelemenin basinda spot olarak gosterilir.
+                  en: Used on archive cards and as the review intro.
+              tags:
+                extends: fields/content-tags
 
   seo:
     label: SEO
@@ -129,6 +224,9 @@ tabs:
         sections:
           seo_fields:
             type: fields
+            headline:
+              tr: Arama ve Paylasim
+              en: Search and Sharing
             fields:
               seo_title:
                 extends: fields/seo-title
@@ -141,5 +239,7 @@ tabs:
         sections:
           files:
             type: files
-            headline: Dosyalar
+            headline:
+              tr: Dosyalar
+              en: Files
             template: photo

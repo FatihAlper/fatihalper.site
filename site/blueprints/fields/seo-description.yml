@@ -1,6 +1,10 @@
-label: SEO description
+label:
+  tr: SEO aciklamasi
+  en: SEO Description
 type: textarea
 size: small
 buttons: false
 maxlength: 320
-help: Optional meta description. Empty values fall back to summaries or site defaults.
+help:
+  tr: Opsiyonel meta aciklamasi. Bos kalirsa ozetler veya site varsayilanlari kullanilir.
+  en: Optional meta description. Empty values fall back to summaries or site defaults.

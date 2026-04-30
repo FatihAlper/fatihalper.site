@@ -1,4 +1,6 @@
-label: Cover image
+label:
+  tr: Kapak gorseli
+  en: Cover Image
 type: files
 max: 1
 layout: cards
@@ -8,4 +10,6 @@ uploads:
 image:
   ratio: 4/3
   cover: true
-help: Primary archive/card image for this content item.
+help:
+  tr: Bu icerik icin ana arsiv/kart gorseli.
+  en: Primary archive/card image for this content item.

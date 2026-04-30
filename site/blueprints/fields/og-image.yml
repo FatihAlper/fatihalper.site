@@ -1,4 +1,6 @@
-label: OG image
+label:
+  tr: OG gorseli
+  en: OG Image
 type: files
 max: 1
 layout: cards
@@ -8,4 +10,6 @@ uploads:
 image:
   ratio: 16/9
   cover: true
-help: Optional social image. Empty values fall back to cover/poster/backdrop/site defaults.
+help:
+  tr: Opsiyonel sosyal paylasim gorseli. Bos kalirsa cover/poster/backdrop/site varsayilanlari kullanilir.
+  en: Optional social image. Empty values fall back to cover/poster/backdrop/site defaults.

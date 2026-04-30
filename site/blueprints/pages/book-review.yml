@@ -1,77 +1,143 @@
-title: Kitap kaydı
+title:
+  tr: Kitap kaydi
+  en: Book Entry
 icon: book
 
 tabs:
-  content:
-    label: İnceleme
+  review:
+    label:
+      tr: Inceleme / Review
+      en: Review
     icon: book
     columns:
       main:
         width: 2/3
-        fields:
-          book_title:
-            label: Kitap başlığı
-            type: text
-            width: 1/2
-            help: Boşsa Kirby sayfa başlığı kullanılır.
-          author:
-            label: Yazar
-            type: text
-            width: 1/2
-            required: true
-          review_summary:
-            label: Kısa inceleme / özet
-            type: textarea
-            size: small
-            buttons: false
-            maxlength: 360
-          body:
-            extends: fields/editor-body
-            label: İnceleme gövdesi
-          tags:
-            extends: fields/content-tags
+        sections:
+          identity:
+            type: fields
+            headline:
+              tr: Kitap Kimligi
+              en: Book Identity
+            fields:
+              book_title:
+                label:
+                  tr: Kitap basligi
+                  en: Book Title
+                type: text
+                width: 1/2
+                help:
+                  tr: Bos kalirsa Kirby sayfa basligi kullanilir.
+                  en: Falls back to the Kirby page title when empty.
+              author:
+                label:
+                  tr: Yazar
+                  en: Author
+                type: text
+                width: 1/2
+                required: true
+          editorial:
+            type: fields
+            headline:
+              tr: Editoryal Not
+              en: Editorial Note
+            fields:
+              review_summary:
+                label:
+                  tr: Kisa inceleme / ozet
+                  en: Short Review / Summary
+                type: textarea
+                size: small
+                buttons: false
+                maxlength: 360
+                help:
+                  tr: Liste karti ve sayfa girisi icin kisa metin.
+                  en: Short copy for cards and page intro.
+              body:
+                extends: fields/editor-body
+                label:
+                  tr: Inceleme govdesi
+                  en: Review Body
+              tags:
+                extends: fields/content-tags
 
       sidebar:
         width: 1/3
-        fields:
-          date:
-            label: Katalog tarihi
-            type: date
-            default: today
-          rating:
-            extends: fields/rating-5
-            label: Puan
-          cover:
-            extends: fields/cover-image
-            label: Kapak görseli
-            image:
-              ratio: 2/3
-              cover: true
+        sections:
+          publishing:
+            type: fields
+            headline:
+              tr: Katalog
+              en: Catalogue
+            fields:
+              date:
+                label:
+                  tr: Katalog tarihi
+                  en: Catalogue Date
+                type: date
+                default: today
+              rating:
+                extends: fields/rating-5
+                label:
+                  tr: Puan
+                  en: Rating
+              cover:
+                extends: fields/cover-image
+                label:
+                  tr: Kapak gorseli
+                  en: Cover Image
+                image:
+                  ratio: 2/3
+                  cover: true
 
   metadata:
-    label: Metadata
+    label:
+      tr: Detaylar / Details
+      en: Details
     icon: list-bullet
-    fields:
-      original_year:
-        label: İlk yayın yılı
-        type: number
-        width: 1/4
-      publisher:
-        label: Yayınevi
-        type: text
-        width: 1/4
-      translator:
-        label: Çevirmen
-        type: text
-        width: 1/4
-      page_count:
-        label: Sayfa sayısı
-        type: number
-        width: 1/4
-      isbn:
-        label: ISBN
-        type: text
-        width: 1/2
+    columns:
+      main:
+        width: 2/3
+        fields:
+          original_year:
+            label:
+              tr: Ilk yayin yili
+              en: Original Year
+            type: number
+            width: 1/4
+          publisher:
+            label:
+              tr: Yayinevi
+              en: Publisher
+            type: text
+            width: 1/4
+          translator:
+            label:
+              tr: Cevirmen
+              en: Translator
+            type: text
+            width: 1/4
+          page_count:
+            label:
+              tr: Sayfa sayisi
+              en: Page Count
+            type: number
+            width: 1/4
+          isbn:
+            label: ISBN
+            type: text
+            width: 1/2
+      guide:
+        width: 1/3
+        fields:
+          metadata_note:
+            label:
+              tr: Not
+              en: Note
+            type: info
+            theme: info
+            text:
+              tr: Bu alanlar frontend kartlarini zenginlestirir; zorunlu degildir. Bilgi yoksa bos birakmak daha temizdir.
+              en: These fields enrich the frontend cards; leave unknown values empty.
 
   seo:
     label: SEO
@@ -82,6 +148,9 @@ tabs:
         sections:
           seo_fields:
             type: fields
+            headline:
+              tr: Arama ve Paylasim
+              en: Search and Sharing
             fields:
               seo_title:
                 extends: fields/seo-title
@@ -94,5 +163,7 @@ tabs:
         sections:
           files:
             type: files
-            headline: Dosyalar
+            headline:
+              tr: Dosyalar
+              en: Files
             template: photo

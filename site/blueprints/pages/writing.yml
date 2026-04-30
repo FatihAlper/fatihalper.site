@@ -1,57 +1,111 @@
-title: Yazı
+title:
+  tr: Yazi
+  en: Writing
 icon: text
 
 tabs:
-  content:
-    label: İçerik
+  draft:
+    label:
+      tr: Taslak / Draft
+      en: Draft
     icon: text
     columns:
       main:
         width: 2/3
-        fields:
-          subtitle:
-            label: Alt başlık / dek
-            type: text
-          summary:
-            label: Kısa özet
-            type: textarea
-            size: small
-            buttons: false
-            maxlength: 320
-            placeholder: Bu yazı ne hakkında?
-            help: Arşiv listesindeki kartlarda, SEO açıklamalarında ve yazının girişinde spot olarak kullanılır.
-          body:
-            extends: fields/editor-body
-            label: Blok içerik
-            required: true
-          quote_highlight:
-            label: Alıntı vurgusu
-            type: textarea
-            size: small
-            buttons: false
+        sections:
+          editorial:
+            type: fields
+            headline:
+              tr: Metin Akisi
+              en: Editorial Flow
+            fields:
+              subtitle:
+                label:
+                  tr: Alt baslik / dek
+                  en: Subtitle / Dek
+                type: text
+                help:
+                  tr: Basligin altinda kisa ritim kurar; bos birakilabilir.
+                  en: Optional supporting line below the title.
+              summary:
+                label:
+                  tr: Kisa ozet
+                  en: Short Summary
+                type: textarea
+                size: small
+                buttons: false
+                maxlength: 320
+                placeholder:
+                  tr: Bu yazi ne hakkinda?
+                  en: What is this piece about?
+                help:
+                  tr: Arsiv kartlari, SEO aciklamasi ve yazinin giris spotu icin kullanilir.
+                  en: Used for archive cards, SEO description, and the story intro.
+              body:
+                extends: fields/editor-body
+                label:
+                  tr: Blok icerik
+                  en: Body Blocks
+                required: true
+              quote_highlight:
+                label:
+                  tr: Alinti vurgusu
+                  en: Quote Highlight
+                type: textarea
+                size: small
+                buttons: false
+                help:
+                  tr: Yazi icinde one cikarilacak kisa pasaj.
+                  en: Optional pull quote for emphasis.
 
       sidebar:
         width: 1/3
-        fields:
-          writing_type:
-            label: Yazı türü
-            type: select
-            default: essay
-            options:
-              essay: Deneme
-              article: Makale
-              note: Not
-          date:
-            label: Yayın / katalog tarihi
-            type: date
-            default: today
-            required: true
-          cover:
-            extends: fields/cover-image
-            label: Kapak görseli
-            help: Arşiv listesi kartlarında ve yazı başında "Hero" olarak kullanılır.
-          tags:
-            extends: fields/content-tags
+        sections:
+          publishing:
+            type: fields
+            headline:
+              tr: Yayin Bilgisi
+              en: Publishing
+            fields:
+              writing_type:
+                label:
+                  tr: Yazi turu
+                  en: Writing Type
+                type: select
+                default: essay
+                options:
+                  essay:
+                    tr: Deneme
+                    en: Essay
+                  article:
+                    tr: Makale
+                    en: Article
+                  note:
+                    tr: Not
+                    en: Note
+              date:
+                label:
+                  tr: Yayin / katalog tarihi
+                  en: Publish / Catalogue Date
+                type: date
+                default: today
+                required: true
+          presentation:
+            type: fields
+            headline:
+              tr: Sunum
+              en: Presentation
+            fields:
+              cover:
+                extends: fields/cover-image
+                label:
+                  tr: Kapak gorseli
+                  en: Cover Image
+                help:
+                  tr: Arsiv kartlarinda ve yazi basinda hero olarak kullanilir.
+                  en: Used by archive cards and the article hero.
+              tags:
+                extends: fields/content-tags
 
   seo:
     label: SEO
@@ -62,6 +116,9 @@ tabs:
         sections:
           seo_fields:
             type: fields
+            headline:
+              tr: Arama ve Paylasim
+              en: Search and Sharing
             fields:
               seo_title:
                 extends: fields/seo-title
@@ -74,5 +131,7 @@ tabs:
         sections:
           files:
             type: files
-            headline: Dosyalar
+            headline:
+              tr: Dosyalar
+              en: Files
             template: photo
