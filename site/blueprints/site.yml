@@ -1039,6 +1039,35 @@ tabs:
                 disabled: true
                 width: 1/2
 
+          cache_status:
+            type: info
+            theme: notice
+            headline: Cache durumu
+            text: |
+              {{ site.panelCacheSummary }}
+
+          cache_tools:
+            type: fields
+            headline: Cache temizleme
+            fields:
+              cache_clear_requested:
+                label: Cache'i temizle
+                type: toggle
+                default: false
+                width: 1/2
+                help: AÃ§Ä±p kaydedince Kirby page cache, TMDB/Spotify cache ve site/cache klasÃ¶rÃ¼ temizlenir. Ä°ÅŸlemden sonra otomatik kapanÄ±r.
+              cache_last_cleared_at:
+                label: Son temizleme zamanÄ±
+                type: date
+                time: true
+                disabled: true
+                width: 1/2
+              cache_last_clear_status:
+                label: Son temizleme sonucu
+                type: textarea
+                size: small
+                disabled: true
+
           google_analytics_config:
             type: fields
             headline: Google Analytics

@@ -38,4 +38,33 @@ Kirby::plugin('site/helpers', [
             return dashboardHealthChecks();
         },
     ],
+    'hooks' => [
+        'site.update:after' => function () {
+            static $clearing = false;
+
+            if ($clearing === true || site()->cache_clear_requested()->toBool() !== true) {
+                return;
+            }
+
+            $clearing = true;
+
+            try {
+                $result = dashboardClearCaches();
+
+                site()->update([
+                    'cache_clear_requested' => false,
+                    'cache_last_cleared_at' => date('c'),
+                    'cache_last_clear_status' => $result['message'],
+                ]);
+            } catch (Throwable $e) {
+                site()->update([
+                    'cache_clear_requested' => false,
+                    'cache_last_cleared_at' => date('c'),
+                    'cache_last_clear_status' => 'Cache temizleme başarısız: ' . $e->getMessage(),
+                ]);
+            } finally {
+                $clearing = false;
+            }
+        },
+    ],
 ]);

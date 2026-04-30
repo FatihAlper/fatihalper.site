@@ -337,7 +337,52 @@ function dashboardCacheStats(): string {
         'Production assetler: main.min.css / main.min.js mevcut',
         'Cache boyutu: ' . dashboardFormatBytes(dashboardDirectorySize($cacheRoot)),
         'Media/generated boyutu: ' . dashboardFormatBytes(dashboardDirectorySize($mediaRoot)),
+        'Son cache temizleme: ' . ($site->cache_last_cleared_at()->isNotEmpty() ? $site->cache_last_cleared_at()->toDate('d.m.Y H:i') : 'henüz yok'),
+        'Son cache temizleme sonucu: ' . ($site->cache_last_clear_status()->value() ?: 'henüz yok'),
     ]);
+}
+
+function dashboardClearCaches(): array {
+    $kirby = kirby();
+    $cacheRoot = $kirby->root('cache');
+    $sizeBefore = dashboardDirectorySize($cacheRoot);
+    $errors = [];
+
+    foreach (['pages', 'site.tmdb', 'site.spotify'] as $cacheName) {
+        try {
+            $kirby->cache($cacheName)->flush();
+        } catch (Throwable $e) {
+            $errors[] = $cacheName . ': ' . $e->getMessage();
+        }
+    }
+
+    try {
+        if (is_dir($cacheRoot) === true) {
+            \Kirby\Filesystem\Dir::remove($cacheRoot);
+        }
+
+        \Kirby\Filesystem\Dir::make($cacheRoot, true);
+    } catch (Throwable $e) {
+        $errors[] = 'cache root: ' . $e->getMessage();
+    }
+
+    $sizeAfter = dashboardDirectorySize($cacheRoot);
+
+    if ($errors !== []) {
+        return [
+            'ok' => false,
+            'message' => 'Cache kısmen temizlendi. Hata: ' . implode(' | ', $errors),
+            'size_before' => $sizeBefore,
+            'size_after' => $sizeAfter,
+        ];
+    }
+
+    return [
+        'ok' => true,
+        'message' => 'Cache temizlendi: ' . dashboardFormatBytes($sizeBefore) . ' -> ' . dashboardFormatBytes($sizeAfter),
+        'size_before' => $sizeBefore,
+        'size_after' => $sizeAfter,
+    ];
 }
 
 function dashboardSystemStats(): string {
