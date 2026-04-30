@@ -226,7 +226,7 @@ picture {
 .card-content .meta-label {
   display: block;
   font-size: 0.8rem;
-  color: var(--color-accent-gold);
+  color: var(--color-text-light);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: var(--space-xs);
@@ -1851,25 +1851,33 @@ picture {
 }
 
 .home-recent-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  min-height: 184px;
   padding: 1.5rem;
   border: 1px solid var(--color-border);
-  background: transparent;
+  background: var(--color-card-dark);
   color: var(--color-text-light);
-  transition: all 0.2s;
+  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 }
 
 .home-recent-card:hover {
   border-color: var(--color-text-muted);
   background: var(--color-bg-secondary);
+  transform: translateY(-2px);
 }
 
 .home-recent-card__type {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
   font-size: 0.8rem;
   color: var(--color-text-light);
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
 }
 
 .home-recent-card h3 {
@@ -1908,11 +1916,6 @@ picture {
 
 .home-recent-card__metadata dd {
   overflow-wrap: anywhere;
-}
-
-.home-recent-card__date {
-  font-size: 0.85rem;
-  color: var(--color-text-light);
 }
 
 /* Tag Wall */

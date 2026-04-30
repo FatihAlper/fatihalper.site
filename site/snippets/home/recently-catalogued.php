@@ -20,9 +20,14 @@ if ($recent->isEmpty()) return;
   <div class="home-recent__grid">
     <?php foreach ($recent as $item): ?>
       <?php $tpl = $item->intendedTemplate()->name(); ?>
-      <?php $metadata = contentCardMetadata($item, 2); ?>
+      <?php $metadata = contentCardMetadata($item, $tpl === 'playlist' ? 3 : 2); ?>
       <a href="<?= $item->url() ?>" class="home-recent-card">
-        <span class="home-recent-card__type"><?= contentTypeLabel($tpl, $item) ?></span>
+        <span class="home-recent-card__type">
+          <?= contentTypeLabel($tpl, $item) ?>
+          <?php if ($date = contentDisplayDate($item)): ?>
+            <span aria-hidden="true">&middot;</span> <?= $date ?>
+          <?php endif ?>
+        </span>
         <h3><?= $item->title() ?></h3>
         <?php if (!empty($metadata)): ?>
           <dl class="home-recent-card__metadata">
@@ -33,9 +38,6 @@ if ($recent->isEmpty()) return;
               </div>
             <?php endforeach ?>
           </dl>
-        <?php endif ?>
-        <?php if ($date = contentDisplayDate($item)): ?>
-          <span class="home-recent-card__date"><?= $date ?></span>
         <?php endif ?>
       </a>
     <?php endforeach ?>
