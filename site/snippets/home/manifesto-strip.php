@@ -41,6 +41,20 @@ $fontSize = in_array($fontSize, ['small', 'medium', 'large', 'display'], true) ?
       </figure>
     <?php endforeach ?>
   </div>
+  <?php if (count($quoteEntries) > 1): ?>
+    <div class="home-manifesto-strip__dots" aria-label="Manifesto seçimi">
+      <?php foreach ($quoteEntries as $index => $entry): ?>
+        <button
+          class="home-manifesto-strip__dot<?= $index === 0 ? ' is-active' : '' ?>"
+          type="button"
+          data-manifesto-dot
+          data-index="<?= $index ?>"
+          aria-label="Manifesto <?= $index + 1 ?>"
+          aria-current="<?= $index === 0 ? 'true' : 'false' ?>"
+        ></button>
+      <?php endforeach ?>
+    </div>
+  <?php endif ?>
   <?php if ($linkUrl->isNotEmpty()): ?>
     <a href="<?= $linkUrl ?>" class="home-manifesto-strip__link"><?= $linkText->or('Hakk&#305;nda') ?></a>
   <?php endif ?>

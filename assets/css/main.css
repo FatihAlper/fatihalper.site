@@ -2180,6 +2180,7 @@ picture {
 .home-manifesto-strip__items {
   display: grid;
   width: min(100%, 860px);
+  touch-action: pan-y;
 }
 
 .home-manifesto-strip__item {
@@ -2230,6 +2231,39 @@ picture {
   color: var(--color-accent-gold);
   letter-spacing: 1px;
   text-transform: uppercase;
+}
+
+.home-manifesto-strip__dots {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 1.5rem;
+}
+
+.home-manifesto-strip__dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--color-text-muted);
+  opacity: 0.42;
+  cursor: pointer;
+  padding: 0;
+  transform: scale(1);
+  transition: background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+
+.home-manifesto-strip__dot:hover,
+.home-manifesto-strip__dot:focus-visible {
+  opacity: 0.78;
+}
+
+.home-manifesto-strip__dot.is-active {
+  background: var(--color-accent-gold);
+  box-shadow: 0 0 0 0.28rem rgba(201, 164, 92, 0.14);
+  opacity: 1;
+  transform: scale(1.18);
 }
 
 .home-manifesto-strip__link {
