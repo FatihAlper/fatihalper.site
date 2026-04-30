@@ -1,0 +1,32 @@
+---
+description: Keep this public Kirby repository code-only and protect private content.
+alwaysApply: true
+---
+
+This is a public, code-only Kirby CMS repository. Never modify, stage, commit, print or summarize private/live data from:
+
+- `content/`
+- `media/`
+- `site/accounts/`
+- `site/cache/`
+- `site/sessions/`
+- `site/logs/`
+- `site/config/.license`
+- `.env`
+- `_deploy*/`
+
+Only make code/config changes in safe project areas such as:
+
+- `.cpanel.yml`, `.env.example`, `.gitattributes`, `.gitignore`, `.htaccess`
+- `assets/css/`, `assets/js/`
+- `site/blueprints/`, `site/config/config.php`, `site/docs/`
+- `site/plugins/`, `site/snippets/`, `site/templates/`, `site/translations/`
+- `tools/`
+
+Before committing, run:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\check-code-only.ps1
+```
+
+If a task requires content/media/account/secret changes, stop and ask the user for explicit approval.

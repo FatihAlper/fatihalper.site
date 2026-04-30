@@ -1,0 +1,24 @@
+#!/bin/sh
+set -eu
+
+blocked_paths='^(\.env($|\.)|content/|media/|site/accounts/|site/cache/|site/sessions/|site/logs/|site/config/\.license|_deploy|.*\.(zip|log)$)'
+staged_paths="$(git diff --cached --name-only --diff-filter=ACMR || true)"
+
+if printf '%s\n' "$staged_paths" | grep -E "$blocked_paths" >/dev/null 2>&1; then
+  echo "Blocked commit: staged private/content/runtime files were detected:" >&2
+  printf '%s\n' "$staged_paths" | grep -E "$blocked_paths" >&2
+  echo "Unstage them before committing." >&2
+  exit 1
+fi
+
+secret_pattern='(SPOTIFY_CLIENT_SECRET[[:space:]]*=[[:space:]]*[^#[:space:]]+|SPOTIFY_REFRESH_TOKEN[[:space:]]*=[[:space:]]*[^#[:space:]]+|TMDB_ACCESS_TOKEN[[:space:]]*=[[:space:]]*[^#[:space:]]+|K-[A-Z0-9]{10,}|BEGIN (RSA |OPENSSH |PRIVATE )?PRIVATE KEY)'
+
+if git grep --cached -n -I -E "$secret_pattern" -- . ':!kirby/**' ':!site/plugins/kirby3-dotenv/vendor/**' ':!site/plugins/timnarr-kirby-imagex-bd9abbe/**' >/tmp/fatihalper-secret-scan.$$ 2>/dev/null; then
+  echo "Blocked commit: secret-looking values were detected:" >&2
+  cat /tmp/fatihalper-secret-scan.$$ >&2
+  rm -f /tmp/fatihalper-secret-scan.$$
+  exit 1
+fi
+
+rm -f /tmp/fatihalper-secret-scan.$$
+exit 0
