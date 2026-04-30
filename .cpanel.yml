@@ -2,4 +2,17 @@
 deployment:
   tasks:
     - export DEPLOYPATH=$HOME/public_html/
-    - /bin/rsync -a --delete --exclude='.git' --exclude='.env' --exclude='content' --exclude='media' --exclude='site/accounts' --exclude='site/cache' --exclude='site/sessions' --exclude='site/logs' ./ $DEPLOYPATH
+    - /bin/cp .htaccess $DEPLOYPATH
+    - /bin/cp index.php $DEPLOYPATH
+    - /bin/cp composer.json $DEPLOYPATH
+    - /bin/cp -R assets $DEPLOYPATH
+    - /bin/cp -R kirby $DEPLOYPATH
+    - /bin/mkdir -p $DEPLOYPATH/site
+    - /bin/mkdir -p $DEPLOYPATH/site/config
+    - /bin/cp site/config/config.php $DEPLOYPATH/site/config/
+    - /bin/cp -R site/blueprints $DEPLOYPATH/site/
+    - /bin/cp -R site/docs $DEPLOYPATH/site/
+    - /bin/cp -R site/plugins $DEPLOYPATH/site/
+    - /bin/cp -R site/snippets $DEPLOYPATH/site/
+    - /bin/cp -R site/templates $DEPLOYPATH/site/
+    - /bin/cp -R site/translations $DEPLOYPATH/site/
