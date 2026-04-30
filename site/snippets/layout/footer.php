@@ -92,7 +92,7 @@ $assetVersion = function (string $path): string {
   </div>
 </footer>
 
-<script src="<?= esc($assetVersion('assets/js/main.js'), 'attr') ?>" defer></script>
+<script data-cfasync="false" src="<?= esc($assetVersion('assets/js/main.js'), 'attr') ?>" defer></script>
 
 </body>
 </html>

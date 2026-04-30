@@ -19,6 +19,7 @@ site/logs/
 _deploy*/
 *.zip
 *.log
+tools/php-server.*
 
 # Personal/raw media assets if they are ever placed outside content/media.
 *.psd

@@ -3,13 +3,19 @@
  *
  * Vanilla JS. No dependencies and no build tooling required.
  */
-document.addEventListener('DOMContentLoaded', () => {
+function initSite() {
   initLanguagePreference();
   initMobileMenu();
   initLightbox();
   initTagSearch();
   initManifestoStrip();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSite, { once: true });
+} else {
+  initSite();
+}
 
 function initLanguagePreference() {
   const switcher = document.querySelector('.language-switcher');
