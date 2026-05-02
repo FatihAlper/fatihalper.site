@@ -10,22 +10,22 @@
 /* Mobile order: poster(1) → article(2) → meta(3) — natural source order */
 
 .layout-sidebar-main--offset {
-  margin-top: -60px;
+  margin-top: calc(var(--space-12) * -1.25);
   position: relative;
   z-index: 10;
 }
 
 @media (min-width: 768px) {
   .layout-sidebar-main {
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: minmax(240px, 280px) 1fr;
     gap: var(--space-lg);
     margin-top: var(--space-lg);
   }
 
   .layout-sidebar-main--wide {
-    max-width: min(1660px, calc(100vw - 3rem));
+    max-width: min(var(--container-wide), calc(100vw - (var(--container-padding-inline) * 2)));
     grid-template-columns: minmax(240px, 300px) minmax(0, 1fr) minmax(240px, 320px);
-    gap: clamp(2rem, 3vw, 3.5rem);
+    gap: clamp(var(--space-8), 3vw, 3.5rem);
   }
 
   .single-art.layout-sidebar-main--wide {
@@ -80,13 +80,13 @@
   }
 
   .layout-sidebar-main--offset {
-    margin-top: -150px;
+    margin-top: clamp(-9.5rem, -10vw, -7.5rem);
   }
 }
 
 @media (min-width: 768px) and (max-width: 1099px) {
   .single-art.layout-sidebar-main--wide {
-    max-width: min(980px, calc(100vw - 2rem));
+    max-width: min(980px, calc(100vw - (var(--container-padding-inline) * 2)));
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "meta"
@@ -190,28 +190,28 @@
 }
 
 .writing-hero__content .meta-label {
-  font-size: 0.8rem;
+  font-size: var(--font-size-meta);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: var(--letter-meta);
   color: var(--color-accent-gold);
 }
 
 .writing-hero__content .meta-date {
-  font-size: 0.8rem;
+  font-size: var(--font-size-meta);
   color: var(--color-text-muted);
 }
 
 .writing-hero__content h1 {
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  text-shadow: var(--shadow-text);
 }
 
 .writing-hero__content .dek {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: var(--font-size-body-lg);
   font-style: italic;
   color: var(--color-text-muted);
   margin-top: var(--space-xs);
-  max-width: 60ch;
+  max-width: var(--container-narrow);
 }
 
 @media (min-width: 768px) {

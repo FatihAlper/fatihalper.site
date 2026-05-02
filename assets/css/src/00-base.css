@@ -18,23 +18,78 @@
   /* Typography */
   --font-serif: 'Cormorant Garamond', serif;
   --font-sans: 'Jost', sans-serif;
+  --font-size-caption: 0.75rem;
+  --font-size-meta: 0.82rem;
+  --font-size-small: 0.9rem;
+  --font-size-ui: 1rem;
+  --font-size-body: 1.125rem;
+  --font-size-body-lg: 1.25rem;
+  --font-size-title-sm: 1.5rem;
+  --font-size-h1: clamp(2.5rem, 5vw, 4rem);
+  --font-size-h2: clamp(2rem, 4vw, 3rem);
+  --font-size-h3: clamp(1.5rem, 3vw, 2rem);
+  --font-size-icon-md: 2rem;
+  --font-size-icon-lg: 3rem;
+  --rating-star-size-compact: 0.78rem;
+  --rating-star-size-compact-sm: 0.72rem;
+  --line-tight: 1.2;
+  --line-snug: 1.35;
+  --line-body: 1.7;
+  --line-relaxed: 1.45;
+  --letter-meta: 0.06em;
   
-  /* Layout */
-  --max-width-reading: 68ch;
-  --max-width-content: 1200px;
+  /* Layout containers */
+  --container-reading: 68ch;
+  --container-narrow: 60ch;
+  --container-content: 1200px;
+  --container-wide: 1660px;
+  --container-padding-inline: clamp(1rem, 4vw, 1.5rem);
+  --max-width-reading: var(--container-reading);
+  --max-width-content: var(--container-content);
   
-  /* Spacing (Fluid with clamp) */
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: clamp(1.25rem, 3vw, 2rem);
-  --space-lg: clamp(2.5rem, 6vw, 4rem);
-  --space-xl: clamp(4rem, 10vw, 6rem);
+  /* Spacing scale: 4px base, fluid section steps */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-xs: var(--space-2);
+  --space-sm: var(--space-4);
+  --space-md: clamp(var(--space-5), 3vw, var(--space-8));
+  --space-lg: clamp(var(--space-10), 6vw, var(--space-16));
+  --space-xl: clamp(var(--space-16), 10vw, var(--space-24));
+  --section-space-sm: clamp(var(--space-8), 5vw, var(--space-12));
+  --section-space-md: clamp(var(--space-12), 7vw, var(--space-16));
+  --section-space-lg: clamp(var(--space-16), 10vw, var(--space-24));
+  --grid-gap-sm: var(--space-4);
+  --grid-gap-md: var(--space-6);
+  --grid-gap-lg: var(--space-8);
   --reading-flow-space: clamp(1.15rem, 2.2vw, 1.45rem);
   --reading-paragraph-space: clamp(1.35rem, 2.6vw, 1.75rem);
   --reading-section-space: clamp(2rem, 4vw, 2.8rem);
 
+  /* Shape and depth */
+  --radius-none: 0;
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-pill: 999px;
+  --border-width-hairline: 1px;
+  --shadow-soft: 0 18px 42px rgba(0, 0, 0, 0.28);
+  --shadow-feature: 0 20px 40px rgba(0, 0, 0, 0.4);
+  --shadow-text: 0 2px 20px rgba(0, 0, 0, 0.5);
+  --shadow-dot: 0 0 0 1px rgba(245, 233, 226, 0.08);
+  --shadow-dot-active: 0 0 0 0.18rem rgba(201, 164, 92, 0.16), 0 0 0.85rem rgba(201, 164, 92, 0.24);
+
   /* Dynamically Injected by Meta Snippet */
-  --card-radius: 0;
+  --card-radius: var(--radius-none);
   --card-border-opacity: 0.14;
 }
 
@@ -52,8 +107,8 @@ body {
   background-color: var(--color-bg-dark);
   color: var(--color-text-light);
   font-family: var(--font-sans);
-  line-height: 1.7;
-  font-size: 1.125rem;
+  line-height: var(--line-body);
+  font-size: var(--font-size-body);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -61,14 +116,14 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   font-weight: 600;
-  line-height: 1.2;
+  line-height: var(--line-tight);
   overflow-wrap: break-word;
 }
 
-h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
-h2 { font-size: clamp(2rem, 4vw, 3rem); }
-h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
-h4, h5, h6 { font-size: 1.25rem; }
+h1 { font-size: var(--font-size-h1); }
+h2 { font-size: var(--font-size-h2); }
+h3 { font-size: var(--font-size-h3); }
+h4, h5, h6 { font-size: var(--font-size-body-lg); }
 
 /* Strict Flow System (Lobotomized Owl approach) */
 .reading-content > * + *,
@@ -122,9 +177,9 @@ input:focus-visible,
 blockquote {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 1.25rem;
+  font-size: var(--font-size-body-lg);
   border-left: 2px solid var(--color-accent-gold);
-  padding-left: 1.5rem;
+  padding-left: var(--space-6);
   color: var(--color-text-muted);
 }
 
@@ -132,7 +187,7 @@ blockquote {
 .writing-body blockquote,
 .review-text blockquote {
   font-size: clamp(1.35rem, 3.6vw, 1.65rem);
-  line-height: 1.42;
+  line-height: var(--line-relaxed);
   color: var(--color-text-light);
 }
 

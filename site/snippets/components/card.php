@@ -40,12 +40,19 @@ $metadata = contentCardMetadata($item);
   <?php endif ?>
   
   <div class="card-content">
-    <span class="meta-label">
-      <?= $typeLabel ?> 
-      <?php if ($item->date()->isNotEmpty()): ?>
-        &middot; <?= contentDisplayDate($item) ?>
+    <div class="card-eyebrow">
+      <span class="meta-label card-type">
+        <?= $typeLabel ?>
+        <?php if ($item->date()->isNotEmpty()): ?>
+          &middot; <?= contentDisplayDate($item) ?>
+        <?php endif ?>
+      </span>
+      <?php if ($item->rating()->isNotEmpty()): ?>
+        <span class="card-rating">
+          <?php snippet('components/rating-stars', ['rating' => $item->rating()->toFloat()]) ?>
+        </span>
       <?php endif ?>
-    </span>
+    </div>
     
     <h2><?= $item->title() ?></h2>
 
@@ -64,12 +71,6 @@ $metadata = contentCardMetadata($item);
       <p class="card-subtitle"><?= $item->subtitle() ?></p>
     <?php elseif ($item->review_summary()->isNotEmpty()): ?>
       <p class="card-subtitle"><?= $item->review_summary()->excerpt(100) ?></p>
-    <?php endif ?>
-    
-    <?php if ($item->rating()->isNotEmpty()): ?>
-      <div class="card-rating">
-        <?php snippet('components/rating-stars', ['rating' => $item->rating()->toFloat()]) ?>
-      </div>
     <?php endif ?>
   </div>
 </article>

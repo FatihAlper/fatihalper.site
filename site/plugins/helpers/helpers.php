@@ -661,30 +661,40 @@ function contentCardMetadata($page, int $limit = 3): array {
             break;
 
         case 'film-review':
-            $tmdb = [];
-            if ($page->tmdb_id()->isNotEmpty() && function_exists('tmdbMovie')) {
-                $tmdb = tmdbMovie($page->tmdb_id()->value());
-            }
             $priority = site()->tmdb_manual_override_priority()->toBool(true);
-            $tmdbDirector = function_exists('tmdbDirector') ? tmdbDirector($tmdb) : '';
-            $director = $priority
-                ? ($page->director()->value() ?: $tmdbDirector)
-                : ($tmdbDirector ?: $page->director()->value());
-            $tmdbYear = isset($tmdb['release_date']) ? substr($tmdb['release_date'], 0, 4) : '';
-            $year = $priority
-                ? ($page->release_year()->value() ?: $tmdbYear)
-                : ($tmdbYear ?: $page->release_year()->value());
+            $manualDirector = $page->director()->value();
+            $manualYear = $page->release_year()->value();
             $manualRuntime = $page->runtime()->value();
+            $manualGenres = $page->genres()->value();
+            $needsTmdb = $page->tmdb_id()->isNotEmpty()
+                && function_exists('tmdbMovie')
+                && (
+                    $priority === false ||
+                    $manualDirector === '' ||
+                    $manualYear === '' ||
+                    $manualRuntime === '' ||
+                    $manualGenres === ''
+                );
+
+            $tmdb = $needsTmdb ? tmdbMovie($page->tmdb_id()->value()) : [];
+            $tmdbDirector = ($needsTmdb && function_exists('tmdbDirector')) ? tmdbDirector($tmdb) : '';
+            $director = $priority
+                ? ($manualDirector ?: $tmdbDirector)
+                : ($tmdbDirector ?: $manualDirector);
+            $tmdbYear = ($needsTmdb && isset($tmdb['release_date'])) ? substr($tmdb['release_date'], 0, 4) : '';
+            $year = $priority
+                ? ($manualYear ?: $tmdbYear)
+                : ($tmdbYear ?: $manualYear);
             if (is_numeric($manualRuntime)) {
                 $manualRuntime .= ' ' . fa_t('unit.minute.short', 'dk');
             }
-            $tmdbRuntime = ($tmdb['runtime'] ?? null) ? $tmdb['runtime'] . ' ' . fa_t('unit.minute.short', 'dk') : '';
+            $tmdbRuntime = ($needsTmdb && ($tmdb['runtime'] ?? null)) ? $tmdb['runtime'] . ' ' . fa_t('unit.minute.short', 'dk') : '';
             $runtime = $priority ? ($manualRuntime ?: $tmdbRuntime) : ($tmdbRuntime ?: $manualRuntime);
-            $tmdbGenres = function_exists('tmdbGenres') ? tmdbGenres($tmdb) : [];
+            $tmdbGenres = ($needsTmdb && function_exists('tmdbGenres')) ? tmdbGenres($tmdb) : [];
             $tmdbGenres = !empty($tmdbGenres) ? implode(', ', array_slice($tmdbGenres, 0, 3)) : '';
             $genres = $priority
-                ? ($page->genres()->value() ?: $tmdbGenres)
-                : ($tmdbGenres ?: $page->genres()->value());
+                ? ($manualGenres ?: $tmdbGenres)
+                : ($tmdbGenres ?: $manualGenres);
 
             $add(fa_t('meta.director', 'Yönetmen'), $director);
             $add(fa_t('meta.year', 'Yıl'), $year);

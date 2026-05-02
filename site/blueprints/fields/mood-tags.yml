@@ -1,7 +1,7 @@
 label:
-  tr: Ruh hali etiketleri
-  en: Mood Tags
+  tr: Tür
+  en: Genre
 type: tags
 help:
-  tr: Playlist kesif etiketleri. Etiket indeksini `mood_tags` uzerinden besler.
-  en: Playlist discovery tags. These feed the tag index through `mood_tags`.
+  tr: Playlist türlerini virgülle ayırarak girin. Etiket indeksi teknik olarak `mood_tags` alanını kullanır.
+  en: Enter playlist genres separated by commas. The tag index still uses the `mood_tags` field internally.

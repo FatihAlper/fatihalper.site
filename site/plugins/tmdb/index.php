@@ -1,7 +1,10 @@
 <?php
 
 use Kirby\Cms\App as Kirby;
+use Kirby\Filesystem\Dir;
+use Kirby\Filesystem\F;
 use Kirby\Http\Remote;
+use Kirby\Http\Response;
 
 const FA_TMDB_INTEGRATION_VERSION = '0.1b';
 
@@ -48,6 +51,90 @@ if (!function_exists('tmdbFetchJson')) {
         $data = json_decode($body, true);
 
         return is_array($data) ? $data : null;
+    }
+}
+
+if (!function_exists('tmdbImageAllowedSize')) {
+    function tmdbImageAllowedSize(string $size): bool {
+        return in_array($size, ['w92', 'w154', 'w185', 'w342', 'w500', 'w780', 'original'], true);
+    }
+}
+
+if (!function_exists('tmdbImageSize')) {
+    function tmdbImageSize($size = null): string {
+        $size = $size ?: kirby()->site()->tmdb_image_size()->value() ?: option('site.tmdb.image_size', 'w500');
+        $size = (string)$size;
+
+        return tmdbImageAllowedSize($size) ? $size : 'w500';
+    }
+}
+
+if (!function_exists('tmdbImagePath')) {
+    function tmdbImagePath($path): string|null {
+        $path = ltrim((string)$path, '/');
+
+        if (
+            $path === '' ||
+            str_contains($path, '..') ||
+            preg_match('![^A-Za-z0-9/_\.\-]!', $path) === 1 ||
+            preg_match('!\.(jpe?g|png|webp|avif)$!i', $path) !== 1
+        ) {
+            return null;
+        }
+
+        return $path;
+    }
+}
+
+if (!function_exists('tmdbImageCacheEnabled')) {
+    function tmdbImageCacheEnabled(): bool {
+        return kirby()->site()->tmdb_image_cache_enabled()->toBool(option('site.tmdb.image_cache', true));
+    }
+}
+
+if (!function_exists('tmdbImageCacheFile')) {
+    function tmdbImageCacheFile(string $path, string $size): string {
+        return kirby()->root('cache') . '/tmdb-images/' . $size . '/' . $path;
+    }
+}
+
+if (!function_exists('tmdbCachedImageUrl')) {
+    function tmdbCachedImageUrl($path, $size = null): string|null {
+        $path = tmdbImagePath($path);
+        if ($path === null) return null;
+
+        $size = tmdbImageSize($size);
+
+        return url('tmdb-image/' . rawurlencode($size) . '/' . $path);
+    }
+}
+
+if (!function_exists('tmdbFetchImage')) {
+    function tmdbFetchImage(string $url): string|null {
+        if (extension_loaded('curl')) {
+            try {
+                $response = Remote::get($url, ['timeout' => 8]);
+
+                return $response->code() === 200 ? $response->content() : null;
+            } catch (Throwable $e) {
+                return null;
+            }
+        }
+
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'GET',
+                'timeout' => 8,
+                'ignore_errors' => true,
+            ]
+        ]);
+
+        $body = @file_get_contents($url, false, $context);
+        if ($body === false) return null;
+
+        $status = $http_response_header[0] ?? '';
+
+        return str_contains($status, '200') ? $body : null;
     }
 }
 
@@ -119,7 +206,16 @@ if (!function_exists('tmdbMovie')) {
 if (!function_exists('tmdbImageUrl')) {
     function tmdbImageUrl($path, $size = null) {
         if (empty($path)) return null;
-        $size = $size ?: kirby()->site()->tmdb_image_size()->value() ?: option('site.tmdb.image_size', 'w500');
+
+        if (tmdbImageCacheEnabled() && $cached = tmdbCachedImageUrl($path, $size)) {
+            return $cached;
+        }
+
+        $size = tmdbImageSize($size);
+        $path = tmdbImagePath($path);
+        if ($path === null) return null;
+        $path = '/' . $path;
+
         return "https://image.tmdb.org/t/p/{$size}{$path}";
     }
 }
@@ -146,12 +242,44 @@ Kirby::plugin('fatihalper/tmdb-integration', [
     'options' => [
         'version' => FA_TMDB_INTEGRATION_VERSION,
         'cache' => true,
+        'image_cache' => true,
         'expires' => 10080, // minutes (1 week)
         'language' => 'tr-TR',
         'image_size' => 'w500'
     ],
     'siteMethods' => [
         'tmdbIntegrationVersion' => fn (): string => FA_TMDB_INTEGRATION_VERSION,
+    ],
+    'routes' => [
+        [
+            'pattern' => 'tmdb-image/(:any)/(:all)',
+            'action' => function (string $size, string $path) {
+                $size = rawurldecode($size);
+                $path = tmdbImagePath($path);
+
+                if (tmdbImageAllowedSize($size) === false || $path === null) {
+                    return new Response('Not found', 'text/plain', 404);
+                }
+
+                $cacheFile = tmdbImageCacheFile($path, $size);
+                if (is_file($cacheFile) === false) {
+                    $content = tmdbFetchImage("https://image.tmdb.org/t/p/{$size}/{$path}");
+
+                    if ($content === null) {
+                        return new Response('Image unavailable', 'text/plain', 502);
+                    }
+
+                    Dir::make(dirname($cacheFile), true);
+                    F::write($cacheFile, $content);
+                }
+
+                return Response::file($cacheFile, [
+                    'headers' => [
+                        'Cache-Control' => 'public, max-age=604800'
+                    ]
+                ]);
+            }
+        ]
     ],
     'pageMethods' => [
         'tmdb' => function () {

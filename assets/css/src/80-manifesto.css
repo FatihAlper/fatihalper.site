@@ -15,7 +15,7 @@
   padding-inline: clamp(1.25rem, 3.2vw, 2.5rem);
   margin-top: clamp(0.75rem, 2.4vw, 2rem);
   text-align: center;
-  border-top: 1px solid var(--color-border);
+  border-top: var(--border-width-hairline) solid var(--color-border);
 }
 
 .home-manifesto-strip__items {
@@ -81,7 +81,7 @@
 
 .home-manifesto-strip__source {
   font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-size: var(--font-size-meta);
   font-style: normal;
   color: var(--color-accent-gold);
   letter-spacing: 1px;
@@ -108,7 +108,7 @@
   width: 1.15rem;
   height: 1.25rem;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: transparent;
   cursor: pointer;
   padding: 0;
@@ -138,7 +138,7 @@
   height: 0.36rem;
   border-radius: inherit;
   background: var(--color-text-muted);
-  box-shadow: 0 0 0 1px rgba(245, 233, 226, 0.08);
+  box-shadow: var(--shadow-dot);
   opacity: 0.55;
   transform: translate(-50%, -50%) scale(1);
   transition: background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
@@ -151,14 +151,14 @@
 
 .home-manifesto-strip__dot.is-active::before {
   background: var(--color-accent-gold);
-  box-shadow: 0 0 0 0.18rem rgba(201, 164, 92, 0.16), 0 0 0.85rem rgba(201, 164, 92, 0.24);
+  box-shadow: var(--shadow-dot-active);
   opacity: 1;
   transform: translate(-50%, -50%) scale(1.22);
 }
 
 .home-manifesto-strip__link {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: var(--font-size-small);
   color: var(--color-accent-gold);
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -166,5 +166,5 @@
 
 main:has(.home-page) + .site-footer {
   margin-top: clamp(1rem, 2.4vw, 2rem);
-  padding-top: calc(var(--footer-logo-offset, 34px) + clamp(2.75rem, 5vw, 4rem));
+  padding-top: calc(var(--footer-logo-offset, 34px) + clamp(var(--space-10), 5vw, var(--space-16)));
 }

@@ -1,21 +1,21 @@
 /* Layout Utilities */
 .container {
   width: 100%;
-  max-width: var(--max-width-content);
+  max-width: var(--container-content);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding-inline: var(--container-padding-inline);
 }
 
 .reading-container {
   width: 100%;
-  max-width: var(--max-width-reading);
+  max-width: var(--container-reading);
   margin: 0 auto;
-  padding: var(--space-md) 1.5rem;
+  padding: var(--space-md) var(--container-padding-inline);
 }
 
 .reading-content {
   width: 100%;
-  max-width: var(--max-width-reading);
+  max-width: var(--container-reading);
 }
 
 /* Archive Pages */
@@ -30,8 +30,8 @@
 
 .archive-description {
   color: var(--color-text-muted);
-  font-size: 1.1rem;
-  max-width: 60ch;
+  font-size: clamp(var(--font-size-body), 1.5vw, var(--font-size-body-lg));
+  max-width: var(--container-narrow);
 }
 
 .archive-grid {
@@ -50,34 +50,37 @@
 }
 
 .card-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   padding-top: var(--space-sm);
 }
 
 .card-content h2 {
-  font-size: 1.25rem;
+  font-size: var(--font-size-body-lg);
   margin-bottom: var(--space-xs);
 }
 
 .card-content p {
   color: var(--color-text-muted);
-  font-size: 0.9rem;
+  font-size: var(--font-size-small);
 }
 
 .card-metadata {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem 0.75rem;
-  margin: 0 0 var(--space-xs);
+  gap: var(--space-2) var(--space-3);
+  margin: 0;
   color: var(--color-text-muted);
-  font-size: 0.82rem;
-  line-height: 1.45;
+  font-size: var(--font-size-meta);
+  line-height: var(--line-relaxed);
 }
 
 .card-metadata div {
   display: inline-flex;
   min-width: 0;
   max-width: 100%;
-  gap: 0.25rem;
+  gap: var(--space-1);
 }
 
 .card-metadata dt,
@@ -95,31 +98,79 @@
 }
 
 .card-content .meta-label {
-  display: block;
-  font-size: 0.8rem;
+  display: inline-flex;
+  font-size: var(--font-size-meta);
   color: var(--color-text-light);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: var(--space-xs);
+  letter-spacing: var(--letter-meta);
+}
+
+.card-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-width: 0;
+  margin-bottom: var(--space-3);
+}
+
+.card-type {
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  min-width: 0;
+  line-height: var(--line-snug);
+}
+
+.card-rating {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+  line-height: 1;
+  opacity: 0.95;
+}
+
+.card-rating .rating-star {
+  --rating-star-size: var(--rating-star-size-compact);
+}
+
+.card-subtitle {
+  margin-top: var(--space-3);
+}
+
+@media (max-width: 520px) {
+  .card-eyebrow {
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .card-rating {
+    padding-top: var(--space-1);
+  }
+
+  .card-rating .rating-star {
+    --rating-star-size: var(--rating-star-size-compact-sm);
+  }
 }
 
 /* Museum Label (sidebar metadata) */
 .museum-label {
   margin-top: var(--space-md);
-  border-top: 1px solid var(--color-border);
+  border-top: var(--border-width-hairline) solid var(--color-border);
   padding-top: var(--space-sm);
 }
 
 .museum-label dt {
-  font-size: 0.7rem;
+  font-size: var(--font-size-caption);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: var(--letter-meta);
   color: var(--color-accent-gold);
   margin-top: var(--space-sm);
 }
 
 .museum-label dd {
-  font-size: 1rem;
+  font-size: var(--font-size-ui);
   color: var(--color-text-light);
   margin-top: 2px;
 }
@@ -129,7 +180,7 @@
   .sidebar-meta {
     margin-top: var(--space-md);
     padding: var(--space-sm) 0;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: var(--border-width-hairline) solid var(--color-border);
   }
   
   .museum-label {
@@ -142,7 +193,7 @@
   
   .museum-label > div {
     flex: 1;
-    min-width: 80px;
+    min-width: calc(var(--space-20) * 1);
   }
   
   .museum-label dt {
@@ -180,12 +231,12 @@
   left: var(--space-sm);
   z-index: 1;
   font-family: var(--font-sans);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
+  font-size: var(--font-size-meta);
+  letter-spacing: var(--letter-meta);
   text-transform: uppercase;
   color: var(--color-accent-gold);
   background: rgba(38, 12, 26, 0.78);
-  padding: 0.35rem 0.5rem;
+  padding: var(--space-1) var(--space-2);
 }
 
 /* Rating */

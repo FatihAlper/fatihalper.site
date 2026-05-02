@@ -175,8 +175,10 @@ return [
         ]
     ],
     'site.tmdb' => [
-        'expires'  => 10080, // minutes (1 week)
-        'language' => 'tr-TR'
+        'expires'     => 10080, // minutes (1 week)
+        'image_cache' => true,
+        'image_size'  => 'w500',
+        'language'    => 'tr-TR'
     ],
     'site.spotify' => [
         'expires' => 360, // minutes
