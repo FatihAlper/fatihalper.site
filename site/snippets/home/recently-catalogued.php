@@ -20,24 +20,40 @@ if ($recent->isEmpty()) return;
   <div class="home-recent__grid">
     <?php foreach ($recent as $item): ?>
       <?php $tpl = $item->intendedTemplate()->name(); ?>
-      <?php $metadata = contentCardMetadata($item, $tpl === 'playlist' ? 3 : 2); ?>
+      <?php
+      $metadataLimit = match ($tpl) {
+          'book-review', 'film-review' => 4,
+          'playlist' => 3,
+          default => 2,
+      };
+      $metadata = contentCardMetadata($item, $metadataLimit);
+      ?>
       <a href="<?= $item->url() ?>" class="home-recent-card">
-        <span class="home-recent-card__type">
-          <?= contentTypeLabel($tpl, $item) ?>
-          <?php if ($date = contentDisplayDate($item)): ?>
-            <span aria-hidden="true">&middot;</span> <?= $date ?>
+        <div class="home-recent-card__eyebrow">
+          <span class="home-recent-card__type">
+            <?= contentTypeLabel($tpl, $item) ?>
+            <?php if ($date = contentDisplayDate($item)): ?>
+              <span aria-hidden="true">&middot;</span> <?= $date ?>
+            <?php endif ?>
+          </span>
+          <?php if ($item->rating()->isNotEmpty()): ?>
+            <span class="home-recent-card__rating">
+              <?php snippet('components/rating-stars', ['rating' => $item->rating()->toFloat()]) ?>
+            </span>
           <?php endif ?>
-        </span>
+        </div>
         <h3><?= $item->title() ?></h3>
         <?php if (!empty($metadata)): ?>
-          <dl class="home-recent-card__metadata">
-            <?php foreach ($metadata as $fact): ?>
-              <div>
-                <dt><?= $fact['label'] ?></dt>
-                <dd><?= $fact['value'] ?></dd>
-              </div>
-            <?php endforeach ?>
-          </dl>
+          <div class="home-recent-card__details">
+            <dl class="home-recent-card__metadata">
+              <?php foreach ($metadata as $fact): ?>
+                <div>
+                  <dt><?= $fact['label'] ?></dt>
+                  <dd><?= $fact['value'] ?></dd>
+                </div>
+              <?php endforeach ?>
+            </dl>
+          </div>
         <?php endif ?>
       </a>
     <?php endforeach ?>

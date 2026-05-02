@@ -1,0 +1,220 @@
+/* Layout Utilities */
+.container {
+  width: 100%;
+  max-width: var(--max-width-content);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.reading-container {
+  width: 100%;
+  max-width: var(--max-width-reading);
+  margin: 0 auto;
+  padding: var(--space-md) 1.5rem;
+}
+
+.reading-content {
+  width: 100%;
+  max-width: var(--max-width-reading);
+}
+
+/* Archive Pages */
+.archive-header {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-md);
+}
+
+.archive-header h1 {
+  margin-bottom: var(--space-xs);
+}
+
+.archive-description {
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  max-width: 60ch;
+}
+
+.archive-grid {
+  padding-bottom: var(--space-xl);
+}
+
+/* Card internals */
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.card-image {
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.card-content {
+  padding-top: var(--space-sm);
+}
+
+.card-content h2 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-xs);
+}
+
+.card-content p {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.card-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.75rem;
+  margin: 0 0 var(--space-xs);
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.card-metadata div {
+  display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
+  gap: 0.25rem;
+}
+
+.card-metadata dt,
+.card-metadata dd {
+  min-width: 0;
+  margin: 0;
+}
+
+.card-metadata dt {
+  color: var(--color-accent-gold);
+}
+
+.card-metadata dd {
+  overflow-wrap: anywhere;
+}
+
+.card-content .meta-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-xs);
+}
+
+/* Museum Label (sidebar metadata) */
+.museum-label {
+  margin-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-sm);
+}
+
+.museum-label dt {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-accent-gold);
+  margin-top: var(--space-sm);
+}
+
+.museum-label dd {
+  font-size: 1rem;
+  color: var(--color-text-light);
+  margin-top: 2px;
+}
+
+/* Horizontal layout for mobile */
+@media (max-width: 767px) {
+  .sidebar-meta {
+    margin-top: var(--space-md);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .museum-label {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    border-top: none;
+    padding-top: 0;
+  }
+  
+  .museum-label > div {
+    flex: 1;
+    min-width: 80px;
+  }
+  
+  .museum-label dt {
+    margin-top: 0;
+  }
+}
+
+/* Poster / Cover images */
+.film-poster-large,
+.book-cover-large,
+.playlist-cover-large {
+  width: 100%;
+  height: auto;
+}
+
+.playlist-cover-large {
+  display: block;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.playlist-cover-frame {
+  position: relative;
+  margin: 0 0 var(--space-md);
+  width: 100%;
+}
+
+.playlist-cover-frame a {
+  display: block;
+}
+
+.playlist-cover-label {
+  position: absolute;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  z-index: 1;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold);
+  background: rgba(38, 12, 26, 0.78);
+  padding: 0.35rem 0.5rem;
+}
+
+/* Rating */
+.large-rating {
+  margin-top: var(--space-sm);
+}
+
+.rating {
+  margin-top: var(--space-xs);
+}
+
+/* Detail page utilities */
+.original-title {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.review-summary {
+  margin-top: var(--space-md);
+}
+
+.review-text .block-embed {
+  width: 100%;
+  margin-block: var(--space-md);
+}
+
+.review-text .block-embed iframe,
+.review-text .block-embed embed,
+.review-text .block-embed object,
+.review-text .block-embed video {
+  max-width: 100%;
+}

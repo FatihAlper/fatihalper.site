@@ -1,0 +1,221 @@
+/* Layout Sidebar Main (Book/Film reviews) */
+.layout-sidebar-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+/* Mobile order: poster(1) → article(2) → meta(3) — natural source order */
+
+.layout-sidebar-main--offset {
+  margin-top: -60px;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .layout-sidebar-main {
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+
+  .layout-sidebar-main--wide {
+    max-width: min(1660px, calc(100vw - 3rem));
+    grid-template-columns: minmax(240px, 300px) minmax(0, 1fr) minmax(240px, 320px);
+    gap: clamp(2rem, 3vw, 3.5rem);
+  }
+
+  .single-art.layout-sidebar-main--wide {
+    grid-template-areas:
+      "meta gallery description";
+  }
+
+  /* Desktop: poster + meta stack in left column, article spans right */
+  .sidebar-poster-group {
+    grid-column: 1;
+    grid-row: 1;
+    position: sticky;
+    top: var(--space-md);
+    align-self: start;
+  }
+  
+  .layout-sidebar-main > article {
+    grid-column: 2;
+  }
+
+  /* For templates using sticky-meta-panel (playlist, art-project) */
+  .sticky-meta-panel {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    position: sticky;
+    top: var(--space-md);
+    align-self: start;
+  }
+
+  .single-art .art-catalog-panel {
+    grid-area: meta;
+    grid-column: auto;
+    grid-row: auto;
+    position: sticky;
+    top: var(--space-md);
+    align-self: start;
+  }
+
+  .single-art .art-description-panel {
+    grid-area: description;
+    grid-column: auto;
+    grid-row: auto;
+    position: sticky;
+    top: var(--space-md);
+    align-self: start;
+  }
+
+  .single-art .art-content {
+    grid-area: gallery;
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .layout-sidebar-main--offset {
+    margin-top: -150px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1099px) {
+  .single-art.layout-sidebar-main--wide {
+    max-width: min(980px, calc(100vw - 2rem));
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "meta"
+      "gallery"
+      "description";
+    gap: var(--space-md);
+  }
+
+  .single-art .sticky-meta-panel {
+    grid-column: auto;
+    grid-row: auto;
+    position: static;
+    top: auto;
+  }
+
+  .single-art .art-catalog-panel {
+    grid-area: meta;
+  }
+
+  .single-art .art-content {
+    grid-area: gallery;
+  }
+
+  .single-art .art-description-panel {
+    grid-area: description;
+  }
+
+  .single-art .art-gallery,
+  .single-art .art-gallery--count-2,
+  .single-art .art-gallery--count-3,
+  .single-art .art-gallery--count-4,
+  .single-art .art-gallery--count-many {
+    grid-template-columns: 1fr;
+  }
+
+  .single-art .art-gallery--count-3 .art-figure:first-child {
+    grid-column: auto;
+  }
+
+  .single-art .art-figure figcaption {
+    text-align: left;
+  }
+}
+
+/* Mobile poster sizing */
+@media (max-width: 767px) {
+  .single-film.layout-sidebar-main--offset {
+    margin-top: clamp(-7rem, -22vw, -4rem);
+  }
+
+  .film-poster-large {
+    max-width: min(62vw, 220px);
+    margin: 0 auto;
+  }
+  .book-cover-large {
+    max-width: 180px;
+    margin: 0 auto;
+  }
+  .playlist-cover-large {
+    max-width: none;
+    margin: 0;
+  }
+  .playlist-cover-frame {
+    max-width: 240px;
+    margin: 0 auto var(--space-md);
+  }
+}
+
+/* Film Hero */
+.film-hero, .film-hero-fallback {
+  width: 100%;
+  min-height: clamp(240px, 58vw, 320px);
+  background-size: cover;
+  background-position: center;
+}
+
+@media (min-width: 768px) {
+  .film-hero, .film-hero-fallback {
+    min-height: 50vh;
+  }
+}
+
+/* Writing Hero */
+.writing-hero {
+  width: 100%;
+  min-height: 40vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+}
+
+.writing-hero__content {
+  padding-bottom: var(--space-lg);
+}
+
+.writing-hero__content .meta-tags {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.writing-hero__content .meta-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-accent-gold);
+}
+
+.writing-hero__content .meta-date {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.writing-hero__content h1 {
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.writing-hero__content .dek {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin-top: var(--space-xs);
+  max-width: 60ch;
+}
+
+@media (min-width: 768px) {
+  .writing-hero {
+    min-height: 50vh;
+  }
+}

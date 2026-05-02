@@ -1,3 +1,5 @@
+/* Generated from assets/css/src/*.css. Edit source modules, not this file. */
+
 :root {
   /* Colors */
   --color-bg-dark: #260c1a;
@@ -29,6 +31,9 @@
   --space-md: clamp(1.25rem, 3vw, 2rem);
   --space-lg: clamp(2.5rem, 6vw, 4rem);
   --space-xl: clamp(4rem, 10vw, 6rem);
+  --reading-flow-space: clamp(1.15rem, 2.2vw, 1.45rem);
+  --reading-paragraph-space: clamp(1.35rem, 2.6vw, 1.75rem);
+  --reading-section-space: clamp(2rem, 4vw, 2.8rem);
 
   /* Dynamically Injected by Meta Snippet */
   --card-radius: 0;
@@ -71,7 +76,13 @@ h4, h5, h6 { font-size: 1.25rem; }
 .reading-content > * + *,
 .writing-body > * + *,
 .review-text > * + * {
-  margin-top: var(--space-sm);
+  margin-top: var(--reading-flow-space);
+}
+
+.reading-content p + p,
+.writing-body p + p,
+.review-text p + p {
+  margin-top: var(--reading-paragraph-space);
 }
 
 .reading-content > h1 + *, .writing-body > h1 + *, .review-text > h1 + *,
@@ -82,12 +93,14 @@ h4, h5, h6 { font-size: 1.25rem; }
 
 .reading-content > * + h2, .writing-body > * + h2, .review-text > * + h2,
 .reading-content > * + h3, .writing-body > * + h3, .review-text > * + h3 {
-  margin-top: var(--space-md);
+  margin-top: var(--reading-section-space);
 }
 
-.reading-content > blockquote {
-  margin-top: var(--space-md);
-  margin-bottom: var(--space-md);
+.reading-content > blockquote,
+.writing-body > blockquote,
+.review-text > blockquote {
+  margin-top: var(--reading-section-space);
+  margin-bottom: var(--reading-section-space);
 }
 
 a {
@@ -115,6 +128,14 @@ blockquote {
   border-left: 2px solid var(--color-accent-gold);
   padding-left: 1.5rem;
   color: var(--color-text-muted);
+}
+
+.reading-content blockquote,
+.writing-body blockquote,
+.review-text blockquote {
+  font-size: clamp(1.35rem, 3.6vw, 1.65rem);
+  line-height: 1.42;
+  color: var(--color-text-light);
 }
 
 img {
@@ -1070,8 +1091,12 @@ picture {
 
 /* Mobile poster sizing */
 @media (max-width: 767px) {
+  .single-film.layout-sidebar-main--offset {
+    margin-top: clamp(-7rem, -22vw, -4rem);
+  }
+
   .film-poster-large {
-    max-width: 200px;
+    max-width: min(62vw, 220px);
     margin: 0 auto;
   }
   .book-cover-large {
@@ -1091,7 +1116,7 @@ picture {
 /* Film Hero */
 .film-hero, .film-hero-fallback {
   width: 100%;
-  min-height: 40vh;
+  min-height: clamp(240px, 58vw, 320px);
   background-size: cover;
   background-position: center;
 }
@@ -1853,8 +1878,8 @@ picture {
 .home-recent-card {
   display: flex;
   flex-direction: column;
-  min-height: 184px;
-  padding: 1.5rem;
+  min-height: 188px;
+  padding: clamp(1.25rem, 2vw, 1.6rem);
   border: 1px solid var(--color-border);
   background: var(--color-card-dark);
   color: var(--color-text-light);
@@ -1867,31 +1892,47 @@ picture {
   transform: translateY(-2px);
 }
 
-.home-recent-card__type {
+.home-recent-card__eyebrow {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  min-width: 0;
+  margin-bottom: 0.8rem;
+}
+
+.home-recent-card__type {
+  display: inline-flex;
+  flex: 1 1 auto;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
+  min-width: 0;
   font-size: 0.8rem;
   color: var(--color-text-light);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   line-height: 1.4;
-  margin-bottom: 0.75rem;
 }
 
 .home-recent-card h3 {
   font-size: 1.25rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.8rem;
   line-height: 1.3;
   color: var(--color-accent-gold);
+}
+
+.home-recent-card__details {
+  display: block;
+  min-width: 0;
 }
 
 .home-recent-card__metadata {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem 0.75rem;
-  margin: 0 0 1rem;
+  gap: 0.36rem 0.72rem;
+  min-width: 0;
+  margin: 0;
   color: var(--color-text-light);
   font-size: 0.82rem;
   line-height: 1.45;
@@ -1916,6 +1957,38 @@ picture {
 
 .home-recent-card__metadata dd {
   overflow-wrap: anywhere;
+}
+
+.home-recent-card__rating {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+  line-height: 1;
+  opacity: 0.95;
+}
+
+.home-recent-card__rating .rating-star {
+  width: 0.78rem;
+  height: 0.78rem;
+  flex-basis: 0.78rem;
+}
+
+@media (max-width: 520px) {
+  .home-recent-card__eyebrow {
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+
+  .home-recent-card__rating {
+    padding-top: 0.16rem;
+  }
+
+  .home-recent-card__rating .rating-star {
+    width: 0.72rem;
+    height: 0.72rem;
+    flex-basis: 0.72rem;
+  }
 }
 
 /* Tag Wall */
@@ -2103,7 +2176,44 @@ picture {
 }
 
 .tags-result-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
   margin-bottom: var(--space-md);
+  padding-bottom: var(--space-xl);
+  column-count: auto;
+  column-gap: 0;
+}
+
+.tags-result-grid > * {
+  margin-bottom: 0;
+}
+
+.tags-result-grid .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: clamp(22rem, 30vw, 25rem);
+}
+
+.tags-result-grid .card-image-wrapper {
+  flex: 0 0 auto;
+}
+
+.tags-result-grid .card-image {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.tags-result-grid .card-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.tags-result-grid .card-rating {
+  margin-top: auto;
 }
 
 .tags-result-grid .card-image--fallback {
@@ -2115,6 +2225,18 @@ picture {
   font-family: var(--font-serif);
   font-size: 3rem;
   line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .tags-result-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .tags-result-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .tags-pagination {

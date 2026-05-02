@@ -1,0 +1,345 @@
+/* Cards (Base) */
+.card {
+  position: relative;
+  background-color: var(--color-card-dark);
+  border: 1px solid rgba(245, 233, 226, var(--card-border-opacity));
+  padding: 1.5rem;
+  border-radius: var(--card-radius);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  border-color: var(--color-accent-gold);
+  transform: translateY(-2px);
+}
+
+.card .card-link-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+}
+
+.card h2 {
+  color: var(--color-accent-gold);
+  transition: color 0.3s ease;
+}
+
+.card:hover h2 {
+  color: var(--color-text-light);
+}
+
+/* Responsive Grid Base */
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.grid-cols-2 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(1, 1fr); }
+
+@media (min-width: 768px) {
+  .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-cols-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Lightbox */
+#lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 5, 9, 0.96);
+  z-index: 2000;
+  padding: var(--space-md);
+  align-items: center;
+  justify-content: center;
+}
+
+#lightbox[hidden] {
+  display: none !important;
+}
+
+#lightbox.active {
+  display: flex;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.lightbox-close:hover { opacity: 1; }
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+  font-size: 3rem;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  line-height: 1;
+  padding: var(--space-sm);
+}
+
+.lightbox-prev { left: var(--space-xs); }
+.lightbox-next { right: var(--space-xs); }
+.lightbox-prev:hover,
+.lightbox-next:hover { opacity: 1; }
+
+.lightbox-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  max-width: 1200px;
+  max-height: 90vh;
+  width: 100%;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .lightbox-content {
+    grid-template-columns: 1fr 280px;
+    overflow-y: hidden;
+  }
+}
+
+.lightbox-image-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.lightbox-exif {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(245, 233, 226, 0.1);
+  padding-top: 1.5rem;
+}
+
+.lightbox-exif dt {
+  color: var(--color-accent-gold);
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 0.75rem;
+}
+
+.lightbox-meta {
+  align-self: start;
+  padding: 2rem 0;
+  text-align: left;
+}
+
+.lightbox-title {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  line-height: 1.1;
+  color: var(--color-text-light);
+  margin-bottom: 1rem;
+}
+
+.lightbox-desc {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin-bottom: var(--space-sm);
+}
+
+.lightbox-exif {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-sm);
+}
+
+.lightbox-exif dt {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-accent-gold);
+  margin-top: var(--space-xs);
+}
+
+.lightbox-exif dd {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+}
+
+/* Tags */
+.page-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: var(--space-md);
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tag:hover {
+  color: var(--color-accent-gold);
+  border-color: var(--color-accent-gold);
+}
+
+.empty-state {
+  color: var(--color-text-muted);
+  border: 1px dashed var(--color-border);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+/* Rating Stars */
+.rating-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.12rem;
+  line-height: 1;
+}
+
+.rating-star {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 1.15rem;
+  overflow: visible;
+}
+
+.large-rating .rating-star {
+  width: 1.35rem;
+  height: 1.35rem;
+  flex-basis: 1.35rem;
+}
+
+.rating-star__base {
+  fill: var(--color-text-muted);
+  opacity: 0.35;
+}
+
+.rating-star__fill {
+  fill: var(--color-accent-gold);
+}
+
+/* Meta Label (shared) */
+.meta-label {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-accent-gold);
+}
+
+.meta-date {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.meta-tags {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+/* Gear Strip (Photography) */
+.gear-strip {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  gap: clamp(0.8rem, 2vw, var(--space-md));
+  min-width: 0;
+  font-size: clamp(0.76rem, 0.85vw, 0.9rem);
+  line-height: 1.35;
+  color: var(--color-text-muted);
+}
+
+.gear-strip span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gear-strip strong {
+  color: var(--color-accent-gold);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 767px) {
+  .album-header h1 {
+    margin-bottom: 0.65rem;
+  }
+
+  .album-subtitle {
+    margin-top: 0;
+  }
+
+  .album-facts {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.15rem;
+    text-align: center;
+  }
+
+  .album-meta {
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+
+  .gear-strip {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.18rem;
+    font-size: 0.78rem;
+    line-height: 1.25;
+  }
+
+  .gear-strip span {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+
+  .gear-strip strong {
+    font-size: 0.68rem;
+  }
+}
