@@ -115,6 +115,64 @@ body {
   overflow-x: hidden;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at center, rgba(201, 164, 92, 0.08), transparent 34%),
+    var(--color-bg-dark);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.34s ease, visibility 0.34s ease;
+}
+
+.page-loader.is-hiding {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.page-loader__spinner {
+  width: clamp(2.75rem, 10vw, 4rem);
+  aspect-ratio: 1;
+  border-radius: var(--radius-pill);
+  border: 2px solid rgba(245, 233, 226, 0.18);
+  border-top-color: var(--color-accent-gold);
+  border-right-color: rgba(201, 164, 92, 0.55);
+  box-shadow: 0 0 0 1px rgba(245, 233, 226, 0.04), 0 0 28px rgba(201, 164, 92, 0.16);
+  animation: pageLoaderSpin 0.82s linear infinite;
+}
+
+@keyframes pageLoaderSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-loader,
+  .page-loader__spinner {
+    transition: none;
+    animation: none;
+  }
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   font-weight: 600;

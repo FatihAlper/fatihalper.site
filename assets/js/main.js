@@ -3,6 +3,8 @@
  *
  * Vanilla JS. No dependencies and no build tooling required.
  */
+initPageLoader();
+
 function initSite() {
   initLanguagePreference();
   initMobileMenu();
@@ -15,6 +17,27 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initSite, { once: true });
 } else {
   initSite();
+}
+
+function initPageLoader() {
+  const loader = document.querySelector('[data-page-loader]');
+  if (!loader) return;
+
+  let hidden = false;
+  const hide = () => {
+    if (hidden) return;
+    hidden = true;
+
+    loader.classList.add('is-hiding');
+    window.setTimeout(() => loader.remove(), 420);
+  };
+
+  if (document.readyState === 'complete') {
+    window.requestAnimationFrame(hide);
+  } else {
+    window.addEventListener('load', hide, { once: true });
+    window.setTimeout(hide, 6000);
+  }
 }
 
 function initLanguagePreference() {

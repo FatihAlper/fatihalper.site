@@ -29,6 +29,7 @@ $assetVersion = function (string $path): string {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
   <link rel="stylesheet" href="<?= esc($assetVersion('assets/css/main.css'), 'attr') ?>">
+  <noscript><style>.page-loader{display:none!important}</style></noscript>
   <style>
     :root {
       --logo-size-mobile: <?= $site->logo_size_mobile()->or(48) ?>px;
@@ -40,6 +41,11 @@ $assetVersion = function (string $path): string {
   <?php snippet('layout/meta') ?>
 </head>
 <body>
+
+<div class="page-loader" data-page-loader role="status" aria-label="<?= esc(fa_t('loader.aria', 'Sayfa yükleniyor'), 'attr') ?>">
+  <span class="page-loader__spinner" aria-hidden="true"></span>
+  <span class="sr-only"><?= fa_t('loader.text', 'Sayfa yükleniyor') ?></span>
+</div>
 
 <header class="site-header-wrapper">
   <div class="container site-header">
