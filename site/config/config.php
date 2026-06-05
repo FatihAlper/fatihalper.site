@@ -105,7 +105,8 @@ return [
     'panel' => [
         'install' => true,
         'slug'    => 'panel',
-        'language' => env('PANEL_LANGUAGE', 'tr')
+        'language' => env('PANEL_LANGUAGE', 'tr'),
+        'css' => 'assets/css/panel.css'
     ],
 
     // Image Handling
