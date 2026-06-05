@@ -35,3 +35,7 @@ tools/php-server.*
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Prevent committing favicons
+favicon.ico
+

@@ -29,11 +29,12 @@ $isLocal = $host === ''
     || $host === 'kirby.test'
     || $host === 'localhost'
     || str_starts_with($host, '127.0.0.1')
-    || str_ends_with($host, '.localhost');
+    || str_ends_with($host, '.localhost')
+    || str_ends_with($host, '.test');
 $isProduction = $appEnv === 'production' || ($appEnv !== 'local' && $isLocal === false);
 
 return [
-    'debug' => $appEnv === 'local' || $host === 'kirby.test',
+    'debug' => $appEnv === 'local' || $host === 'kirby.test' || str_ends_with($host, '.test'),
 
     'site.production' => $isProduction,
 
