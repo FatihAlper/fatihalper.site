@@ -405,6 +405,10 @@ function initManifestoStrip() {
     autoTimer = window.setInterval(() => show(index + 1), Number.isFinite(interval) ? interval : 6500);
   }
 
+  function stopAuto() {
+    window.clearInterval(autoTimer);
+  }
+
   if (initialIndex !== index) {
     show(initialIndex, false);
   }
@@ -418,6 +422,7 @@ function initManifestoStrip() {
 
   if (itemsWrap) {
     itemsWrap.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'mouse') return; // Ignore desktop mouse selection drags
       pointerStartX = event.clientX;
     });
 
@@ -437,6 +442,9 @@ function initManifestoStrip() {
       pointerStartX = null;
     });
   }
+
+  strip.addEventListener('mouseenter', stopAuto);
+  strip.addEventListener('mouseleave', startAuto);
 
   startAuto();
 }
