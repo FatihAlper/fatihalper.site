@@ -1,17 +1,18 @@
-/* Custom Kirby Panel Theme - Dark Wine & Gold */
+/* Custom Kirby Panel Theme - Dark Wine & Gold - Premium Rewrite */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap');
 
 :root {
   /* Fonts */
-  --font-sans: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  --font-serif: 'Cormorant Garamond', serif !important;
+  --font-mono: monospace !important;
 
   /* Theme Colors */
   --color-text: #f5e9e2 !important;
   --color-text-dimmed: #bca9a8 !important;
   --color-text-light: #bca9a8 !important;
   
-  --color-background: #260c1a !important;
+  --color-background: #260c1a !important; /* Koyu Şarap */
   --color-border: rgba(245, 233, 226, 0.12) !important;
   --color-border-dimmed: rgba(245, 233, 226, 0.06) !important;
   
@@ -21,10 +22,10 @@
   --color-focus-outline: #c9a45c !important;
   
   --color-blue: #c9a45c !important;
-  --color-blue-100: rgba(201, 164, 92, 0.1) !important;
-  --color-blue-200: rgba(201, 164, 92, 0.2) !important;
-  --color-blue-300: rgba(201, 164, 92, 0.4) !important;
-  --color-blue-400: rgba(201, 164, 92, 0.6) !important;
+  --color-blue-100: rgba(201, 164, 92, 0.08) !important;
+  --color-blue-200: rgba(201, 164, 92, 0.16) !important;
+  --color-blue-300: rgba(201, 164, 92, 0.3) !important;
+  --color-blue-400: rgba(201, 164, 92, 0.5) !important;
   --color-blue-500: #c9a45c !important;
   --color-blue-600: #b5904b !important;
   --color-blue-700: #a17c3b !important;
@@ -35,22 +36,27 @@
   --link-color-hover: #f5e9e2 !important;
 
   /* Inputs & Elements */
-  --input-color-back: #1d0914 !important;
+  --input-color-back: #13060d !important;
   --input-color-border: rgba(245, 233, 226, 0.16) !important;
-  --input-rounded: 6px !important;
+  --input-rounded: 8px !important;
   
   --button-rounded: 6px !important;
   --dialog-color-back: #1d0914 !important;
-  --dialog-rounded: 8px !important;
-  --drawer-width: 55rem !important;
+  --dialog-rounded: 12px !important;
+  --drawer-width: 600px !important;
 
   /* Menu and Headers */
   --header-color-back: #13060d !important;
-  --menu-width: 15rem !important;
+  --menu-width: 16rem !important;
   --menu-color-back: #13060d !important;
+
+  /* Transitions & Depth */
+  --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-premium: 0 10px 30px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 12px rgba(201, 164, 92, 0.25);
 }
 
-/* Base Panel Overrides */
+/* Base Panel Overrides & Scrollbars */
 body {
   background-color: var(--color-background);
   color: var(--color-text);
@@ -58,109 +64,51 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Headings with Serif font */
+/* Custom Webkit Scrollbars */
+::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: #13060d !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c9a45c !important;
+  border-radius: 4px !important;
+  border: 2px solid #13060d !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f5e9e2 !important;
+}
+
+/* Firefox scrollbar compatibility */
+* {
+  scrollbar-width: thin !important;
+  scrollbar-color: #c9a45c #13060d !important;
+}
+
+/* Typography & Headings */
 .k-headline, 
 .k-title,
-.k-page-view .k-header h1 {
+.k-header h1,
+.k-page-view .k-header h1,
+.k-headline-field,
+.k-inside h1, .k-inside h2, .k-inside h3 {
   font-family: var(--font-serif) !important;
   font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
 }
 
-/* Sidebar Styling (WordPress-like dark left menu) */
-.k-sidebar {
-  background-color: #13060d !important;
-  border-right: 1px solid var(--color-border) !important;
-  padding-block: 1.5rem !important;
-}
-
-.k-sidebar-logo {
-  padding-inline: 1.25rem !important;
-  margin-bottom: 1.5rem !important;
-}
-
-.k-sidebar-logo a {
-  color: var(--color-focus) !important;
-  font-family: var(--font-serif);
-  font-weight: bold;
-  font-size: 1.25rem;
-}
-
-/* Sidebar navigation links */
-.k-sidebar-navigation .k-link {
-  padding: 0.65rem 1.25rem !important;
-  color: var(--color-text-dimmed) !important;
-  font-size: 0.925rem !important;
-  border-left: 3px solid transparent;
-  transition: all 0.2s ease !important;
-}
-
-.k-sidebar-navigation .k-link:hover {
-  color: var(--color-text) !important;
-  background-color: rgba(245, 233, 226, 0.04) !important;
-}
-
-/* Active sidebar item (WordPress left border style) */
-.k-sidebar-navigation .k-link[aria-current="page"],
-.k-sidebar-navigation .k-link.k-link-active {
-  color: var(--color-text) !important;
-  background-color: rgba(201, 164, 92, 0.08) !important;
-  border-left: 3px solid var(--color-focus) !important;
-  font-weight: 500 !important;
-}
-
-/* Card Styling (premium cards) */
-.k-card {
-  background-color: #321323 !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 8px !important;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-}
-
-.k-card:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25) !important;
-  border-color: rgba(201, 164, 92, 0.3) !important;
-}
-
-.k-card-content {
-  padding: 0.75rem !important;
-}
-
-/* Fields & Inputs styling */
-.k-input {
-  background-color: var(--input-color-back) !important;
-  border: 1px solid var(--input-color-border) !important;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
-}
-
-.k-input:focus-within {
-  border-color: var(--color-focus) !important;
-  box-shadow: 0 0 0 3px var(--color-focus-light) !important;
-}
-
-/* Buttons */
-.k-button-group .k-button {
-  border-radius: var(--button-rounded) !important;
-}
-
-.k-button[data-theme="primary"] {
-  background-color: var(--color-focus) !important;
-  color: #260c1a !important;
-  font-weight: 600 !important;
-  transition: opacity 0.2s ease !important;
-}
-
-.k-button[data-theme="primary"]:hover {
-  opacity: 0.9 !important;
-}
-
-/* Topbar Styling */
+/* Topbar & Breadcrumbs (Glassmorphism Header) */
 .k-topbar {
-  background-color: #13060d !important;
+  background-color: rgba(19, 6, 13, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   border-bottom: 1px solid var(--color-border) !important;
-  height: 3rem !important;
+  height: 3.25rem !important;
 }
 
 .k-topbar-wrapper {
@@ -169,30 +117,597 @@ body {
 
 .k-topbar-breadcrumb .k-link {
   color: var(--color-text-dimmed) !important;
+  font-size: 0.95rem !important;
+  transition: var(--transition-smooth) !important;
 }
 
 .k-topbar-breadcrumb .k-link:hover {
   color: var(--color-focus) !important;
+  text-shadow: 0 0 8px rgba(201, 164, 92, 0.3);
 }
 
-/* Login Screen Styling (stunning dark wine look) */
+.k-topbar-breadcrumb .k-link-active {
+  color: var(--color-text) !important;
+  font-weight: 500 !important;
+}
+
+/* Search UI in Topbar */
+.k-search {
+  background-color: rgba(38, 12, 26, 0.5) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 20px !important;
+  padding-inline: 0.75rem !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.k-search:focus-within {
+  border-color: var(--color-focus) !important;
+  box-shadow: 0 0 10px rgba(201, 164, 92, 0.25) !important;
+  background-color: rgba(19, 6, 13, 0.8) !important;
+}
+
+/* WordPress-like Sidebar Left Menu */
+.k-sidebar {
+  background-color: #13060d !important;
+  border-right: 1px solid var(--color-border) !important;
+  padding-block: 1.5rem !important;
+}
+
+.k-sidebar-logo {
+  padding-inline: 1.5rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.k-sidebar-logo a {
+  color: var(--color-focus) !important;
+  font-family: var(--font-serif);
+  font-weight: bold;
+  font-size: 1.35rem;
+  letter-spacing: 0.05em;
+  transition: var(--transition-smooth);
+}
+
+.k-sidebar-logo a:hover {
+  color: var(--color-text) !important;
+  text-shadow: 0 0 12px rgba(245, 233, 226, 0.4);
+}
+
+/* Sidebar navigation links */
+.k-sidebar-navigation .k-link {
+  padding: 0.75rem 1.5rem !important;
+  color: var(--color-text-dimmed) !important;
+  font-size: 0.95rem !important;
+  font-family: var(--font-sans) !important;
+  border-left: 4px solid transparent;
+  transition: var(--transition-smooth) !important;
+  margin-bottom: 0.15rem !important;
+}
+
+.k-sidebar-navigation .k-link:hover {
+  color: var(--color-text) !important;
+  background-color: rgba(245, 233, 226, 0.04) !important;
+}
+
+/* Active sidebar item (WordPress accent left border) */
+.k-sidebar-navigation .k-link[aria-current="page"],
+.k-sidebar-navigation .k-link.k-link-active {
+  color: var(--color-text) !important;
+  background-color: rgba(201, 164, 92, 0.08) !important;
+  border-left: 4px solid var(--color-focus) !important;
+  font-weight: 500 !important;
+  box-shadow: inset 4px 0 10px rgba(201, 164, 92, 0.04) !important;
+}
+
+/* Sidebar Sections Headers / Dividers */
+.k-sidebar-navigation p {
+  padding-inline: 1.5rem !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.5rem !important;
+  font-size: 0.75rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: rgba(245, 233, 226, 0.4) !important;
+  border-top: 1px solid rgba(245, 233, 226, 0.05) !important;
+  padding-top: 0.75rem !important;
+}
+
+/* Dashboard Cards Design (Frosted/Glossy Dark Wine Cards) */
+.k-card {
+  background-color: #321323 !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+  box-shadow: var(--shadow-premium) !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.k-card:hover {
+  transform: translateY(-4px) scale(1.01) !important;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(201, 164, 92, 0.15) !important;
+  border-color: rgba(201, 164, 92, 0.35) !important;
+}
+
+.k-card-image {
+  background-color: #1d0914 !important;
+  border-bottom: 1px solid var(--color-border-dimmed) !important;
+  overflow: hidden;
+}
+
+.k-card-image img {
+  transition: var(--transition-smooth) !important;
+}
+
+.k-card:hover .k-card-image img {
+  transform: scale(1.05) !important;
+}
+
+.k-card-content {
+  padding: 0.85rem !important;
+  background-color: rgba(38, 12, 26, 0.4) !important;
+}
+
+.k-card-title {
+  font-family: var(--font-serif) !important;
+  font-size: 1.1rem !important;
+  color: var(--color-text) !important;
+  font-weight: 500 !important;
+}
+
+/* Info Boxes / Alerts */
+.k-box {
+  border-radius: 8px !important;
+  border: 1px solid var(--color-border) !important;
+  box-shadow: var(--shadow-premium) !important;
+  font-family: var(--font-sans) !important;
+}
+
+.k-box[data-theme="info"] {
+  background-color: #1c2630 !important;
+  border-color: rgba(74, 144, 226, 0.3) !important;
+  color: #d0e1f9 !important;
+}
+
+.k-box[data-theme="positive"] {
+  background-color: #14281f !important;
+  border-color: rgba(46, 204, 113, 0.3) !important;
+  color: #d0f4de !important;
+}
+
+.k-box[data-theme="notice"] {
+  background-color: #332211 !important;
+  border-color: rgba(201, 164, 92, 0.3) !important;
+  color: #fbeee0 !important;
+}
+
+.k-box[data-theme="negative"] {
+  background-color: #35121c !important;
+  border-color: rgba(143, 47, 74, 0.4) !important;
+  color: #ffd8d8 !important;
+}
+
+/* Fields & General Form Controls */
+.k-fieldset {
+  gap: 1.5rem !important;
+}
+
+.k-field-label {
+  font-family: var(--font-sans) !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  color: var(--color-text) !important;
+  margin-bottom: 0.5rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.k-input {
+  background-color: var(--input-color-back) !important;
+  border: 1px solid var(--input-color-border) !important;
+  border-radius: var(--input-rounded) !important;
+  color: var(--color-text) !important;
+  padding: 0.25rem !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.k-input:focus-within {
+  border-color: var(--color-focus) !important;
+  box-shadow: 0 0 0 3px var(--color-focus-light), var(--shadow-glow) !important;
+}
+
+.k-input-element {
+  color: var(--color-text) !important;
+  font-size: 0.95rem !important;
+}
+
+.k-input-element::placeholder {
+  color: rgba(245, 233, 226, 0.35) !important;
+}
+
+/* Buttons */
+.k-button {
+  font-family: var(--font-sans) !important;
+  font-weight: 500 !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.k-button-group .k-button {
+  border-radius: var(--button-rounded) !important;
+}
+
+.k-button[data-theme="primary"] {
+  background-color: var(--color-focus) !important;
+  color: #13060d !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 12px rgba(201, 164, 92, 0.2) !important;
+}
+
+.k-button[data-theme="primary"]:hover {
+  background-color: #f5e9e2 !important;
+  color: #13060d !important;
+  box-shadow: 0 6px 18px rgba(245, 233, 226, 0.3) !important;
+  transform: translateY(-1px) !important;
+}
+
+.k-button[data-theme="outline"] {
+  border: 1px solid var(--color-border) !important;
+  background-color: transparent !important;
+  color: var(--color-text) !important;
+}
+
+.k-button[data-theme="outline"]:hover {
+  border-color: var(--color-focus) !important;
+  background-color: rgba(201, 164, 92, 0.05) !important;
+  color: var(--color-focus) !important;
+}
+
+/* Checkbox & Radio native tinting */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--color-focus) !important;
+  cursor: pointer;
+}
+
+/* Toggle Switch Overhaul */
+.k-toggle-input {
+  background-color: #13060d !important;
+  border: 1px solid var(--input-color-border) !important;
+  border-radius: 100px !important;
+  width: 2.75rem !important;
+  height: 1.5rem !important;
+  position: relative !important;
+  cursor: pointer !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.k-toggle-input::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 2px !important;
+  left: 2px !important;
+  width: 1.1rem !important;
+  height: 1.1rem !important;
+  border-radius: 50% !important;
+  background-color: var(--color-text-dimmed) !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.k-toggle-input[checked] {
+  background-color: var(--color-focus) !important;
+  border-color: var(--color-focus) !important;
+}
+
+.k-toggle-input[checked]::after {
+  left: calc(100% - 1.1rem - 2px) !important;
+  background-color: #13060d !important;
+}
+
+/* Custom styling for Select / Multiselect dropdown fields */
+.k-select-input {
+  cursor: pointer !important;
+}
+
+.k-multiselect-input {
+  background-color: #13060d !important;
+}
+
+/* Writer / Editorial Text editor (Make writing feel like a book) */
+.k-writer .ProseMirror,
+.k-writer-input,
+.k-textarea-input {
+  font-family: var(--font-serif) !important;
+  font-size: 1.25rem !important;
+  line-height: 1.65 !important;
+  color: #f5e9e2 !important;
+  background-color: #13060d !important;
+  padding: 1.25rem !important;
+  border-radius: 8px !important;
+  min-height: 150px !important;
+}
+
+.k-writer-toolbar {
+  background-color: #1d0914 !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+  padding: 0.35rem !important;
+}
+
+.k-writer-toolbar-button {
+  color: var(--color-text-dimmed) !important;
+  border-radius: 4px !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.k-writer-toolbar-button:hover,
+.k-writer-toolbar-button.k-writer-toolbar-button-active {
+  color: var(--color-focus) !important;
+  background-color: rgba(201, 164, 92, 0.1) !important;
+}
+
+/* Structure Tables & Lists */
+.k-structure-table {
+  border: 1px solid var(--color-border) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  background-color: #13060d !important;
+}
+
+.k-structure-table th {
+  background-color: #1d0914 !important;
+  font-family: var(--font-serif) !important;
+  font-weight: bold !important;
+  color: var(--color-focus) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  padding: 0.75rem !important;
+}
+
+.k-structure-table td {
+  border-bottom: 1px solid var(--color-border-dimmed) !important;
+  padding: 0.75rem !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.k-structure-table tr:hover td {
+  background-color: rgba(245, 233, 226, 0.03) !important;
+}
+
+/* Modals & Dialog Boxes */
+.k-overlay {
+  background-color: rgba(19, 6, 13, 0.65) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+.k-dialog {
+  background-color: #1d0914 !important;
+  border: 1px solid rgba(201, 164, 92, 0.25) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 20px rgba(201, 164, 92, 0.1) !important;
+  overflow: hidden !important;
+}
+
+.k-dialog-header {
+  background-color: #13060d !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  padding: 1rem 1.5rem !important;
+}
+
+.k-dialog-header h1,
+.k-dialog-header .k-headline {
+  font-family: var(--font-serif) !important;
+  color: var(--color-focus) !important;
+  font-size: 1.35rem !important;
+}
+
+.k-dialog-body {
+  padding: 1.5rem !important;
+}
+
+.k-dialog-footer {
+  background-color: #13060d !important;
+  border-top: 1px solid var(--color-border) !important;
+  padding: 0.75rem 1.5rem !important;
+}
+
+/* Slide-out Drawers */
+.k-drawer {
+  background-color: rgba(19, 6, 13, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-left: 2px solid var(--color-focus) !important;
+  box-shadow: -15px 0 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+.k-drawer-header {
+  background-color: rgba(19, 6, 13, 0.6) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.k-drawer-title {
+  font-family: var(--font-serif) !important;
+  font-size: 1.5rem !important;
+  color: var(--color-focus) !important;
+}
+
+.k-drawer-content {
+  padding: 2rem !important;
+  background-color: transparent !important;
+}
+
+/* Tabs UI Navigation */
+.k-tabs {
+  background-color: #13060d !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  margin-bottom: 1.5rem !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+}
+
+.k-tab-button {
+  font-family: var(--font-sans) !important;
+  font-weight: 500 !important;
+  padding: 0.75rem 1.25rem !important;
+  color: var(--color-text-dimmed) !important;
+  border-bottom: 2px solid transparent !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.k-tab-button:hover {
+  color: var(--color-text) !important;
+  background-color: rgba(245, 233, 226, 0.02) !important;
+}
+
+.k-tab-button[aria-selected="true"],
+.k-tab-button.k-tab-button-active {
+  color: var(--color-focus) !important;
+  background-color: rgba(201, 164, 92, 0.06) !important;
+  border-bottom: 2px solid var(--color-focus) !important;
+}
+
+/* Neon Glowing Status Dots */
+@keyframes status-glow-draft {
+  0% { box-shadow: 0 0 0 0 rgba(201, 164, 92, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(201, 164, 92, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(201, 164, 92, 0); }
+}
+
+@keyframes status-glow-unlisted {
+  0% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(74, 144, 226, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0); }
+}
+
+@keyframes status-glow-listed {
+  0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(46, 204, 113, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+}
+
+/* Target Status Dots */
+.k-status-icon[data-status="draft"] svg,
+.k-status-icon-draft svg {
+  color: var(--color-focus) !important;
+  fill: var(--color-focus) !important;
+}
+
+.k-status-icon[data-status="draft"],
+.k-status-icon-draft {
+  background-color: var(--color-focus) !important;
+  border-radius: 50% !important;
+  animation: status-glow-draft 2s infinite !important;
+}
+
+.k-status-icon[data-status="unlisted"] svg,
+.k-status-icon-unlisted svg {
+  color: #4a90e2 !important;
+  fill: #4a90e2 !important;
+}
+
+.k-status-icon[data-status="unlisted"],
+.k-status-icon-unlisted {
+  background-color: #4a90e2 !important;
+  border-radius: 50% !important;
+  animation: status-glow-unlisted 2s infinite !important;
+}
+
+.k-status-icon[data-status="listed"] svg,
+.k-status-icon-listed svg,
+.k-status-icon[data-status="public"] svg {
+  color: #2ecc71 !important;
+  fill: #2ecc71 !important;
+}
+
+.k-status-icon[data-status="listed"],
+.k-status-icon-listed,
+.k-status-icon[data-status="public"] {
+  background-color: #2ecc71 !important;
+  border-radius: 50% !important;
+  animation: status-glow-listed 2s infinite !important;
+}
+
+/* Popovers / Floating Dropdowns */
+.k-popover,
+.k-dropdown-content {
+  background-color: #1d0914 !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 8px !important;
+  box-shadow: var(--shadow-premium) !important;
+  overflow: hidden !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.k-dropdown-item {
+  color: var(--color-text) !important;
+  font-family: var(--font-sans) !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.k-dropdown-item:hover {
+  background-color: rgba(201, 164, 92, 0.1) !important;
+  color: var(--color-focus) !important;
+}
+
+/* Stats view reports (glowing dashboard boxes) */
+.k-stats .k-stat {
+  background-color: #321323 !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 8px !important;
+  padding: 1.25rem !important;
+  box-shadow: var(--shadow-premium) !important;
+}
+
+.k-stat-label {
+  font-size: 0.8rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--color-text-dimmed) !important;
+}
+
+.k-stat-value {
+  font-family: var(--font-serif) !important;
+  font-size: 2.25rem !important;
+  color: var(--color-focus) !important;
+  font-weight: 600 !important;
+}
+
+/* User Menu & Avatar */
+.k-user-info {
+  color: var(--color-text) !important;
+}
+
+.k-topbar .k-user-menu img {
+  border: 2px solid var(--color-focus) !important;
+  box-shadow: var(--shadow-glow) !important;
+}
+
+/* Login Screen UI Enhancement (Centered, beautifully focused form) */
 .k-login-view {
   background-color: #13060d !important;
   background-image: radial-gradient(circle at center, #260c1a 0%, #13060d 100%) !important;
 }
 
 .k-login-fields {
-  background-color: #260c1a !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 10px !important;
-  padding: 2.25rem !important;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
+  background-color: rgba(38, 12, 26, 0.45) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(201, 164, 92, 0.2) !important;
+  border-radius: 12px !important;
+  padding: 2.5rem !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(201, 164, 92, 0.1) !important;
 }
 
 .k-login-view h1 {
   color: var(--color-focus) !important;
   font-family: var(--font-serif) !important;
-  font-size: 2.25rem !important;
-  margin-bottom: 1.5rem !important;
-  text-align: center;
+  font-size: 2.5rem !important;
+  margin-bottom: 2rem !important;
+  text-shadow: 0 0 15px rgba(201, 164, 92, 0.2) !important;
+}
+
+.k-login-view .k-button[type="submit"] {
+  width: 100% !important;
+  padding-block: 0.75rem !important;
+  font-size: 1.05rem !important;
 }
