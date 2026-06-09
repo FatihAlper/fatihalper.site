@@ -39,4 +39,5 @@ $showHomeModule = function (string $field, bool $default = true) use ($home, $si
   <?php endif ?>
 </div>
 
+<?php snippet('components/lightbox') ?>
 <?php snippet('layout/footer') ?>

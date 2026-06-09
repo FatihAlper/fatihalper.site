@@ -84,8 +84,28 @@ if (count($items) === 0) return;
       $displayItems = array_merge($items, $items);
       foreach ($displayItems as $item):
         if ($img = $item['image']):
+          $isLightbox = ($item['link'] === '#');
+          $photoDate = $img->photo_date()->isNotEmpty() ? $img->photo_date()->toDate('d M Y') : '';
       ?>
-        <a href="<?= $item['link'] ?>" class="home-marquee-gallery__item">
+        <a href="<?= $item['link'] ?>" 
+           class="home-marquee-gallery__item <?= $isLightbox ? 'js-lightbox-trigger' : '' ?>"
+           <?php if ($isLightbox): ?>
+           data-src="<?= esc($img->url(), 'attr') ?>"
+           data-title="<?= esc($item['title'], 'attr') ?>"
+           data-caption="<?= esc($img->lightbox_caption()->or($img->caption()), 'attr') ?>"
+           data-alt-text="<?= esc($img->alt(), 'attr') ?>"
+           data-camera="<?= esc($img->camera(), 'attr') ?>"
+           data-lens="<?= esc($img->lens(), 'attr') ?>"
+           data-focal-length="<?= esc($img->focal_length(), 'attr') ?>"
+           data-iso="<?= esc($img->iso(), 'attr') ?>"
+           data-shutter="<?= esc($img->shutter_speed(), 'attr') ?>"
+           data-aperture="<?= esc($img->aperture(), 'attr') ?>"
+           data-date="<?= esc($photoDate, 'attr') ?>"
+           data-image-note="<?= esc($img->visual_descriptors(), 'attr') ?>"
+           data-technical-note="<?= esc($img->atmosphere(), 'attr') ?>"
+           data-material-note="<?= esc($img->credit(), 'attr') ?>"
+           <?php endif ?>
+        >
           <?php snippet('components/picture', [
             'file' => $img,
             'crop' => [500, 350],

@@ -1829,12 +1829,14 @@ picture {
   background: var(--color-bg-secondary);
   display: flex;
   align-items: center;
+  touch-action: pan-y;
 }
 
 .home-marquee-gallery__wrapper {
   display: flex;
   overflow: hidden;
   user-select: none;
+  touch-action: pan-y;
 }
 
 .home-marquee-gallery__track {
@@ -1843,6 +1845,10 @@ picture {
   padding: 0 var(--space-4);
   min-width: max-content;
   animation: scrollMarquee 30s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
 }
 
 .home-marquee-gallery__track.dir-right {
