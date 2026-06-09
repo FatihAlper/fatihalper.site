@@ -1,9 +1,9 @@
 <?php
 $site = site();
 $logoFile = $site->logo()->toFile() ?? $site->site_logo()->toFile();
-$siteAuthor = fa_field($site, 'site_author')->or($site->title());
-$copyright = fa_field($site, 'copyright_text')->isNotEmpty()
-  ? fa_field($site, 'copyright_text')
+$siteAuthor = $site->site_author()->or($site->title());
+$copyright = $site->copyright_text()->isNotEmpty()
+  ? $site->copyright_text()
   : '&copy; ' . date('Y') . ' ' . $siteAuthor . '.';
 $assetVersion = function (string $path): string {
     $root = kirby()->root('index');
@@ -44,7 +44,7 @@ $assetVersion = function (string $path): string {
 
   <div class="container footer-content">
     <div class="footer-manifesto">
-      <p><?= fa_field($site, 'footer_text')->or(fa_field($site, 'site_subtitle')) ?></p>
+      <p><?= $site->footer_text()->or($site->site_subtitle()) ?></p>
     </div>
 
     <div class="footer-social">

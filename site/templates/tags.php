@@ -26,6 +26,7 @@ $perPage = $tagSlug ? 12 : 24;
         'limit'    => $perPage,
         'method'   => 'query',
         'variable' => 'page',
+        'page'     => get('page', 1),
     ]);
     $pagination = $paginatedItems->pagination();
     $detailTitle = $tag['name'] ?? str_replace('-', ' ', $tagSlug);
@@ -81,6 +82,7 @@ $perPage = $tagSlug ? 12 : 24;
         'limit'    => $perPage,
         'method'   => 'query',
         'variable' => 'page',
+        'page'     => get('page', 1),
     ]);
     $pagination = $paginatedTags->pagination();
     ?>

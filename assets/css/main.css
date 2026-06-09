@@ -261,6 +261,33 @@ picture {
   display: block;
 }
 
+/* List Indentation & Styling in Detail/Reading Contents */
+.reading-content ul, .writing-body ul, .review-text ul {
+  list-style-type: disc;
+  padding-left: var(--space-6);
+  margin-bottom: var(--reading-flow-space);
+}
+
+.reading-content ol, .writing-body ol, .review-text ol {
+  list-style-type: decimal;
+  padding-left: var(--space-6);
+  margin-bottom: var(--reading-flow-space);
+}
+
+.reading-content li, .writing-body li, .review-text li {
+  margin-top: var(--space-2);
+}
+
+.reading-content ul ul, .writing-body ul ul, .review-text ul ul {
+  list-style-type: circle;
+  margin-top: var(--space-2);
+}
+
+.reading-content ol ol, .writing-body ol ol, .review-text ol ol {
+  list-style-type: lower-alpha;
+  margin-top: var(--space-2);
+}
+
 /* Layout Utilities */
 .container {
   width: 100%;

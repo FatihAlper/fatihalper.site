@@ -1,236 +1,156 @@
 title:
-  tr: Exhibit kaydi
-  en: Exhibit Entry
-icon: heart
+  tr: "{{ page.title }}"
+  en: "{{ page.title }}"
 
-tabs:
-  artwork:
-    label:
-      tr: Eser / Artwork
-      en: Artwork
-    icon: heart
-    columns:
-      main:
-        width: 2/3
-        sections:
-          story:
-            type: fields
-            headline:
-              tr: Eser Anlatimi
-              en: Artwork Story
-            fields:
-              body:
-                extends: fields/editor-body
-                label:
-                  tr: Eser aciklamasi
-                  en: Artwork Description
-                help:
-                  tr: Frontend'de sag bilgi kolonunda gosterilir. Eski statement alani bos olmayan kayitlar icin fallback olarak korunur.
-                  en: Shown in the right information column. The legacy statement field remains as fallback for older entries.
-              curator_note:
-                label:
-                  tr: Kurator notu
-                  en: Curator Note
-                type: writer
-                help:
-                  tr: Frontend'de eser basliginin hemen altinda kisa not olarak gosterilir.
-                  en: Short note below the artwork title.
-          gallery_section:
-            type: fields
-            headline:
-              tr: Galeri
-              en: Gallery
-            fields:
-              gallery:
-                label:
-                  tr: Gorsel galeri
-                  en: Visual Gallery
-                type: files
-                layout: cards
-                query: page.images
-                uploads:
-                  template: art-image
-                help:
-                  tr: Eser gorselleri ve lightbox bilgileri.
-                  en: Artwork images and lightbox data.
-                image:
-                  ratio: 4/3
-                  cover: true
-              tags:
-                extends: fields/content-tags
+columns:
+  main:
+    width: 2/3
+    sections:
+      content:
+        type: fields
+        fields:
+          body:
+            extends: fields/editor-body
 
-      sidebar:
-        width: 1/3
-        sections:
-          card:
-            type: fields
-            headline:
-              tr: Kart ve Katalog
-              en: Card and Catalogue
-            fields:
-              cover:
-                label:
-                  tr: Kapak gorseli
-                  en: Cover Image
-                type: files
-                max: 1
-                layout: cards
-                query: page.images
-                uploads:
-                  template: art-image
-                help:
-                  tr: Liste kartlari, onizleme ve SEO icin kullanilir; galeride tekrar edilmez.
-                  en: Used by cards, previews, and SEO; not repeated in the gallery.
-                image:
-                  ratio: 4/3
-                  cover: true
-              date:
-                label:
-                  tr: Katalog tarihi
-                  en: Catalogue Date
-                type: date
-                default: today
+          curator_note:
+            label:
+              tr: Küratör notu
+              en: Curator note
+            type: writer
 
-  details:
-    label:
-      tr: Detaylar / Details
-      en: Details
-    icon: list-bullet
-    columns:
-      main:
-        width: 2/3
+      gallery:
+        type: files
+        headline:
+          tr: Galeri
+          en: Gallery
+        template: art-image
+        layout: cards
+        image:
+          ratio: 4/3
+          cover: true
+
+      catalog:
+        type: fields
+        headline:
+          tr: Katalog bilgileri
+          en: Catalog details
         fields:
           year:
             label:
-              tr: Yapim yili
-              en: Year
+              tr: Yapım yılı
+              en: Production year
             type: number
-            width: 1/3
+            width: 1/2
+
           production_duration:
             label:
-              tr: Yapim suresi
-              en: Production Duration
+              tr: Üretim süresi
+              en: Production duration
             type: text
-            width: 1/3
-            help:
-              tr: "Ornek: 4 ay, 2 hafta, 2024-2026."
-              en: "Example: 4 months, 2 weeks, 2024-2026."
+            width: 1/2
+
           materials:
             label:
-              tr: Malzeme / yuzey
-              en: Materials / Surface
+              tr: Malzemeler
+              en: Materials
             type: text
-            width: 1/3
-            help:
-              tr: Eski paper alani frontend fallback olarak korunur.
-              en: The legacy paper field remains as frontend fallback.
+
           technique:
             label:
               tr: Teknik
               en: Technique
             type: text
             width: 1/2
+
           dimensions:
             label:
-              tr: Boyut
+              tr: Boyutlar
               en: Dimensions
             type: text
             width: 1/2
+
           edition:
             label:
               tr: Edisyon
               en: Edition
             type: text
-            width: 1/3
+            width: 1/2
+
           inventory_code:
             label:
-              tr: Arsiv numarasi
-              en: Inventory Code
+              tr: Envanter kodu
+              en: Inventory code
             type: text
-            width: 1/3
+            width: 1/2
+
           status:
             label:
               tr: Durum
               en: Status
             type: select
-            width: 1/3
+            default: draft
             options:
               draft:
-                tr: Taslak / uretimde
-                en: Draft / in production
+                tr: Taslak
+                en: Draft
               completed:
-                tr: Tamamlandi
+                tr: Tamamlandı
                 en: Completed
               exhibited:
                 tr: Sergilendi
                 en: Exhibited
               archived:
-                tr: Arsivde
+                tr: Arşivlendi
                 en: Archived
               unavailable:
-                tr: Mevcut degil
+                tr: Ulaşılamaz
                 en: Unavailable
-      guide:
-        width: 1/3
+
+      seo:
+        type: fields
+        headline:
+          tr: SEO
+          en: SEO
         fields:
-          detail_note:
+          seo_title:
+            extends: fields/seo-title
+          seo_description:
+            extends: fields/seo-description
+          og_image:
+            extends: fields/og-image
+
+  sidebar:
+    width: 1/3
+    sections:
+      sidebar_fields:
+        type: fields
+        fields:
+          cover:
             label:
-              tr: Kisa Kilavuz
-              en: Quick Guide
-            type: info
-            theme: info
-            text:
-              tr: Detaylar kartlari ve eser bilgi kolonunu besler. Kesin olmayan bilgiler bos kalabilir.
-              en: Details feed cards and the artwork info column. Leave uncertain values empty.
-
-  legacy:
-    label:
-      tr: Eski Alanlar
-      en: Legacy
-    icon: layers
-    fields:
-      statement:
-        label:
-          tr: Eski statement fallback
-          en: Legacy statement fallback
-        type: writer
-        help:
-          tr: Yeni kayitlarda body alanini tercih edin.
-          en: Prefer body for new entries.
-      paper:
-        label:
-          tr: Eski malzeme fallback
-          en: Legacy material fallback
-        type: text
-        help:
-          tr: Yeni kayitlarda materials alanini tercih edin.
-          en: Prefer materials for new entries.
-
-  seo:
-    label: SEO
-    icon: search
-    columns:
-      main:
-        width: 2/3
-        sections:
-          seo_fields:
-            type: fields
-            headline:
-              tr: Arama ve Paylasim
-              en: Search and Sharing
-            fields:
-              seo_title:
-                extends: fields/seo-title
-              seo_description:
-                extends: fields/seo-description
-              og_image:
-                extends: fields/og-image
-      files:
-        width: 1/3
-        sections:
-          files:
+              tr: Kapak görseli
+              en: Cover image
             type: files
-            headline:
-              tr: Dosyalar
-              en: Files
+            max: 1
+            layout: cards
+            query: page.images
             template: art-image
+            image:
+              ratio: 4/3
+              cover: true
+
+          date:
+            label:
+              tr: Tarih
+              en: Date
+            type: date
+            default: today
+
+          tags:
+            extends: fields/content-tags
+
+      files:
+        type: files
+        headline:
+          tr: Dosyalar
+          en: Files
+        template: art-image

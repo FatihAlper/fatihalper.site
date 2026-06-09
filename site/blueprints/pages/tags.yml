@@ -1,38 +1,48 @@
-title: Tags
-icon: tag
-
+title:
+  tr: Etiketler
+  en: Tags
 options:
   changeSlug: false
-  changeStatus: true
   delete: false
 
 tabs:
   content:
-    label: Content
-    icon: text
-    fields:
-      intro:
-        label: Intro
-        type: textarea
-        size: small
-      description:
-        label: Description
-        type: textarea
-        size: small
-        help: Optional fallback text for SEO and the tag landing page.
+    label:
+      tr: İçerik
+      en: Content
+    columns:
+      main:
+        width: 2/3
+        sections:
+          content_fields:
+            type: fields
+            fields:
+              intro:
+                label:
+                  tr: Giriş metni
+                  en: Intro text
+                type: textarea
+                size: small
+              description:
+                label:
+                  tr: Açıklama
+                  en: Description
+                type: textarea
+                size: small
 
   seo:
     label: SEO
     icon: search
-    fields:
-      seo_title:
-        label: SEO title
-        type: text
-      seo_description:
-        label: SEO description
-        type: textarea
-        size: small
-      og_image:
-        label: OG image
-        type: files
-        max: 1
+    columns:
+      main:
+        width: 2/3
+        sections:
+          seo_fields:
+            type: fields
+            fields:
+              seo_title:
+                extends: fields/seo-title
+              seo_description:
+                extends: fields/seo-description
+              og_image:
+                extends: fields/og-image

@@ -97,6 +97,9 @@ return [
         'pages' => [
             'active' => $isProduction,
             'ignore' => function ($page) {
+                if (count(kirby()->request()->query()->toArray()) > 0) {
+                    return true;
+                }
                 return $page->intendedTemplate()->name() === 'error';
             }
         ]

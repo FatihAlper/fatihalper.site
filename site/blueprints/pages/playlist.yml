@@ -1,83 +1,117 @@
 title:
-  tr: Playlist
-  en: Playlist
-icon: music
+  tr: "{{ page.playlist_title }}"
+  en: "{{ page.playlist_title }}"
 
 tabs:
-  overview:
-    label:
-      tr: Özet
-      en: Overview
-    icon: music
+
+  playlist:
+    label: Playlist
+    icon: audio
     columns:
       main:
         width: 2/3
         sections:
-          playlist_identity:
+          playlist_fields:
             type: fields
-            headline:
-              tr: Playlist kimliği
-              en: Playlist identity
             fields:
               playlist_title:
                 label:
-                  tr: Playlist başlığı
+                  tr: Playlist adı
                   en: Playlist title
                 type: text
-                width: 1/2
-                help:
-                  tr: Boşsa Kirby sayfa başlığı kullanılır.
-                  en: Falls back to the Kirby page title when empty.
-              date:
-                label:
-                  tr: Katalog tarihi
-                  en: Catalogue date
-                type: date
-                default: today
-                required: true
-                width: 1/2
+
               description:
                 label:
-                  tr: Kısa açıklama
-                  en: Short description
+                  tr: Açıklama
+                  en: Description
                 type: textarea
                 size: small
-                buttons: false
                 maxlength: 320
+
               body:
                 extends: fields/editor-body
+
+              embed_code:
                 label:
-                  tr: Notlar
-                  en: Notes
+                  tr: Embed kodu
+                  en: Embed code
+                type: textarea
+                size: medium
+                font: monospace
+                buttons: false
+                help:
+                  tr: Spotify, Apple Music vb. embed HTML kodu.
+                  en: Embed HTML from Spotify, Apple Music, etc.
+
+          spotify_fields:
+            type: fields
+            headline: Spotify
+            fields:
+              spotify_url:
+                label: Spotify URL
+                type: url
+                placeholder: "https://open.spotify.com/playlist/..."
+
+              spotify_sync_requested:
+                label:
+                  tr: Playlist'i senkronize et
+                  en: Sync playlist
+                type: toggle
+                default: false
+                help:
+                  tr: Açıp kaydedince Spotify'dan metadata çekilir.
+                  en: Turn on and save to fetch metadata from Spotify.
+
+              spotify_force_refresh:
+                label:
+                  tr: Cache'i yoksay
+                  en: Skip cache
+                type: toggle
+                default: false
+                width: 1/2
+
+          seo:
+            type: fields
+            headline:
+              tr: SEO
+              en: SEO
+            fields:
+              seo_title:
+                extends: fields/seo-title
+              seo_description:
+                extends: fields/seo-description
+              og_image:
+                extends: fields/og-image
 
       sidebar:
         width: 1/3
         sections:
-          playlist_cover:
+          playlist_sidebar:
             type: fields
-            headline:
-              tr: Kapak ve yayın görünümü
-              en: Cover and display
             fields:
               cover:
                 extends: fields/cover-image
-                label:
-                  tr: Kapak görseli
-                  en: Cover image
                 image:
                   ratio: 1/1
-                  cover: true
+
               show_cover:
                 label:
-                  tr: Frontend'de kapak görselini göster
-                  en: Show cover on frontend
+                  tr: Kapak görseli göster
+                  en: Show cover image
                 type: toggle
                 default: true
-                help:
-                  tr: Kapalıysa manuel kapak ve Spotify kapak görseli frontend'de gösterilmez.
-                  en: When disabled, neither manual nor Spotify cover art is shown on the frontend.
+
+              date:
+                label:
+                  tr: Tarih
+                  en: Date
+                type: date
+                required: true
+                default: today
+
               mood_tags:
                 extends: fields/mood-tags
+
               platform:
                 label: Platform
                 type: select
@@ -85,23 +119,51 @@ tabs:
                 options:
                   spotify: Spotify
                   apple: Apple Music
-                  youtube: YouTube
+                  youtube: YouTube Music
                   tidal: Tidal
+
               track_count:
                 label:
-                  tr: Parça sayısı ezmesi
-                  en: Track count override
+                  tr: Parça sayısı
+                  en: Track count
                 type: number
                 width: 1/2
-                help:
-                  tr: Boşsa manuel parça listesinden hesaplanır.
-                  en: Calculated from manual tracks when empty.
+
               duration:
                 label:
                   tr: Toplam süre
                   en: Total duration
                 type: text
                 width: 1/2
+
+          spotify_readonly:
+            type: fields
+            headline:
+              tr: Spotify verileri
+              en: Spotify data
+            fields:
+              playlist_id:
+                label: Playlist ID
+                type: text
+                disabled: true
+              last_synced_at:
+                label:
+                  tr: Son senkronizasyon
+                  en: Last synced
+                type: date
+                time: true
+                disabled: true
+              cover_url:
+                label: Cover URL
+                type: url
+                disabled: true
+              last_error:
+                label:
+                  tr: Son hata
+                  en: Last error
+                type: textarea
+                size: small
+                disabled: true
 
   tracks:
     label:
@@ -110,36 +172,36 @@ tabs:
     icon: list-bullet
     columns:
       main:
-        width: 1/1
+        width: 2/3
         sections:
-          track_list:
+          tracks_fields:
             type: fields
-            headline:
-              tr: Manuel parça listesi
-              en: Manual track list
             fields:
               tracks:
                 label:
-                  tr: Parçalar
-                  en: Tracks
+                  tr: Parça listesi
+                  en: Track list
                 type: structure
-                help:
-                  tr: Frontend tarafından kullanılan nihai parça listesi. JSON içe aktarımı bu alanı doldurur.
-                  en: Final track list used by the frontend. JSON import fills this field.
-                empty:
-                  tr: Manuel liste için parça ekleyin.
-                  en: Add tracks for a manual list.
+                columns:
+                  position:
+                    width: 1/12
+                  title:
+                    width: 4/12
+                  artist:
+                    width: 3/12
+                  album:
+                    width: 3/12
+                  duration:
+                    width: 1/12
                 fields:
                   position:
-                    label:
-                      tr: Sıra
-                      en: Position
+                    label: "#"
                     type: number
                     width: 1/6
                   title:
                     label:
-                      tr: Parça başlığı
-                      en: Track title
+                      tr: Parça
+                      en: Title
                     type: text
                     width: 1/3
                   artist:
@@ -159,212 +221,51 @@ tabs:
                       tr: Süre
                       en: Duration
                     type: text
-                    placeholder: "4:32"
                     width: 1/6
                   duration_ms:
-                    label:
-                      tr: Süre (ms)
-                      en: Duration (ms)
-                    type: text
+                    label: ms
+                    type: number
                     disabled: true
-                    width: 1/2
-
-  spotify:
-    label: Spotify
-    icon: refresh
-    columns:
-      main:
-        width: 2/3
-        sections:
-          spotify_connection:
-            type: fields
-            headline:
-              tr: Spotify metadata
-              en: Spotify metadata
-            fields:
-              spotify_url:
-                label:
-                  tr: Spotify Playlist URL / URI / ID
-                  en: Spotify Playlist URL / URI / ID
-                type: text
-                help:
-                  tr: Metadata ve kapak için Spotify playlist URL, URI veya ID girin. Secret değerleri .env içinde kalır.
-                  en: Enter a Spotify playlist URL, URI or ID for metadata and cover art. Secrets stay in .env.
-              spotify_sync_status:
-                label:
-                  tr: Spotify sync durumu
-                  en: Spotify sync status
-                type: info
-                theme: info
-                text: |
-                  {{ page.spotifySyncStatus }}
-              spotify_sync_requested:
-                label:
-                  tr: Spotify'dan metadata senkronize et
-                  en: Sync metadata from Spotify
-                type: toggle
-                default: false
-                help:
-                  tr: Açıp kaydedince Spotify metadata ve kapak bilgisi çekilir; işlemden sonra tekrar kapanır.
-                  en: Turn on and save to fetch Spotify metadata and cover art; it resets automatically.
-              spotify_force_refresh:
-                label:
-                  tr: Force refresh / manuel alanları yenile
-                  en: Force refresh / update manual fields
-                type: toggle
-                default: false
-                help:
-                  tr: Kapalıyken dolu manuel alanlar ezilmez.
-                  en: Existing manual fields are preserved when disabled.
-
-          json_import:
-            type: fields
-            headline:
-              tr: JSON içe aktarım
-              en: JSON import
-            fields:
-              spotify_tracks_json_template:
-                label:
-                  tr: JSON parça listesi şablonu
-                  en: JSON track template
-                type: info
-                theme: passive
-                text:
-                  tr: |
-                    Ekran görüntüsünü bir LLM'e verip sadece aşağıdaki JSON formatında çıktı isteyin. Sonucu JSON alanına yapıştırıp "JSON'dan parça listesini içe aktar" seçeneğini açarak kaydedin.
-
-                    ```json
-                    {
-                      "tracks": [
-                        {
-                          "position": 1,
-                          "title": "Parça adı",
-                          "artist": "Sanatçı",
-                          "album": "Albüm adı",
-                          "duration": "4:32"
-                        }
-                      ]
-                    }
-                    ```
-                  en: |
-                    Give a screenshot to an LLM and ask for output in this JSON format only. Paste the result into the JSON field, enable import and save.
-
-                    ```json
-                    {
-                      "tracks": [
-                        {
-                          "position": 1,
-                          "title": "Track title",
-                          "artist": "Artist",
-                          "album": "Album title",
-                          "duration": "4:32"
-                        }
-                      ]
-                    }
-                    ```
-              spotify_tracks_json:
-                label:
-                  tr: Spotify parça JSON'u
-                  en: Spotify track JSON
-                type: textarea
-                size: medium
-                buttons: false
-                font: monospace
-                help:
-                  tr: JSON yalnızca panelde tutulur; frontend doğrudan bu alanı göstermez. İçe aktarım sonrası frontend Parçalar alanını kullanır.
-                  en: JSON is kept in the Panel only. The frontend uses the imported Tracks field.
-              spotify_json_import_requested:
-                label:
-                  tr: JSON'dan parça listesini içe aktar
-                  en: Import track list from JSON
-                type: toggle
-                default: false
-                help:
-                  tr: Açıp kaydedince JSON, Parçalar alanına aktarılır ve işlemden sonra tekrar kapanır.
-                  en: Turn on and save to import JSON into Tracks; it resets automatically.
+                    width: 1/6
 
       sidebar:
         width: 1/3
         sections:
-          spotify_readonly:
+          json_import:
             type: fields
             headline:
-              tr: Spotify kayıt bilgisi
-              en: Spotify record info
+              tr: JSON import
+              en: JSON import
             fields:
-              spotify_playlist_id:
-                label: Spotify Playlist ID
-                type: text
-                disabled: true
-                width: 1/2
-              spotify_last_synced_at:
+              spotify_tracks_json:
                 label:
-                  tr: Son sync zamanı
-                  en: Last sync time
-                type: date
-                time: true
-                disabled: true
-                width: 1/2
-              spotify_cover_url:
+                  tr: JSON veri
+                  en: JSON data
+                type: textarea
+                size: medium
+                font: monospace
+                buttons: false
+                help:
+                  tr: Spotify API'den alınan JSON track listesini buraya yapıştırın.
+                  en: Paste the Spotify API JSON track list here.
+
+              spotify_json_import_requested:
                 label:
-                  tr: Spotify kapak URL
-                  en: Spotify cover URL
-                type: url
-                disabled: true
-              spotify_last_error:
+                  tr: JSON'u içe aktar
+                  en: Import JSON
+                type: toggle
+                default: false
+                help:
+                  tr: Açıp kaydedince JSON verisi parça listesine dönüştürülür.
+                  en: Turn on and save to convert JSON data to the track list.
+
+          skip_notes:
+            type: fields
+            fields:
+              skip_notes:
                 label:
-                  tr: Son sync hatası
-                  en: Last sync error
+                  tr: Atlanan parçalar
+                  en: Skipped tracks
                 type: textarea
                 size: small
                 disabled: true
-              spotify_skip_notes:
-                label:
-                  tr: Atlanan Spotify item notları
-                  en: Skipped Spotify item notes
-                type: textarea
-                size: small
-                disabled: true
-
-  embed:
-    label: Embed
-    icon: code
-    fields:
-      embed_info:
-        label:
-          tr: Embed kullanımı
-          en: Embed usage
-        type: info
-        text:
-          tr: Sağlayıcı embed kodunu buraya yapıştırın. Manuel metadata ve parça listesi diğer sekmelerde kalır.
-          en: Paste provider embed code here. Manual metadata and track list remain in the other tabs.
-      embed_code:
-        label: Embed code
-        type: textarea
-        size: medium
-
-  seo:
-    label: SEO
-    icon: search
-    columns:
-      main:
-        width: 2/3
-        sections:
-          seo_fields:
-            type: fields
-            fields:
-              seo_title:
-                extends: fields/seo-title
-              seo_description:
-                extends: fields/seo-description
-              og_image:
-                extends: fields/og-image
-      files:
-        width: 1/3
-        sections:
-          files:
-            type: files
-            headline:
-              tr: Dosyalar
-              en: Files
-            template: photo

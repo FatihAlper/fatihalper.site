@@ -1,4 +1,6 @@
-title: Fotoğraf dosyası
+title:
+  tr: Fotoğraf dosyası
+  en: Photo file
 icon: image
 
 accept:
@@ -6,74 +8,112 @@ accept:
 
 fields:
   content_headline:
-    label: İçerik bilgisi
+    label:
+      tr: İçerik bilgisi
+      en: Content info
     type: headline
   title:
-    label: Fotoğraf başlığı
+    label:
+      tr: Fotoğraf başlığı
+      en: Photo title
     type: text
     width: 1/2
-    help: Albüm overlay ve lightbox başlığı. Boşsa dosya adı kullanılır.
+    help:
+      tr: Albüm overlay ve lightbox başlığı. Boşsa dosya adı kullanılır.
+      en: Album overlay and lightbox title. Falls back to filename.
   alt:
-    label: Alt metin
+    label:
+      tr: Alt metin
+      en: Alt text
     type: text
     width: 1/2
   caption:
-    label: Kısa açıklama
+    label:
+      tr: Kısa açıklama
+      en: Caption
     type: textarea
     size: small
   visual_descriptors:
-    label: Görsel not / tanım
+    label:
+      tr: Görsel not / tanım
+      en: Visual note / descriptors
     type: tags
     width: 1/2
   atmosphere:
-    label: Teknik not
+    label:
+      tr: Teknik not
+      en: Technical note
     type: text
     width: 1/2
   credit:
-    label: Kaynak / malzeme notu
+    label:
+      tr: Kaynak / malzeme notu
+      en: Credit / source note
     type: text
     width: 1/2
   series:
-    label: Seri
+    label:
+      tr: Seri
+      en: Series
     type: text
     width: 1/2
   color_mode:
-    label: Renk / S&B
+    label:
+      tr: Renk modu
+      en: Color mode
     type: select
     width: 1/2
     options:
-      color: Renkli
-      bw: Siyah beyaz
+      color:
+        tr: Renkli
+        en: Color
+      bw:
+        tr: Siyah beyaz
+        en: Black & white
 
   lightbox_headline:
     label: Lightbox
     type: headline
     numbered: false
   lightbox_enabled:
-    label: Lightbox'ta göster
+    label:
+      tr: Lightbox'ta göster
+      en: Show in lightbox
     type: toggle
     default: true
     width: 1/2
   lightbox_caption:
-    label: Lightbox açıklaması
+    label:
+      tr: Lightbox açıklaması
+      en: Lightbox caption
     type: textarea
     size: small
-    help: Boşsa kısa açıklama kullanılır.
+    help:
+      tr: Boşsa kısa açıklama kullanılır.
+      en: Falls back to caption when empty.
 
   exif_headline:
-    label: Teknik / EXIF metadata
+    label:
+      tr: Teknik / EXIF
+      en: Technical / EXIF
     type: headline
     numbered: false
   camera:
-    label: Kamera
+    label:
+      tr: Kamera
+      en: Camera
     type: text
     width: 1/2
   lens:
-    label: Lens
+    label:
+      tr: Lens
+      en: Lens
     type: text
     width: 1/2
   focal_length:
-    label: Odak uzaklığı
+    label:
+      tr: Odak uzaklığı
+      en: Focal length
     type: text
     placeholder: "180mm"
     width: 1/3
@@ -83,82 +123,64 @@ fields:
     placeholder: "400"
     width: 1/3
   shutter_speed:
-    label: Enstantane
+    label:
+      tr: Enstantane
+      en: Shutter speed
     type: text
     placeholder: "1/250"
     width: 1/3
   aperture:
-    label: Diyafram
+    label:
+      tr: Diyafram
+      en: Aperture
     type: text
     placeholder: "f/3.5"
     width: 1/3
   photo_date:
-    label: Fotoğraf tarihi
+    label:
+      tr: Fotoğraf tarihi
+      en: Photo date
     type: date
     width: 1/3
   location:
-    label: Konum
+    label:
+      tr: Konum
+      en: Location
     type: text
     width: 1/3
 
   optimization_headline:
-    label: Görsel optimizasyonu
+    label:
+      tr: Görsel optimizasyonu
+      en: Image optimization
     type: headline
     numbered: false
   image_optimization_enabled:
-    label: ImageX ile optimize et
-    type: toggle
-    default: true
-    width: 1/2
+    extends: fields/image-optimization/image_optimization_enabled
   image_loading:
-    label: Yükleme modu
-    type: select
-    default: default
-    width: 1/2
-    options:
-      default: Site varsayılanı
-      lazy: Lazy
-      eager: Eager / öncelikli
+    extends: fields/image-optimization/image_loading
   image_srcset:
-    label: Srcset profili
-    type: select
-    default: auto
-    width: 1/2
-    options:
-      auto: Automatic
-      default: Default content
-      card: Cards and thumbnails
-      wide: Wide content
-      hero: Full width / hero
+    extends: fields/image-optimization/image_srcset
   image_ratio:
-    label: Render oranı
-    type: select
-    default: auto
-    width: 1/2
-    options:
-      auto: Automatic
-      intrinsic: Original ratio
-      1/1: Square
-      4/3: Landscape 4:3
-      3/2: Photo 3:2
-      16/9: Wide 16:9
-      2/3: Portrait 2:3
-      3/4: Portrait 3:4
+    extends: fields/image-optimization/image_ratio
   image_sizes:
-    label: Sizes attribute override
-    type: text
-    width: 1/1
-    placeholder: "(min-width: 900px) 800px, 100vw"
+    extends: fields/image-optimization/image_sizes
 
   publishing_headline:
-    label: Yayın
+    label:
+      tr: Yayın
+      en: Publishing
     type: headline
   copyright:
-    label: Telif
+    label:
+      tr: Telif
+      en: Copyright
     type: text
     width: 1/2
   featured:
-    label: Öne çıkan fotoğraf
+    label:
+      tr: Öne çıkan fotoğraf
+      en: Featured photo
     type: toggle
     default: false
     width: 1/2

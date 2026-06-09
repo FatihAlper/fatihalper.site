@@ -1,41 +1,49 @@
 title:
   tr: Playlistler
   en: Playlists
-icon: audio
 
 tabs:
   content:
     label:
-      tr: Icerikler
+      tr: İçerik
       en: Content
-    icon: audio
-    sections:
-      playlists:
-        type: pages
-        headline:
-          tr: Rezonans / Playlistler
-          en: Resonance / Playlists
-        layout: cards
-        search: true
-        empty:
-          tr: Henuz playlist yok
-          en: No playlists yet
-        templates:
-          - playlist
-        sort: date desc
+    columns:
+      main:
+        width: 2/3
+        sections:
+          entries:
+            type: pages
+            headline:
+              tr: Playlist kayıtları
+              en: Playlist entries
+            status: all
+            search: true
+            limit: 20
+            layout: cards
+            create: playlist
+            templates:
+              - playlist
+            sort: date desc
+            image:
+              query: page.cover.toFile
+              ratio: 1/1
+              cover: true
 
-  settings:
-    label:
-      tr: Arsiv Ayarlari
-      en: Archive Settings
-    icon: settings
-    fields:
-      description:
-        label:
-          tr: Arsiv aciklamasi
-          en: Archive Description
-        type: textarea
-        size: small
+      sidebar:
+        width: 1/3
+        sections:
+          settings:
+            type: fields
+            headline:
+              tr: Ayarlar
+              en: Settings
+            fields:
+              description:
+                label:
+                  tr: Arşiv açıklaması
+                  en: Archive description
+                type: textarea
+                size: small
 
   seo:
     label: SEO
@@ -43,13 +51,16 @@ tabs:
     columns:
       main:
         width: 2/3
-        fields:
-          seo_title:
-            extends: fields/seo-title
-          seo_description:
-            extends: fields/seo-description
-          og_image:
-            extends: fields/og-image
+        sections:
+          seo_fields:
+            type: fields
+            fields:
+              seo_title:
+                extends: fields/seo-title
+              seo_description:
+                extends: fields/seo-description
+              og_image:
+                extends: fields/og-image
       files:
         width: 1/3
         sections:

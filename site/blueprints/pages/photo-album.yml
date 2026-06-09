@@ -1,138 +1,102 @@
 title:
-  tr: Fotograf albumu
-  en: Photo Album
-icon: camera
+  tr: "{{ page.title }}"
+  en: "{{ page.title }}"
 
-tabs:
-  album:
-    label:
-      tr: Album / Story
-      en: Album
-    icon: camera
-    columns:
-      main:
-        width: 2/3
-        sections:
-          intro:
-            type: fields
-            headline:
-              tr: Album Girisi
-              en: Album Intro
-            fields:
-              subtitle:
-                label:
-                  tr: Alt baslik
-                  en: Subtitle
-                type: text
-              date:
-                label:
-                  tr: Tarih
-                  en: Date
-                type: date
-                width: 1/2
-              location:
-                label:
-                  tr: Konum
-                  en: Location
-                type: text
-                width: 1/2
-              statement:
-                label:
-                  tr: Album notu / statement
-                  en: Album Note / Statement
-                type: writer
-                help:
-                  tr: Frontend'de album basligi altinda gosterilir.
-                  en: Shown below the album title on the frontend.
+columns:
+  main:
+    width: 2/3
+    sections:
+      album_fields:
+        type: fields
+        fields:
+          subtitle:
+            label:
+              tr: Alt başlık
+              en: Subtitle
+            type: text
 
-          gallery_section:
-            type: fields
-            headline:
-              tr: Galeri
-              en: Gallery
-            fields:
-              gallery:
-                label:
-                  tr: Fotograflar
-                  en: Photos
-                type: files
-                layout: cards
-                query: page.images
-                uploads:
-                  template: photo
-                info: "{{ file.camera }} {{ file.lens }}"
-                help:
-                  tr: Fotograf dosyasi metadata alanlari lightbox'a aktarilir.
-                  en: Photo file metadata is passed to the lightbox.
-                image:
-                  ratio: 1/1
-                  cover: true
+          date:
+            label:
+              tr: Tarih
+              en: Date
+            type: date
+            default: today
 
-      sidebar:
-        width: 1/3
-        sections:
-          cover_section:
-            type: fields
-            headline:
-              tr: Album Karti
-              en: Album Card
-            fields:
-              cover:
-                extends: fields/cover-image
-                label:
-                  tr: Kapak gorseli
-                  en: Cover Image
-                help:
-                  tr: Bos kalirsa kartlarda ilk galeri gorseli kullanilir.
-                  en: Cards use the first gallery image when empty.
-              tags:
-                extends: fields/content-tags
+          location:
+            label:
+              tr: Konum
+              en: Location
+            type: text
 
-          gear:
-            type: fields
-            headline:
-              tr: Varsayilan Ekipman
-              en: Default Gear
-            fields:
-              camera:
-                label:
-                  tr: Kamera
-                  en: Camera
-                type: text
-              lens:
-                label: Lens
-                type: text
-              film_stock:
-                label:
-                  tr: Film / sensor
-                  en: Film / Sensor
-                type: text
+          statement:
+            label:
+              tr: Açıklama
+              en: Statement
+            type: writer
 
-  seo:
-    label: SEO
-    icon: search
-    columns:
-      main:
-        width: 2/3
-        sections:
-          seo_fields:
-            type: fields
-            headline:
-              tr: Arama ve Paylasim
-              en: Search and Sharing
-            fields:
-              seo_title:
-                extends: fields/seo-title
-              seo_description:
-                extends: fields/seo-description
-              og_image:
-                extends: fields/og-image
+      gallery:
+        type: files
+        headline:
+          tr: Galeri
+          en: Gallery
+        template: photo
+        layout: cards
+        info: "{{ file.camera }} – {{ file.lens }}"
+        image:
+          ratio: 4/3
+          cover: true
+
+      seo:
+        type: fields
+        headline:
+          tr: SEO
+          en: SEO
+        fields:
+          seo_title:
+            extends: fields/seo-title
+          seo_description:
+            extends: fields/seo-description
+          og_image:
+            extends: fields/og-image
+
+  sidebar:
+    width: 1/3
+    sections:
+      sidebar_fields:
+        type: fields
+        fields:
+          cover:
+            extends: fields/cover-image
+
+          tags:
+            extends: fields/content-tags
+
+      gear:
+        type: fields
+        headline:
+          tr: Ekipman
+          en: Gear
+        fields:
+          camera:
+            label:
+              tr: Kamera
+              en: Camera
+            type: text
+
+          lens:
+            label:
+              tr: Lens
+              en: Lens
+            type: text
+
+          film_stock:
+            label:
+              tr: Film
+              en: Film stock
+            type: text
+
       files:
-        width: 1/3
-        sections:
-          files:
-            type: files
-            headline:
-              tr: Dosyalar
-              en: Files
-            template: photo
+        type: files
+        headline:
+          tr: Dosyalar
+          en: Files

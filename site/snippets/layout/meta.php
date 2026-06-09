@@ -4,12 +4,12 @@ $page = $page ?? page();
 
 // SEO Fallback logic
 $seoTitle = $page->seo_title()->or($page->title())->value();
-$defaultTitle = fa_field($site, 'default_seo_title')->or(fa_field($site, 'site_title'))->or($site->title())->value();
+$defaultTitle = $site->default_seo_title()->or($site->site_title())->or($site->title())->value();
 
 if ($page->isHomePage()) {
     $title = $defaultTitle;
 } else {
-    $title = $seoTitle . ' | ' . fa_field($site, 'site_title')->or($site->title());
+    $title = $seoTitle . ' | ' . $site->site_title()->or($site->title());
 }
 
 $description = $page->seo_description()
@@ -17,8 +17,8 @@ $description = $page->seo_description()
     ->or($page->short_review())
     ->or($page->review_summary())
     ->or($page->description())
-    ->or(fa_field($site, 'default_seo_description'))
-    ->or(fa_field($site, 'site_description'))
+    ->or($site->default_seo_description())
+    ->or($site->site_description())
     ->value();
 
 if (empty($description) && $page->body()->isNotEmpty()) {
@@ -39,7 +39,7 @@ if (!$ogImageUrl && $page->intendedTemplate()->name() === 'film-review' && funct
     $ogImageUrl = tmdbImageUrl($tmdb['backdrop_path'] ?? $tmdb['poster_path'] ?? null, 'w500');
 }
 
-$author = fa_field($site, 'site_author')->or($site->title());
+$author = $site->site_author()->or($site->title());
 $twitterCard = $site->twitter_card_type()->or('summary_large_image');
 
 $favicon = $site->favicon()->toFile();
@@ -109,14 +109,14 @@ $gaEnabled = $site->ga_enabled()->toBool(false)
   --max-width-reading: <?= $site->content_max_width_ch()->or(68) ?>ch;
   --space-lg: <?= $site->section_spacing()->or('clamp(2.5rem, 6vw, 4rem)') ?>;
   
-  --page-padding-mobile: <?= $site->page_padding_mobile()->or('1.5rem') ?>;
-  --page-padding-desktop: <?= $site->page_padding_desktop()->or('4rem') ?>;
+  --page-padding-mobile: 1.5rem;
+  --page-padding-desktop: 4rem;
   
   --card-radius: <?= $site->card_radius()->or(0) ?>px;
   --card-border-opacity: <?= $site->card_border_opacity()->or(0.1) ?>;
   
-  --hero-height-desktop: <?= $site->hero_height_desktop()->or('clamp(40vh, 50vw, 60vh)') ?>;
-  --hero-height-mobile: <?= $site->hero_height_mobile()->or('clamp(30vh, 40vw, 50vh)') ?>;
+  --hero-height-desktop: clamp(40vh, 50vw, 60vh);
+  --hero-height-mobile: clamp(30vh, 40vw, 50vh);
 }
 
 <?php if ($site->header_style() == 'sticky'): ?>

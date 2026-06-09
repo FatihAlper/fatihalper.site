@@ -101,59 +101,39 @@ function fa_po_catalogs(): array
 
 function fa_locale(string|null $locale = null): string
 {
-    static $cookieWritten = false;
-
     if (in_array($locale, ['tr', 'en'], true)) {
         return $locale;
     }
 
+    // Primary: Kirby native multi-language
+    try {
+        $kirbyLang = kirby()->language()?->code();
+        if (in_array($kirbyLang, ['tr', 'en'], true)) {
+            return $kirbyLang;
+        }
+    } catch (Throwable) {
+    }
+
+    // Fallback: query parameter
     $queryLocale = get('lang');
     if (in_array($queryLocale, ['tr', 'en'], true)) {
-        if ($cookieWritten === false && headers_sent() === false) {
-            setcookie('fa_locale', $queryLocale, [
-                'expires' => time() + 60 * 60 * 24 * 180,
-                'path' => '/',
-                'samesite' => 'Lax'
-            ]);
-            $_COOKIE['fa_locale'] = $queryLocale;
-            $cookieWritten = true;
-        }
-
         return $queryLocale;
     }
 
+    // Fallback: cookie (legacy)
     $cookieLocale = $_COOKIE['fa_locale'] ?? null;
     if (in_array($cookieLocale, ['tr', 'en'], true)) {
         return $cookieLocale;
     }
 
-    try {
-        $siteLocale = site()->content_language()->value();
-        if (in_array($siteLocale, ['tr', 'en'], true)) {
-            return $siteLocale;
-        }
-    } catch (Throwable) {
-    }
-
-    return option('site.locale', 'tr');
+    return 'tr';
 }
 
 function fa_t(string $key, string|null $fallback = null, string|null $locale = null): string
 {
     $locale = fa_locale($locale);
 
-    try {
-        foreach (site()->site_i18n_overrides()->toStructure() as $entry) {
-            if ($entry->key()->value() === $key) {
-                $field = $locale === 'en' ? 'text_en' : 'text_tr';
-                if ($entry->{$field}()->isNotEmpty()) {
-                    return $entry->{$field}()->value();
-                }
-            }
-        }
-    } catch (Throwable) {
-    }
-
+    // PO catalog lookup
     $catalogs = fa_po_catalogs();
     $translated = $catalogs[$locale][$key] ?? null;
 
@@ -166,31 +146,30 @@ function fa_t(string $key, string|null $fallback = null, string|null $locale = n
 
 function fa_field($model, string $base, string|null $locale = null)
 {
-    $locale = fa_locale($locale);
-    $localized = $model->{$base . '_' . $locale}();
-
-    return $localized->isNotEmpty() ? $localized : $model->{$base}();
+    // With Kirby multi-lang, content is resolved per-language automatically
+    return $model->content()->get($base);
 }
 
 function fa_structure_label($entry, string $base = 'label', string|null $locale = null): string
 {
-    $locale = fa_locale($locale);
-    $localized = $entry->{$base . '_' . $locale}();
-    $fallback = $entry->{$base}();
-
-    if ($localized->isNotEmpty()) {
-        return $localized->value();
-    }
-
-    return $fallback->value();
+    $field = $entry->{$base}();
+    return $field->isNotEmpty() ? $field->value() : '';
 }
 
 function fa_language_url(string $locale): string
 {
-    $query = kirby()->request()->query()->toArray();
-    $query['lang'] = $locale;
+    // Use Kirby native multi-language URL system
+    try {
+        $page = page() ?? site()->homePage();
+        if ($page) {
+            return $page->url($locale);
+        }
+    } catch (Throwable) {
+    }
 
-    return Url::build(['query' => $query]);
+    // Fallback: language root URL
+    $lang = kirby()->language($locale);
+    return $lang ? $lang->url() : '/';
 }
 
 Kirby::plugin('fatihalper/po-translations', [

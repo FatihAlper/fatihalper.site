@@ -1,8 +1,7 @@
 <?php
 $site = site();
 $logoFile = $site->logo()->toFile() ?? $site->site_logo()->toFile();
-$siteTitle = fa_field($site, 'site_title')->or($site->title());
-$locale = fa_locale();
+$siteTitle = $site->site_title()->or($site->title());
 $assetVersion = function (string $path): string {
     $root = kirby()->root('index');
     $production = strtolower((string)env('APP_ENV', '')) === 'production';
@@ -19,7 +18,7 @@ $assetVersion = function (string $path): string {
 };
 ?>
 <!DOCTYPE html>
-<html lang="<?= $locale ?>">
+<html lang="tr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,9 +31,9 @@ $assetVersion = function (string $path): string {
   <noscript><style>.page-loader{display:none!important}</style></noscript>
   <style>
     :root {
-      --logo-size-mobile: <?= $site->logo_size_mobile()->or(48) ?>px;
-      --logo-size-tablet: <?= $site->logo_size_tablet()->or(52) ?>px;
-      --logo-size-desktop: <?= $site->logo_size_desktop()->or(56) ?>px;
+      --logo-size-mobile: 48px;
+      --logo-size-tablet: 52px;
+      --logo-size-desktop: 56px;
       --color-logo: <?= $site->logo_color()->or('#DDD96A') ?>;
     }
   </style>
@@ -105,20 +104,6 @@ $assetVersion = function (string $path): string {
       <?php if ($site->show_about_link()->toBool()): ?>
         <a href="#about" class="about-trigger"><?= fa_t('nav.about', 'Hakkımda') ?></a>
       <?php endif ?>
-
-      <div class="language-switcher" aria-label="<?= esc(fa_t('language.switch', 'Dil seçimi'), 'attr') ?>">
-        <a href="<?= esc(fa_language_url('tr'), 'attr') ?>"
-           lang="tr"
-           hreflang="tr"
-           <?= $locale === 'tr' ? 'class="active" aria-current="true"' : '' ?>
-           title="<?= esc(fa_t('language.tr', 'Türkçe'), 'attr') ?>">TR</a>
-        <span aria-hidden="true">/</span>
-        <a href="<?= esc(fa_language_url('en'), 'attr') ?>"
-           lang="en"
-           hreflang="en"
-           <?= $locale === 'en' ? 'class="active" aria-current="true"' : '' ?>
-           title="<?= esc(fa_t('language.en', 'English'), 'attr') ?>">EN</a>
-      </div>
     </nav>
   </div>
 </header>

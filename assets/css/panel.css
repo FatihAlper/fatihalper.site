@@ -1,713 +1,395 @@
-/* Custom Kirby Panel Theme - Dark Wine & Gold - Premium Rewrite */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap');
+/* ──────────────────────────────────────────────────────
+   fatihalper.com — Kirby Panel Custom Theme
+   Premium dark wine aesthetic with modern glass effects
+   ────────────────────────────────────────────────────── */
 
+/* ── Design Tokens ── */
 :root {
-  /* Fonts */
-  --font-sans: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  --font-serif: 'Cormorant Garamond', serif !important;
-  --font-mono: monospace !important;
-
-  /* Theme Colors */
-  --color-text: #f5e9e2 !important;
-  --color-text-dimmed: #bca9a8 !important;
-  --color-text-light: #bca9a8 !important;
-  
-  --color-background: #260c1a !important; /* Koyu Şarap */
-  --color-border: rgba(245, 233, 226, 0.12) !important;
-  --color-border-dimmed: rgba(245, 233, 226, 0.06) !important;
-  
-  /* Primary Accent - Gold */
-  --color-focus: #c9a45c !important;
-  --color-focus-light: rgba(201, 164, 92, 0.15) !important;
-  --color-focus-outline: #c9a45c !important;
-  
-  --color-blue: #c9a45c !important;
-  --color-blue-100: rgba(201, 164, 92, 0.08) !important;
-  --color-blue-200: rgba(201, 164, 92, 0.16) !important;
-  --color-blue-300: rgba(201, 164, 92, 0.3) !important;
-  --color-blue-400: rgba(201, 164, 92, 0.5) !important;
-  --color-blue-500: #c9a45c !important;
-  --color-blue-600: #b5904b !important;
-  --color-blue-700: #a17c3b !important;
-  --color-blue-800: #8c682b !important;
-  --color-blue-900: #78551c !important;
-  
-  --link-color: #c9a45c !important;
-  --link-color-hover: #f5e9e2 !important;
-
-  /* Inputs & Elements */
-  --input-color-back: #13060d !important;
-  --input-color-border: rgba(245, 233, 226, 0.16) !important;
-  --input-rounded: 8px !important;
-  
-  --button-rounded: 6px !important;
-  --dialog-color-back: #1d0914 !important;
-  --dialog-rounded: 12px !important;
-  --drawer-width: 600px !important;
-
-  /* Menu and Headers */
-  --header-color-back: #13060d !important;
-  --menu-width: 16rem !important;
-  --menu-color-back: #13060d !important;
-
-  /* Transitions & Depth */
-  --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  --shadow-premium: 0 10px 30px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-glow: 0 0 12px rgba(201, 164, 92, 0.25);
+  --panel-bg: #1a0a14;
+  --panel-bg-surface: #260c1a;
+  --panel-bg-elevated: #321422;
+  --panel-text: #f5e9e2;
+  --panel-text-muted: #bca9a8;
+  --panel-accent-gold: #c9a45c;
+  --panel-accent-gold-light: #d4b76e;
+  --panel-accent-wine: #8f2f4a;
+  --panel-accent-wine-light: #a83d5c;
+  --panel-border: rgba(201, 164, 92, 0.12);
+  --panel-border-strong: rgba(201, 164, 92, 0.25);
+  --panel-glass: rgba(38, 12, 26, 0.7);
+  --panel-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --panel-radius: 10px;
+  --panel-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Base Panel Overrides & Scrollbars */
-body {
-  background-color: var(--color-background);
-  color: var(--color-text);
-  font-family: var(--font-sans);
+/* ── Global Typography ── */
+.k-panel {
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Webkit Scrollbars */
-::-webkit-scrollbar {
-  width: 8px !important;
-  height: 8px !important;
+.k-headline,
+.k-panel h1,
+.k-panel h2,
+.k-panel h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
-::-webkit-scrollbar-track {
-  background: #13060d !important;
+/* ── Panel Background ── */
+.k-panel {
+  background: var(--panel-bg);
+  color: var(--panel-text);
 }
 
-::-webkit-scrollbar-thumb {
-  background: #c9a45c !important;
-  border-radius: 4px !important;
-  border: 2px solid #13060d !important;
+.k-panel[data-loading] {
+  background: radial-gradient(ellipse at 30% 20%, var(--panel-bg-surface), var(--panel-bg));
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #f5e9e2 !important;
+/* ── Login Screen ── */
+.k-login-view {
+  background: radial-gradient(ellipse at 50% 30%, var(--panel-bg-elevated) 0%, var(--panel-bg) 70%) !important;
 }
 
-/* Firefox scrollbar compatibility */
-* {
-  scrollbar-width: thin !important;
-  scrollbar-color: #c9a45c #13060d !important;
+.k-login-view::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, rgba(201, 164, 92, 0.06), transparent 60%);
+  pointer-events: none;
 }
 
-/* Typography & Headings */
-.k-headline, 
-.k-title,
-.k-header h1,
-.k-page-view .k-header h1,
-.k-headline-field,
-.k-inside h1, .k-inside h2, .k-inside h3 {
-  font-family: var(--font-serif) !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.01em !important;
+.k-login-view .k-button[data-theme="login"] {
+  background: linear-gradient(135deg, var(--panel-accent-gold), var(--panel-accent-gold-light));
+  color: var(--panel-bg);
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: transform var(--panel-transition), box-shadow var(--panel-transition);
 }
 
-/* Topbar & Breadcrumbs (Glassmorphism Header) */
+.k-login-view .k-button[data-theme="login"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(201, 164, 92, 0.3);
+}
+
+/* ── Topbar ── */
 .k-topbar {
-  background-color: rgba(19, 6, 13, 0.8) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid var(--color-border) !important;
-  height: 3.25rem !important;
+  background: var(--panel-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--panel-border);
 }
 
-.k-topbar-wrapper {
-  padding-inline: 1.5rem !important;
+/* ── Sidebar / Navigation ── */
+.k-panel .k-navigation {
+  background: var(--panel-bg-surface);
+  border-right: 1px solid var(--panel-border);
 }
 
-.k-topbar-breadcrumb .k-link {
-  color: var(--color-text-dimmed) !important;
-  font-size: 0.95rem !important;
-  transition: var(--transition-smooth) !important;
+.k-panel .k-navigation .k-button {
+  transition: all var(--panel-transition);
+  border-left: 3px solid transparent;
+  border-radius: 0;
 }
 
-.k-topbar-breadcrumb .k-link:hover {
-  color: var(--color-focus) !important;
-  text-shadow: 0 0 8px rgba(201, 164, 92, 0.3);
+.k-panel .k-navigation .k-button:hover {
+  background: rgba(201, 164, 92, 0.06);
+  color: var(--panel-accent-gold-light);
 }
 
-.k-topbar-breadcrumb .k-link-active {
-  color: var(--color-text) !important;
-  font-weight: 500 !important;
+.k-panel .k-navigation .k-button[aria-current="true"],
+.k-panel .k-navigation .k-button.is-active {
+  background: rgba(201, 164, 92, 0.08);
+  border-left-color: var(--panel-accent-gold);
+  color: var(--panel-accent-gold);
+  font-weight: 600;
 }
 
-/* Search UI in Topbar */
-.k-search {
-  background-color: rgba(38, 12, 26, 0.5) !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 20px !important;
-  padding-inline: 0.75rem !important;
-  transition: var(--transition-smooth) !important;
+/* ── Tabs ── */
+.k-tabs .k-tab-button {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  padding-block: 0.7rem;
+  border-bottom: 2px solid transparent;
+  transition: all var(--panel-transition);
+  color: var(--panel-text-muted);
 }
 
-.k-search:focus-within {
-  border-color: var(--color-focus) !important;
-  box-shadow: 0 0 10px rgba(201, 164, 92, 0.25) !important;
-  background-color: rgba(19, 6, 13, 0.8) !important;
+.k-tabs .k-tab-button:hover {
+  color: var(--panel-text);
 }
 
-/* WordPress-like Sidebar Left Menu */
-.k-sidebar {
-  background-color: #13060d !important;
-  border-right: 1px solid var(--color-border) !important;
-  padding-block: 1.5rem !important;
+.k-tabs .k-tab-button[aria-selected="true"] {
+  color: var(--panel-accent-gold);
+  border-bottom-color: var(--panel-accent-gold);
+  font-weight: 600;
 }
 
-.k-sidebar-logo {
-  padding-inline: 1.5rem !important;
-  margin-bottom: 2rem !important;
+/* ── Cards & Sections ── */
+.k-section {
+  transition: opacity var(--panel-transition);
 }
 
-.k-sidebar-logo a {
-  color: var(--color-focus) !important;
-  font-family: var(--font-serif);
-  font-weight: bold;
-  font-size: 1.35rem;
-  letter-spacing: 0.05em;
-  transition: var(--transition-smooth);
+.k-section .k-headline {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--panel-accent-gold);
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--panel-border);
+  margin-bottom: 1rem;
 }
 
-.k-sidebar-logo a:hover {
-  color: var(--color-text) !important;
-  text-shadow: 0 0 12px rgba(245, 233, 226, 0.4);
-}
-
-/* Sidebar navigation links */
-.k-sidebar-navigation .k-link {
-  padding: 0.75rem 1.5rem !important;
-  color: var(--color-text-dimmed) !important;
-  font-size: 0.95rem !important;
-  font-family: var(--font-sans) !important;
-  border-left: 4px solid transparent;
-  transition: var(--transition-smooth) !important;
-  margin-bottom: 0.15rem !important;
-}
-
-.k-sidebar-navigation .k-link:hover {
-  color: var(--color-text) !important;
-  background-color: rgba(245, 233, 226, 0.04) !important;
-}
-
-/* Active sidebar item (WordPress accent left border) */
-.k-sidebar-navigation .k-link[aria-current="page"],
-.k-sidebar-navigation .k-link.k-link-active {
-  color: var(--color-text) !important;
-  background-color: rgba(201, 164, 92, 0.08) !important;
-  border-left: 4px solid var(--color-focus) !important;
-  font-weight: 500 !important;
-  box-shadow: inset 4px 0 10px rgba(201, 164, 92, 0.04) !important;
-}
-
-/* Sidebar Sections Headers / Dividers */
-.k-sidebar-navigation p {
-  padding-inline: 1.5rem !important;
-  margin-top: 1.5rem !important;
-  margin-bottom: 0.5rem !important;
-  font-size: 0.75rem !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.08em !important;
-  color: rgba(245, 233, 226, 0.4) !important;
-  border-top: 1px solid rgba(245, 233, 226, 0.05) !important;
-  padding-top: 0.75rem !important;
-}
-
-/* Dashboard Cards Design (Frosted/Glossy Dark Wine Cards) */
 .k-card {
-  background-color: #321323 !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 8px !important;
+  background: var(--panel-bg-surface);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius);
   overflow: hidden;
-  box-shadow: var(--shadow-premium) !important;
-  transition: var(--transition-smooth) !important;
+  transition: all var(--panel-transition);
 }
 
 .k-card:hover {
-  transform: translateY(-4px) scale(1.01) !important;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(201, 164, 92, 0.15) !important;
-  border-color: rgba(201, 164, 92, 0.35) !important;
+  border-color: var(--panel-border-strong);
+  box-shadow: var(--panel-shadow);
+  transform: translateY(-2px);
 }
 
-.k-card-image {
-  background-color: #1d0914 !important;
-  border-bottom: 1px solid var(--color-border-dimmed) !important;
-  overflow: hidden;
+.k-card .k-card-figure {
+  border-bottom: 1px solid var(--panel-border);
 }
 
-.k-card-image img {
-  transition: var(--transition-smooth) !important;
+/* ── Info Sections ── */
+.k-info-field[data-theme="positive"] {
+  background: rgba(201, 164, 92, 0.06);
+  border-left: 3px solid var(--panel-accent-gold);
+  border-radius: 0 var(--panel-radius) var(--panel-radius) 0;
+  padding: 1rem;
 }
 
-.k-card:hover .k-card-image img {
-  transform: scale(1.05) !important;
+.k-info-field[data-theme="notice"] {
+  background: rgba(143, 47, 74, 0.08);
+  border-left: 3px solid var(--panel-accent-wine);
+  border-radius: 0 var(--panel-radius) var(--panel-radius) 0;
+  padding: 1rem;
 }
 
-.k-card-content {
-  padding: 0.85rem !important;
-  background-color: rgba(38, 12, 26, 0.4) !important;
+.k-info-field[data-theme="info"] {
+  background: rgba(188, 169, 168, 0.06);
+  border-left: 3px solid var(--panel-text-muted);
+  border-radius: 0 var(--panel-radius) var(--panel-radius) 0;
+  padding: 1rem;
 }
 
-.k-card-title {
-  font-family: var(--font-serif) !important;
-  font-size: 1.1rem !important;
-  color: var(--color-text) !important;
-  font-weight: 500 !important;
-}
-
-/* Info Boxes / Alerts */
-.k-box {
-  border-radius: 8px !important;
-  border: 1px solid var(--color-border) !important;
-  box-shadow: var(--shadow-premium) !important;
-  font-family: var(--font-sans) !important;
-}
-
-.k-box[data-theme="info"] {
-  background-color: #1c2630 !important;
-  border-color: rgba(74, 144, 226, 0.3) !important;
-  color: #d0e1f9 !important;
-}
-
-.k-box[data-theme="positive"] {
-  background-color: #14281f !important;
-  border-color: rgba(46, 204, 113, 0.3) !important;
-  color: #d0f4de !important;
-}
-
-.k-box[data-theme="notice"] {
-  background-color: #332211 !important;
-  border-color: rgba(201, 164, 92, 0.3) !important;
-  color: #fbeee0 !important;
-}
-
-.k-box[data-theme="negative"] {
-  background-color: #35121c !important;
-  border-color: rgba(143, 47, 74, 0.4) !important;
-  color: #ffd8d8 !important;
-}
-
-/* Fields & General Form Controls */
-.k-fieldset {
-  gap: 1.5rem !important;
-}
-
-.k-field-label {
-  font-family: var(--font-sans) !important;
-  font-weight: 500 !important;
-  font-size: 0.9rem !important;
-  color: var(--color-text) !important;
-  margin-bottom: 0.5rem !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-}
-
+/* ── Form Fields ── */
 .k-input {
-  background-color: var(--input-color-back) !important;
-  border: 1px solid var(--input-color-border) !important;
-  border-radius: var(--input-rounded) !important;
-  color: var(--color-text) !important;
-  padding: 0.25rem !important;
-  transition: var(--transition-smooth) !important;
+  background: var(--panel-bg) !important;
+  border-color: var(--panel-border) !important;
+  border-radius: 6px;
+  color: var(--panel-text);
+  transition: border-color var(--panel-transition), box-shadow var(--panel-transition);
 }
 
 .k-input:focus-within {
-  border-color: var(--color-focus) !important;
-  box-shadow: 0 0 0 3px var(--color-focus-light), var(--shadow-glow) !important;
+  border-color: var(--panel-accent-gold) !important;
+  box-shadow: 0 0 0 2px rgba(201, 164, 92, 0.15) !important;
 }
 
-.k-input-element {
-  color: var(--color-text) !important;
-  font-size: 0.95rem !important;
+.k-label {
+  font-weight: 500;
+  color: var(--panel-text);
 }
 
-.k-input-element::placeholder {
-  color: rgba(245, 233, 226, 0.35) !important;
+.k-field .k-help {
+  color: var(--panel-text-muted);
+  font-size: 0.8rem;
 }
 
-/* Buttons */
-.k-button {
-  font-family: var(--font-sans) !important;
-  font-weight: 500 !important;
-  transition: var(--transition-smooth) !important;
+/* ── Toggles ── */
+.k-toggle-input .k-toggle-body {
+  transition: background var(--panel-transition);
 }
 
-.k-button-group .k-button {
-  border-radius: var(--button-rounded) !important;
+.k-toggle-input[aria-checked="true"] .k-toggle-body {
+  background: var(--panel-accent-gold) !important;
 }
 
-.k-button[data-theme="primary"] {
-  background-color: var(--color-focus) !important;
-  color: #13060d !important;
-  font-weight: 600 !important;
-  box-shadow: 0 4px 12px rgba(201, 164, 92, 0.2) !important;
+/* ── Buttons ── */
+.k-button[data-theme="filled"] {
+  background: linear-gradient(135deg, var(--panel-accent-gold), var(--panel-accent-gold-light));
+  color: var(--panel-bg);
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all var(--panel-transition);
 }
 
-.k-button[data-theme="primary"]:hover {
-  background-color: #f5e9e2 !important;
-  color: #13060d !important;
-  box-shadow: 0 6px 18px rgba(245, 233, 226, 0.3) !important;
-  transform: translateY(-1px) !important;
+.k-button[data-theme="filled"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(201, 164, 92, 0.25);
 }
 
-.k-button[data-theme="outline"] {
-  border: 1px solid var(--color-border) !important;
-  background-color: transparent !important;
-  color: var(--color-text) !important;
+.k-button[data-theme="positive"] {
+  color: var(--panel-accent-gold);
 }
 
-.k-button[data-theme="outline"]:hover {
-  border-color: var(--color-focus) !important;
-  background-color: rgba(201, 164, 92, 0.05) !important;
-  color: var(--color-focus) !important;
+/* ── Structure Field ── */
+.k-structure .k-structure-table {
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius);
+  overflow: hidden;
 }
 
-/* Checkbox & Radio native tinting */
-input[type="checkbox"],
-input[type="radio"] {
-  accent-color: var(--color-focus) !important;
-  cursor: pointer;
+.k-structure .k-structure-table th {
+  background: var(--panel-bg-surface);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--panel-text-muted);
 }
 
-/* Toggle Switch Overhaul */
-.k-toggle-input {
-  background-color: #13060d !important;
-  border: 1px solid var(--input-color-border) !important;
-  border-radius: 100px !important;
-  width: 2.75rem !important;
-  height: 1.5rem !important;
-  position: relative !important;
-  cursor: pointer !important;
-  transition: var(--transition-smooth) !important;
+.k-structure .k-structure-table tr:hover {
+  background: rgba(201, 164, 92, 0.04);
 }
 
-.k-toggle-input::after {
-  content: "" !important;
-  position: absolute !important;
-  top: 2px !important;
-  left: 2px !important;
-  width: 1.1rem !important;
-  height: 1.1rem !important;
-  border-radius: 50% !important;
-  background-color: var(--color-text-dimmed) !important;
-  transition: var(--transition-smooth) !important;
+/* ── Pages Section Table ── */
+.k-pages .k-collection {
+  border-radius: var(--panel-radius);
+  overflow: hidden;
 }
 
-.k-toggle-input[checked] {
-  background-color: var(--color-focus) !important;
-  border-color: var(--color-focus) !important;
+.k-items .k-item {
+  transition: background var(--panel-transition);
 }
 
-.k-toggle-input[checked]::after {
-  left: calc(100% - 1.1rem - 2px) !important;
-  background-color: #13060d !important;
+.k-items .k-item:hover {
+  background: rgba(201, 164, 92, 0.04);
 }
 
-/* Custom styling for Select / Multiselect dropdown fields */
-.k-select-input {
-  cursor: pointer !important;
+/* ── Tags Field ── */
+.k-tags-input .k-tag {
+  background: var(--panel-bg-elevated);
+  border: 1px solid var(--panel-border);
+  border-radius: 4px;
+  color: var(--panel-accent-gold);
+  font-size: 0.8rem;
 }
 
-.k-multiselect-input {
-  background-color: #13060d !important;
+/* ── Blocks Editor ── */
+.k-block {
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius);
+  background: var(--panel-bg-surface);
+  transition: border-color var(--panel-transition);
 }
 
-/* Writer / Editorial Text editor (Make writing feel like a book) */
-.k-writer .ProseMirror,
-.k-writer-input,
-.k-textarea-input {
-  font-family: var(--font-serif) !important;
-  font-size: 1.25rem !important;
-  line-height: 1.65 !important;
-  color: #f5e9e2 !important;
-  background-color: #13060d !important;
-  padding: 1.25rem !important;
-  border-radius: 8px !important;
-  min-height: 150px !important;
+.k-block:hover,
+.k-block:focus-within {
+  border-color: var(--panel-border-strong);
 }
 
-.k-writer-toolbar {
-  background-color: #1d0914 !important;
-  border-bottom: 1px solid var(--color-border) !important;
-  border-top-left-radius: 8px !important;
-  border-top-right-radius: 8px !important;
-  padding: 0.35rem !important;
+.k-block-selector .k-block-selector-group {
+  background: var(--panel-bg-elevated);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius);
 }
 
-.k-writer-toolbar-button {
-  color: var(--color-text-dimmed) !important;
-  border-radius: 4px !important;
-  transition: var(--transition-smooth) !important;
-}
-
-.k-writer-toolbar-button:hover,
-.k-writer-toolbar-button.k-writer-toolbar-button-active {
-  color: var(--color-focus) !important;
-  background-color: rgba(201, 164, 92, 0.1) !important;
-}
-
-/* Structure Tables & Lists */
-.k-structure-table {
-  border: 1px solid var(--color-border) !important;
-  border-radius: 8px !important;
-  overflow: hidden !important;
-  background-color: #13060d !important;
-}
-
-.k-structure-table th {
-  background-color: #1d0914 !important;
-  font-family: var(--font-serif) !important;
-  font-weight: bold !important;
-  color: var(--color-focus) !important;
-  border-bottom: 1px solid var(--color-border) !important;
-  padding: 0.75rem !important;
-}
-
-.k-structure-table td {
-  border-bottom: 1px solid var(--color-border-dimmed) !important;
-  padding: 0.75rem !important;
-  transition: var(--transition-smooth) !important;
-}
-
-.k-structure-table tr:hover td {
-  background-color: rgba(245, 233, 226, 0.03) !important;
-}
-
-/* Modals & Dialog Boxes */
-.k-overlay {
-  background-color: rgba(19, 6, 13, 0.65) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-}
-
+/* ── Dialogs ── */
 .k-dialog {
-  background-color: #1d0914 !important;
-  border: 1px solid rgba(201, 164, 92, 0.25) !important;
-  border-radius: 12px !important;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 20px rgba(201, 164, 92, 0.1) !important;
-  overflow: hidden !important;
+  background: var(--panel-bg-surface);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
-.k-dialog-header {
-  background-color: #13060d !important;
-  border-bottom: 1px solid var(--color-border) !important;
-  padding: 1rem 1.5rem !important;
+.k-dialog-overlay {
+  background: rgba(26, 10, 20, 0.8);
+  backdrop-filter: blur(4px);
 }
 
-.k-dialog-header h1,
-.k-dialog-header .k-headline {
-  font-family: var(--font-serif) !important;
-  color: var(--color-focus) !important;
-  font-size: 1.35rem !important;
-}
-
-.k-dialog-body {
-  padding: 1.5rem !important;
-}
-
-.k-dialog-footer {
-  background-color: #13060d !important;
-  border-top: 1px solid var(--color-border) !important;
-  padding: 0.75rem 1.5rem !important;
-}
-
-/* Slide-out Drawers */
-.k-drawer {
-  background-color: rgba(19, 6, 13, 0.95) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  border-left: 2px solid var(--color-focus) !important;
-  box-shadow: -15px 0 40px rgba(0, 0, 0, 0.6) !important;
-}
-
-.k-drawer-header {
-  background-color: rgba(19, 6, 13, 0.6) !important;
-  border-bottom: 1px solid var(--color-border) !important;
-  backdrop-filter: blur(10px) !important;
-}
-
-.k-drawer-title {
-  font-family: var(--font-serif) !important;
-  font-size: 1.5rem !important;
-  color: var(--color-focus) !important;
-}
-
-.k-drawer-content {
-  padding: 2rem !important;
-  background-color: transparent !important;
-}
-
-/* Tabs UI Navigation */
-.k-tabs {
-  background-color: #13060d !important;
-  border-bottom: 1px solid var(--color-border) !important;
-  margin-bottom: 1.5rem !important;
-  border-radius: 6px !important;
-  overflow: hidden !important;
-}
-
-.k-tab-button {
-  font-family: var(--font-sans) !important;
-  font-weight: 500 !important;
-  padding: 0.75rem 1.25rem !important;
-  color: var(--color-text-dimmed) !important;
-  border-bottom: 2px solid transparent !important;
-  transition: var(--transition-smooth) !important;
-}
-
-.k-tab-button:hover {
-  color: var(--color-text) !important;
-  background-color: rgba(245, 233, 226, 0.02) !important;
-}
-
-.k-tab-button[aria-selected="true"],
-.k-tab-button.k-tab-button-active {
-  color: var(--color-focus) !important;
-  background-color: rgba(201, 164, 92, 0.06) !important;
-  border-bottom: 2px solid var(--color-focus) !important;
-}
-
-/* Neon Glowing Status Dots */
-@keyframes status-glow-draft {
-  0% { box-shadow: 0 0 0 0 rgba(201, 164, 92, 0.4); }
-  70% { box-shadow: 0 0 0 6px rgba(201, 164, 92, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(201, 164, 92, 0); }
-}
-
-@keyframes status-glow-unlisted {
-  0% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.4); }
-  70% { box-shadow: 0 0 0 6px rgba(74, 144, 226, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0); }
-}
-
-@keyframes status-glow-listed {
-  0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); }
-  70% { box-shadow: 0 0 0 6px rgba(46, 204, 113, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
-}
-
-/* Target Status Dots */
-.k-status-icon[data-status="draft"] svg,
-.k-status-icon-draft svg {
-  color: var(--color-focus) !important;
-  fill: var(--color-focus) !important;
-}
-
-.k-status-icon[data-status="draft"],
-.k-status-icon-draft {
-  background-color: var(--color-focus) !important;
-  border-radius: 50% !important;
-  animation: status-glow-draft 2s infinite !important;
-}
-
-.k-status-icon[data-status="unlisted"] svg,
-.k-status-icon-unlisted svg {
-  color: #4a90e2 !important;
-  fill: #4a90e2 !important;
-}
-
-.k-status-icon[data-status="unlisted"],
-.k-status-icon-unlisted {
-  background-color: #4a90e2 !important;
-  border-radius: 50% !important;
-  animation: status-glow-unlisted 2s infinite !important;
-}
-
-.k-status-icon[data-status="listed"] svg,
-.k-status-icon-listed svg,
-.k-status-icon[data-status="public"] svg {
-  color: #2ecc71 !important;
-  fill: #2ecc71 !important;
-}
-
-.k-status-icon[data-status="listed"],
-.k-status-icon-listed,
-.k-status-icon[data-status="public"] {
-  background-color: #2ecc71 !important;
-  border-radius: 50% !important;
-  animation: status-glow-listed 2s infinite !important;
-}
-
-/* Popovers / Floating Dropdowns */
-.k-popover,
+/* ── Dropdowns ── */
 .k-dropdown-content {
-  background-color: #1d0914 !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 8px !important;
-  box-shadow: var(--shadow-premium) !important;
-  overflow: hidden !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+  background: var(--panel-bg-elevated);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  box-shadow: var(--panel-shadow);
 }
 
-.k-dropdown-item {
-  color: var(--color-text) !important;
-  font-family: var(--font-sans) !important;
-  transition: var(--transition-smooth) !important;
+.k-dropdown-content .k-dropdown-item:hover {
+  background: rgba(201, 164, 92, 0.08);
+  color: var(--panel-accent-gold);
 }
 
-.k-dropdown-item:hover {
-  background-color: rgba(201, 164, 92, 0.1) !important;
-  color: var(--color-focus) !important;
+/* ── Status Indicators ── */
+.k-status-icon[data-status="listed"] {
+  color: var(--panel-accent-gold);
 }
 
-/* Stats view reports (glowing dashboard boxes) */
-.k-stats .k-stat {
-  background-color: #321323 !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 8px !important;
-  padding: 1.25rem !important;
-  box-shadow: var(--shadow-premium) !important;
+.k-status-icon[data-status="unlisted"] {
+  color: var(--panel-accent-wine);
 }
 
-.k-stat-label {
-  font-size: 0.8rem !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-  color: var(--color-text-dimmed) !important;
+.k-status-icon[data-status="draft"] {
+  color: var(--panel-text-muted);
 }
 
-.k-stat-value {
-  font-family: var(--font-serif) !important;
-  font-size: 2.25rem !important;
-  color: var(--color-focus) !important;
-  font-weight: 600 !important;
+/* ── Breadcrumb ── */
+.k-topbar .k-breadcrumb .k-link {
+  color: var(--panel-text-muted);
+  transition: color var(--panel-transition);
 }
 
-/* User Menu & Avatar */
-.k-user-info {
-  color: var(--color-text) !important;
+.k-topbar .k-breadcrumb .k-link:hover {
+  color: var(--panel-accent-gold);
 }
 
-.k-topbar .k-user-menu img {
-  border: 2px solid var(--color-focus) !important;
-  box-shadow: var(--shadow-glow) !important;
+/* ── Scrollbar ── */
+.k-panel ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-/* Login Screen UI Enhancement (Centered, beautifully focused form) */
-.k-login-view {
-  background-color: #13060d !important;
-  background-image: radial-gradient(circle at center, #260c1a 0%, #13060d 100%) !important;
+.k-panel ::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.k-login-fields {
-  background-color: rgba(38, 12, 26, 0.45) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(201, 164, 92, 0.2) !important;
-  border-radius: 12px !important;
-  padding: 2.5rem !important;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(201, 164, 92, 0.1) !important;
+.k-panel ::-webkit-scrollbar-thumb {
+  background: var(--panel-border-strong);
+  border-radius: 3px;
 }
 
-.k-login-view h1 {
-  color: var(--color-focus) !important;
-  font-family: var(--font-serif) !important;
-  font-size: 2.5rem !important;
-  margin-bottom: 2rem !important;
-  text-shadow: 0 0 15px rgba(201, 164, 92, 0.2) !important;
+.k-panel ::-webkit-scrollbar-thumb:hover {
+  background: var(--panel-accent-gold);
 }
 
-.k-login-view .k-button[type="submit"] {
-  width: 100% !important;
-  padding-block: 0.75rem !important;
-  font-size: 1.05rem !important;
+/* ── Focus Styles ── */
+.k-panel *:focus-visible {
+  outline: 2px solid var(--panel-accent-gold);
+  outline-offset: 2px;
+}
+
+/* ── Animations ── */
+@media (prefers-reduced-motion: no-preference) {
+  .k-card,
+  .k-button,
+  .k-input,
+  .k-toggle-input .k-toggle-body,
+  .k-tabs .k-tab-button,
+  .k-items .k-item {
+    transition-duration: 0.25s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

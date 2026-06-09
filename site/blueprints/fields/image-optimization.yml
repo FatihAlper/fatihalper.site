@@ -1,0 +1,80 @@
+# Shared image optimization fields preset
+# Used by: files/photo.yml, files/art-image.yml
+
+image_optimization_enabled:
+  label:
+    tr: ImageX ile optimize et
+    en: Optimize with ImageX
+  type: toggle
+  default: true
+  width: 1/2
+
+image_loading:
+  label:
+    tr: Yükleme modu
+    en: Loading mode
+  type: select
+  default: default
+  width: 1/2
+  options:
+    default:
+      tr: Site varsayılanı
+      en: Site default
+    lazy: Lazy
+    eager:
+      tr: Eager / öncelikli
+      en: Eager / priority
+
+image_srcset:
+  label:
+    tr: Srcset profili
+    en: Srcset profile
+  type: select
+  default: auto
+  width: 1/2
+  options:
+    auto:
+      tr: Otomatik
+      en: Automatic
+    default:
+      tr: Varsayılan
+      en: Default content
+    card:
+      tr: Kartlar
+      en: Cards and thumbnails
+    wide:
+      tr: Geniş
+      en: Wide content
+    hero:
+      tr: Tam genişlik
+      en: Full width / hero
+
+image_ratio:
+  label:
+    tr: Render oranı
+    en: Render ratio
+  type: select
+  default: auto
+  width: 1/2
+  options:
+    auto:
+      tr: Otomatik
+      en: Automatic
+    intrinsic:
+      tr: Orijinal oran
+      en: Original ratio
+    1/1:
+      tr: Kare
+      en: Square
+    4/3: Landscape 4:3
+    3/2: Photo 3:2
+    16/9: Wide 16:9
+    2/3: Portrait 2:3
+    3/4: Portrait 3:4
+
+image_sizes:
+  label:
+    tr: Sizes niteliği
+    en: Sizes attribute
+  type: text
+  placeholder: "(min-width: 900px) 800px, 100vw"

@@ -3,8 +3,8 @@ title:
   en: Administrator
 
 description:
-  tr: Site, içerik, çeviri ve entegrasyon ayarlarına tam erişim.
-  en: Full access to site, content, translation and integration settings.
+  tr: Site, içerik ve entegrasyon ayarlarına tam erişim.
+  en: Full access to site, content and integration settings.
 
 home: /panel/site
 
@@ -28,66 +28,32 @@ tabs:
           identity:
             type: fields
             fields:
-              public_name_tr:
+              public_name:
                 label:
-                  tr: Görünen ad - Türkçe
-                  en: Display name - Turkish
+                  tr: Görünen ad
+                  en: Display name
                 type: text
-                width: 1/2
-              public_name_en:
+
+              role_title:
                 label:
-                  tr: Görünen ad - İngilizce
-                  en: Display name - English
+                  tr: Rol / ünvan
+                  en: Role / title
                 type: text
-                width: 1/2
-              role_title_tr:
+
+              short_bio:
                 label:
-                  tr: Rol/ünvan - Türkçe
-                  en: Role/title - Turkish
-                type: text
-                width: 1/2
-              role_title_en:
-                label:
-                  tr: Rol/ünvan - İngilizce
-                  en: Role/title - English
-                type: text
-                width: 1/2
-              short_bio_tr:
-                label:
-                  tr: Kısa biyografi - Türkçe
-                  en: Short bio - Turkish
+                  tr: Kısa biyografi
+                  en: Short bio
                 type: textarea
                 size: small
                 maxlength: 240
-                width: 1/2
-              short_bio_en:
+
+              bio:
                 label:
-                  tr: Kısa biyografi - İngilizce
-                  en: Short bio - English
+                  tr: Uzun biyografi
+                  en: Long bio
                 type: textarea
-                size: small
-                maxlength: 240
-                width: 1/2
-              bio_tr:
-                label:
-                  tr: Uzun biyografi - Türkçe
-                  en: Long bio - Turkish
-                type: blocks
-                fieldsets:
-                  - heading
-                  - text
-                  - quote
-                  - list
-              bio_en:
-                label:
-                  tr: Uzun biyografi - İngilizce
-                  en: Long bio - English
-                type: blocks
-                fieldsets:
-                  - heading
-                  - text
-                  - quote
-                  - list
+                size: huge
 
       sidebar:
         width: 1/3
@@ -99,8 +65,8 @@ tabs:
               tr: Hesap bilgisi
               en: Account info
             text:
-              tr: E-posta, parola, avatar ve Panel dili üstteki ayarlar butonundan yönetilir. Bu alanlar sitenin iki dilli profil ve editoryal imza verileri içindir.
-              en: Email, password, avatar and Panel language are managed from the settings button above. These fields are for bilingual profile and editorial signature data.
+              tr: E-posta, parola, avatar ve Panel dili üstteki ayarlar butonundan yönetilir. Bu alanlar Kirby native multi-language ile dil bazında saklanır.
+              en: Email, password, avatar and Panel language are managed from the settings button above. These fields are stored per-language via Kirby native multi-language.
           profile_media:
             type: files
             headline:
@@ -132,63 +98,45 @@ tabs:
                 type: email
                 width: 1/2
                 help:
-                  tr: Site üzerinde gösterilebilecek e-posta adresi. Giriş e-postasından ayrı tutulabilir.
-                  en: Email address that can be shown on the site. It can differ from the login email.
+                  tr: Site üzerinde gösterilebilecek e-posta adresi.
+                  en: Email address that can be shown on the site.
               website:
                 label:
                   tr: Web sitesi
                   en: Website
                 type: url
                 width: 1/2
-              location_tr:
+              location:
                 label:
-                  tr: Konum - Türkçe
-                  en: Location - Turkish
+                  tr: Konum
+                  en: Location
                 type: text
-                width: 1/2
-              location_en:
-                label:
-                  tr: Konum - İngilizce
-                  en: Location - English
-                type: text
-                width: 1/2
               social_links:
                 label:
-                  tr: Sosyal/profesyonel linkler
-                  en: Social/professional links
+                  tr: Sosyal / profesyonel linkler
+                  en: Social / professional links
                 type: structure
                 columns:
                   platform:
-                    width: 1/4
-                  label_tr:
-                    width: 1/4
-                  label_en:
-                    width: 1/4
+                    width: 1/3
+                  label:
+                    width: 1/3
                   visible:
-                    width: 1/4
+                    width: 1/3
                 fields:
                   platform:
-                    label:
-                      tr: Platform
-                      en: Platform
+                    label: Platform
                     type: text
                     width: 1/2
                   url:
                     label: URL
                     type: url
                     width: 1/2
-                  label_tr:
+                  label:
                     label:
-                      tr: Etiket - Türkçe
-                      en: Label - Turkish
+                      tr: Etiket
+                      en: Label
                     type: text
-                    width: 1/2
-                  label_en:
-                    label:
-                      tr: Etiket - İngilizce
-                      en: Label - English
-                    type: text
-                    width: 1/2
                   visible:
                     label:
                       tr: Görünür
@@ -206,8 +154,8 @@ tabs:
               tr: Gizlilik notu
               en: Privacy note
             text:
-              tr: Buradaki alanlar içerik verisi olarak saklanır. Parola, API anahtarı, özel token veya kişisel hassas veri eklemeyin.
-              en: These fields are stored as content data. Do not add passwords, API keys, private tokens or sensitive personal data.
+              tr: Buradaki alanlar içerik verisi olarak saklanır. Parola veya API anahtarı eklemeyin.
+              en: These fields are stored as content data. Do not add passwords or API keys.
 
   preferences:
     label:
@@ -221,16 +169,6 @@ tabs:
           editorial_preferences:
             type: fields
             fields:
-              preferred_content_language:
-                label:
-                  tr: Varsayılan içerik dili
-                  en: Default content language
-                type: select
-                default: tr
-                width: 1/2
-                options:
-                  tr: Türkçe
-                  en: English
               timezone:
                 label:
                   tr: Zaman dilimi
@@ -241,18 +179,11 @@ tabs:
                 options:
                   Europe/Istanbul: Europe/Istanbul
                   UTC: UTC
-              editorial_signature_tr:
+              editorial_signature:
                 label:
-                  tr: Editoryal imza - Türkçe
-                  en: Editorial signature - Turkish
+                  tr: Editoryal imza
+                  en: Editorial signature
                 type: text
-                width: 1/2
-              editorial_signature_en:
-                label:
-                  tr: Editoryal imza - İngilizce
-                  en: Editorial signature - English
-                type: text
-                width: 1/2
               internal_notes:
                 label:
                   tr: İç notlar
@@ -271,11 +202,11 @@ tabs:
             type: info
             theme: info
             headline:
-              tr: Panel dili
-              en: Panel language
+              tr: Dil bilgisi
+              en: Language info
             text:
-              tr: Panel dili frontend TR/EN switch'ten bağımsızdır. Bu hesabın Panel dilini değiştirmek için üstteki ayarlar butonundan Dil seçeneğini kullanın. Yeni/boş kullanıcılar için varsayılan Panel dili site/config/config.php içindeki panel.language ayarından gelir.
-              en: The Panel language is independent from the frontend TR/EN switch. Use the settings button above and choose Language to change this account's Panel language. For new/empty users, the default Panel language comes from panel.language in site/config/config.php.
+              tr: Kirby native multi-language etkin. İçerik panelde dil seçici ile yönetilir.
+              en: Kirby native multi-language is active. Content is managed via the language switcher in the Panel.
 
           access_summary:
             type: info
@@ -284,5 +215,5 @@ tabs:
               tr: Yetki özeti
               en: Access summary
             text:
-              tr: Admin rolü Kirby'de zorunludur ve tüm izinlere sahiptir. Bu blueprint yalnızca ek alanları ve hesap düzenini tanımlar.
-              en: The admin role is mandatory in Kirby and always has all permissions. This blueprint only defines extra fields and the account layout.
+              tr: Admin rolü Kirby'de zorunludur ve tüm izinlere sahiptir.
+              en: The admin role is mandatory in Kirby and always has all permissions.
