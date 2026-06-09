@@ -1,0 +1,99 @@
+title: Dosya
+icon: image
+
+accept:
+  type: image
+
+fields:
+  content_headline:
+    label: İçerik bilgisi
+    type: headline
+  title:
+    label: Başlık
+    type: text
+    width: 1/2
+  alt:
+    label: Alt metin
+    type: text
+    width: 1/2
+  caption:
+    label: Kısa açıklama
+    type: textarea
+    size: small
+
+  lightbox_headline:
+    label: Lightbox
+    type: headline
+    numbered: false
+  lightbox_enabled:
+    label: Lightbox'ta göster
+    type: toggle
+    default: true
+    width: 1/2
+  lightbox_caption:
+    label: Lightbox açıklaması
+    type: textarea
+    size: small
+    help: Boşsa kısa açıklama kullanılır.
+
+  exif_headline:
+    label: Teknik / EXIF
+    type: headline
+    numbered: false
+  camera:
+    label: Kamera
+    type: text
+    width: 1/2
+  lens:
+    label: Lens
+    type: text
+    width: 1/2
+  focal_length:
+    label: Odak uzaklığı
+    type: text
+    placeholder: "180mm"
+    width: 1/3
+  iso:
+    label: ISO
+    type: text
+    placeholder: "400"
+    width: 1/3
+  shutter_speed:
+    label: Enstantane
+    type: text
+    placeholder: "1/250"
+    width: 1/3
+  aperture:
+    label: Diyafram
+    type: text
+    placeholder: "f/3.5"
+    width: 1/3
+  photo_date:
+    label: Fotoğraf tarihi
+    type: date
+    width: 1/3
+  location:
+    label: Konum
+    type: text
+    width: 1/3
+
+  extra_headline:
+    label: Ek bilgi
+    type: headline
+    numbered: false
+  visual_descriptors:
+    label: Görsel not / tanım
+    type: tags
+    width: 1/2
+  atmosphere:
+    label: Teknik not
+    type: text
+    width: 1/2
+  credit:
+    label: Kaynak / malzeme notu
+    type: text
+    width: 1/2
+  series:
+    label: Seri
+    type: text
+    width: 1/2

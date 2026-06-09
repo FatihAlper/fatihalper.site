@@ -497,3 +497,4 @@ tabs:
         sections:
           files:
             type: files
+            template: photo
