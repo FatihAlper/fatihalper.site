@@ -1742,7 +1742,7 @@ picture {
 
 /* Hero */
 .home-hero {
-  min-height: var(--home-hero-min-height, max(360px, calc(100dvh - var(--home-header-offset) - var(--home-marquee-height))));
+  min-height: var(--home-hero-min-height, max(360px, calc(100svh - var(--home-header-offset) - var(--home-marquee-height))));
   display: flex;
   align-items: center;
   position: relative;
@@ -1848,18 +1848,10 @@ picture {
   padding: 0 var(--space-4);
   min-width: max-content;
   animation: scrollMarquee 30s linear infinite;
+  will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform: translate3d(0, 0, 0);
-}
-
-.home-marquee-gallery__track.is-running {
-  will-change: transform;
-}
-
-.home-marquee-gallery__track.is-paused {
-  animation-play-state: paused;
-  will-change: auto;
 }
 
 .home-marquee-gallery__track.dir-right {
@@ -2498,7 +2490,7 @@ picture {
 .home-manifesto-strip {
   --home-manifesto-content-width: min(100%, 820px);
   --home-manifesto-font-size: clamp(1.2rem, 1.65vw, 1.7rem);
-  --home-manifesto-strip-min-height: clamp(250px, 28dvh, 360px);
+  --home-manifesto-strip-min-height: 300px;
   position: relative;
   display: grid;
   grid-template-rows: auto auto auto;
@@ -2613,7 +2605,7 @@ picture {
 @media (max-width: 767px) {
   .home-manifesto-strip {
     --home-manifesto-font-size: clamp(1rem, 4.6vw, 1.32rem);
-    --home-manifesto-strip-min-height: clamp(280px, 38dvh, 390px);
+    --home-manifesto-strip-min-height: 310px;
     row-gap: 0.65rem;
     padding-block: clamp(1.65rem, 6vw, 2.35rem);
     padding-inline: 1.25rem;

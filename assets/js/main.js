@@ -432,44 +432,14 @@ function initMarquee() {
   if (!track) return;
 
   const section = track.closest('.home-marquee-gallery');
-  let isVisible = true;
-  let isScrolling = false;
-  let scrollTimer;
 
-  function updateState() {
-    if (isVisible && !isScrolling) {
-      track.classList.add('is-running');
-      track.classList.remove('is-paused');
-    } else {
-      track.classList.add('is-paused');
-      track.classList.remove('is-running');
-    }
-  }
-
-  // Pause when not in viewport
+  // Pause when not in viewport (pure perf optimization)
   if ('IntersectionObserver' in window && section) {
     const observer = new IntersectionObserver(entries => {
-      isVisible = entries[0].isIntersecting;
-      updateState();
+      track.style.animationPlayState = entries[0].isIntersecting ? 'running' : 'paused';
     }, { threshold: 0 });
     observer.observe(section);
   }
-
-  // Pause during active scroll to free up compositor
-  window.addEventListener('scroll', () => {
-    if (!isScrolling) {
-      isScrolling = true;
-      updateState();
-    }
-    clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(() => {
-      isScrolling = false;
-      updateState();
-    }, 150);
-  }, { passive: true });
-
-  // Initial state
-  updateState();
 }
 
 function setScrollLock(locked) {

@@ -2,7 +2,7 @@
 .home-manifesto-strip {
   --home-manifesto-content-width: min(100%, 820px);
   --home-manifesto-font-size: clamp(1.2rem, 1.65vw, 1.7rem);
-  --home-manifesto-strip-min-height: clamp(250px, 28dvh, 360px);
+  --home-manifesto-strip-min-height: 300px;
   position: relative;
   display: grid;
   grid-template-rows: auto auto auto;
@@ -117,7 +117,7 @@
 @media (max-width: 767px) {
   .home-manifesto-strip {
     --home-manifesto-font-size: clamp(1rem, 4.6vw, 1.32rem);
-    --home-manifesto-strip-min-height: clamp(280px, 38dvh, 390px);
+    --home-manifesto-strip-min-height: 310px;
     row-gap: 0.65rem;
     padding-block: clamp(1.65rem, 6vw, 2.35rem);
     padding-inline: 1.25rem;
