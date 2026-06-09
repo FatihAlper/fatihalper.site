@@ -14,7 +14,9 @@ $manualTags = $home->manual_tags()->isNotEmpty() ? $home->manual_tags() : site()
 if ($mode === 'manual' && $manualTags->isNotEmpty()) {
     $tags = $manualTags->split(',');
 } else {
-    $tags = array_map(fn ($tag) => $tag['name'], array_values(contentTagIndex()));
+    $tagIndex = contentTagIndex();
+    usort($tagIndex, fn ($a, $b) => $b['count'] <=> $a['count']);
+    $tags = array_map(fn ($tag) => $tag['name'], $tagIndex);
     $tags = array_slice($tags, 0, $home->tag_wall_limit()->or(40)->toInt());
 }
 
