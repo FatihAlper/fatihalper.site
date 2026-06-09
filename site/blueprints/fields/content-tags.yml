@@ -3,5 +3,5 @@ label:
   en: Tags
 type: tags
 help:
-  tr: Kamusal kesif etiketleri. Etiket indeksi ve ilgili icerik akisini besler.
+  tr: Kamusal keşif etiketleri. Etiket indeksi ve ilgili içerik akışını besler.
   en: Public discovery tags. These feed the tag index and related content flows.

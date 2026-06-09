@@ -1,5 +1,5 @@
 label:
-  tr: Kapak gorseli
+  tr: Kapak görseli
   en: Cover Image
 type: files
 max: 1
@@ -11,5 +11,5 @@ image:
   ratio: 4/3
   cover: true
 help:
-  tr: Bu icerik icin ana arsiv/kart gorseli.
+  tr: Bu içerik için ana arşiv/kart görseli.
   en: Primary archive/card image for this content item.

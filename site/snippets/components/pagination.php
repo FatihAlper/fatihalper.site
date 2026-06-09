@@ -7,7 +7,7 @@ if (!$pagination || !$pagination->hasPages()) return;
 
 <nav class="tags-pagination" aria-label="Sayfalama">
   <?php if ($pagination->hasPrevPage()): ?>
-    <a href="<?= contentPaginationUrl($baseUrl, $pagination->prevPage()) ?>" class="tags-pagination__link">Onceki</a>
+    <a href="<?= contentPaginationUrl($baseUrl, $pagination->prevPage()) ?>" class="tags-pagination__link">Önceki</a>
   <?php endif ?>
 
   <?php foreach ($pagination->range(5) as $pageNumber): ?>

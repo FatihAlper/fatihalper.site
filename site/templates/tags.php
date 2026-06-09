@@ -33,17 +33,17 @@ $perPage = $tagSlug ? 12 : 24;
     ?>
 
     <div class="container tags-header">
-      <a href="<?= esc(contentTagsUrl(), 'attr') ?>" class="tags-back-link">Tum etiketler</a>
+      <a href="<?= esc(contentTagsUrl(), 'attr') ?>" class="tags-back-link">Tüm etiketler</a>
       <p class="meta-label"><?= fa_t('tags.label', 'Etiket') ?></p>
       <h1><?= esc($detailTitle) ?></h1>
       <p class="archive-description">
-        <?= $pagination->total() ?> katalog kaydi bu etikete bagli.
+        <?= $pagination->total() ?> katalog kaydı bu etikete bağlı.
       </p>
     </div>
 
     <?php if ($tag): ?>
       <nav class="container tags-filter" aria-label="Icerik turu filtresi">
-        <a class="tags-filter__link <?= $type === '' ? 'is-current' : '' ?>" href="<?= esc(contentTagUrl($tag['name']), 'attr') ?>" <?= $type === '' ? 'aria-current="page"' : '' ?>>Tumu</a>
+        <a class="tags-filter__link <?= $type === '' ? 'is-current' : '' ?>" href="<?= esc(contentTagUrl($tag['name']), 'attr') ?>" <?= $type === '' ? 'aria-current="page"' : '' ?>>Tümü</a>
         <?php foreach ($typeFilters as $template => $label): ?>
           <?php $href = contentTagUrl($tag['name']) . '?type=' . rawurlencode($template); ?>
           <a class="tags-filter__link <?= $type === $template ? 'is-current' : '' ?>" href="<?= esc($href, 'attr') ?>" <?= $type === $template ? 'aria-current="page"' : '' ?>>
@@ -59,7 +59,7 @@ $perPage = $tagSlug ? 12 : 24;
       <?php endforeach ?>
 
       <?php if ($paginatedItems->isEmpty()): ?>
-        <p class="empty-state">Bu filtreyle eslesen yayinlanmis katalog kaydi bulunamadi.</p>
+        <p class="empty-state">Bu filtreyle eşleşen yayınlanmış katalog kaydı bulunamadı.</p>
       <?php endif ?>
     </div>
 
@@ -88,7 +88,7 @@ $perPage = $tagSlug ? 12 : 24;
     ?>
 
     <div class="container tags-header">
-      <p class="meta-label">Arsiv</p>
+      <p class="meta-label">Arşiv</p>
       <h1><?= $page->title()->or(fa_t('tags.title', 'Etiketler')) ?></h1>
       <?php if ($page->intro()->isNotEmpty()): ?>
         <p class="archive-description"><?= $page->intro() ?></p>
@@ -127,7 +127,7 @@ $perPage = $tagSlug ? 12 : 24;
           data-tag-name="<?= esc($tag['name'], 'attr') ?>"
         >
           <span class="tags-index-card__name">#<?= esc($tag['name']) ?></span>
-          <span class="tags-index-card__count"><?= $tag['count'] ?> kayit</span>
+          <span class="tags-index-card__count"><?= $tag['count'] ?> kayıt</span>
           <?php if (count($typeLabels) > 0): ?>
             <span class="tags-index-card__hint"><?= esc(implode(', ', array_slice($typeLabels, 0, 3))) ?></span>
           <?php endif ?>
@@ -135,7 +135,7 @@ $perPage = $tagSlug ? 12 : 24;
       <?php endforeach ?>
 
       <?php if ($paginatedTags->isEmpty()): ?>
-        <p class="empty-state">Aramanla eslesen etiket bulunamadi.</p>
+        <p class="empty-state">Aramanla eşleşen etiket bulunamadı.</p>
       <?php endif ?>
     </div>
 

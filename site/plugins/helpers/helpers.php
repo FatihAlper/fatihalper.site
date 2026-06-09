@@ -844,11 +844,11 @@ function contentTaggableItems() {
  */
 function contentTagTypeFilters(): array {
     return [
-        'writing'      => fa_t('content.type.writing', 'Yazi'),
+        'writing'      => fa_t('content.type.writing', 'Yazı'),
         'film-review'  => fa_t('content.type.film', 'Film'),
         'book-review'  => fa_t('content.type.book', 'Kitap'),
-        'playlist'     => fa_t('content.type.playlist', 'Muzik'),
-        'photo-album'  => fa_t('content.type.photo', 'Fotograf'),
+        'playlist'     => fa_t('content.type.playlist', 'Müzik'),
+        'photo-album'  => fa_t('content.type.photo', 'Fotoğraf'),
         'art-project'  => fa_t('content.type.art', 'Sanat'),
     ];
 }

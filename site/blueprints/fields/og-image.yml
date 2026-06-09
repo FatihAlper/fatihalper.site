@@ -1,5 +1,5 @@
 label:
-  tr: OG gorseli
+  tr: OG görseli
   en: OG Image
 type: files
 max: 1
@@ -11,5 +11,5 @@ image:
   ratio: 16/9
   cover: true
 help:
-  tr: Opsiyonel sosyal paylasim gorseli. Bos kalirsa cover/poster/backdrop/site varsayilanlari kullanilir.
+  tr: Opsiyonel sosyal paylaşım görseli. Boş kalırsa cover/poster/backdrop/site varsayılanları kullanılır.
   en: Optional social image. Empty values fall back to cover/poster/backdrop/site defaults.

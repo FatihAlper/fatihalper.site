@@ -6,5 +6,5 @@ min: 0
 max: 5
 step: 0.5
 help:
-  tr: Ortak 0-5 arsiv puanlama olcegi.
+  tr: Ortak 0-5 arşiv puanlama ölçeği.
   en: Shared 0-5 archive rating scale.
