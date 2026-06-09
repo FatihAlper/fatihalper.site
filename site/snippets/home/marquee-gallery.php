@@ -84,10 +84,16 @@ if (count($items) === 0) return;
       $displayItems = array_merge($items, $items);
       foreach ($displayItems as $item):
         if ($img = $item['image']):
-          $isLightbox = ($item['link'] === '#');
+          $link = trim((string)$item['link']);
+          if ($link === '' || $link === '#') {
+              $link = '#';
+              $isLightbox = true;
+          } else {
+              $isLightbox = false;
+          }
           $photoDate = $img->photo_date()->isNotEmpty() ? $img->photo_date()->toDate('d M Y') : '';
       ?>
-        <a href="<?= $item['link'] ?>" 
+        <a href="<?= $link ?>" 
            class="home-marquee-gallery__item <?= $isLightbox ? 'js-lightbox-trigger' : '' ?>"
            <?php if ($isLightbox): ?>
            data-src="<?= esc($img->url(), 'attr') ?>"
