@@ -115,8 +115,8 @@ function initMobileMenu() {
 
 function initLightbox() {
   const lightbox = document.getElementById('lightbox');
-  const triggers = Array.from(document.querySelectorAll('.js-lightbox-trigger'));
-  if (!lightbox || triggers.length === 0) return;
+  const allTriggers = Array.from(document.querySelectorAll('.js-lightbox-trigger'));
+  if (!lightbox || allTriggers.length === 0) return;
 
   const lbImage = lightbox.querySelector('.lightbox-image');
   const lbTitle = lightbox.querySelector('.lightbox-title');
@@ -127,6 +127,24 @@ function initLightbox() {
   const lbNext = lightbox.querySelector('.lightbox-next');
 
   if (!lbImage || !lbTitle || !lbDesc || !lbExif || !lbClose) return;
+
+  // Deduplicate triggers that share the same data-lightbox-id (e.g. marquee duplicates).
+  // Only navigate through unique images; all duplicates still open the correct one.
+  const seenIds = new Set();
+  const triggers = [];
+  const triggerIndexMap = new Map(); // Maps all trigger elements to their unique index
+
+  allTriggers.forEach(el => {
+    const lid = el.dataset.lightboxId;
+    if (lid && seenIds.has(lid)) {
+      // Duplicate — map it to the same unique index
+      triggerIndexMap.set(el, triggers.length - 1);
+    } else {
+      if (lid) seenIds.add(lid);
+      triggerIndexMap.set(el, triggers.length);
+      triggers.push(el);
+    }
+  });
 
   let currentIndex = 0;
 
@@ -206,20 +224,25 @@ function initLightbox() {
     openLightbox(currentIndex);
   }
 
-  triggers.forEach((el, index) => {
+  // Bind click/keyboard to ALL trigger elements (including duplicates),
+  // but resolve to the unique index for lightbox navigation.
+  allTriggers.forEach(el => {
     el.setAttribute('tabindex', '0');
     el.setAttribute('role', 'button');
-    el.setAttribute('aria-label', el.dataset.title || 'Fotografi buyut');
+    el.setAttribute('aria-label', el.dataset.title || 'Fotoğrafı büyüt');
 
     el.addEventListener('click', event => {
       event.preventDefault();
-      openLightbox(index);
+      event.stopPropagation();
+      const uniqueIndex = triggerIndexMap.get(el) ?? 0;
+      openLightbox(uniqueIndex);
     });
 
     el.addEventListener('keydown', event => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
-        openLightbox(index);
+        const uniqueIndex = triggerIndexMap.get(el) ?? 0;
+        openLightbox(uniqueIndex);
       }
     });
   });

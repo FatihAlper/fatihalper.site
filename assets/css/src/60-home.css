@@ -2,20 +2,20 @@
 
 .home-page {
   --home-header-offset: calc(var(--logo-size-mobile, 50px) + (var(--space-md) * 2) + 1px);
-  --home-marquee-height: clamp(150px, 24dvh, 250px);
+  --home-marquee-height: 180px;
 }
 
 @media (min-width: 768px) {
   .home-page {
     --home-header-offset: calc(var(--logo-size-tablet, 54px) + (var(--space-md) * 2) + 1px);
-    --home-marquee-height: clamp(170px, 25dvh, 280px);
+    --home-marquee-height: 220px;
   }
 }
 
 @media (min-width: 1025px) {
   .home-page {
     --home-header-offset: calc(var(--logo-size-desktop, 58px) + (var(--space-md) * 2) + 1px);
-    --home-marquee-height: clamp(190px, 26dvh, 320px);
+    --home-marquee-height: 260px;
   }
 }
 
@@ -102,13 +102,16 @@
 
 /* Marquee Gallery */
 .home-marquee-gallery {
-  min-height: var(--home-marquee-height);
+  height: var(--home-marquee-height);
   padding: var(--space-4) 0;
   overflow: hidden;
   background: var(--color-bg-secondary);
   display: flex;
   align-items: center;
   touch-action: pan-y;
+  contain: strict;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 100% var(--home-marquee-height);
 }
 
 .home-marquee-gallery__wrapper {
@@ -116,6 +119,8 @@
   overflow: hidden;
   user-select: none;
   touch-action: pan-y;
+  height: 100%;
+  align-items: center;
 }
 
 .home-marquee-gallery__track {
@@ -150,9 +155,11 @@
 .home-marquee-gallery__item {
   position: relative;
   display: block;
+  flex: 0 0 auto;
   height: calc(var(--home-marquee-height) - 2rem);
   aspect-ratio: var(--home-marquee-item-ratio, 4/3);
   overflow: hidden;
+  contain: layout style;
 }
 
 .home-marquee-gallery__item img {
@@ -163,6 +170,7 @@
 }
 
 .home-marquee-gallery__item picture {
+  display: block;
   width: 100%;
   height: 100%;
 }

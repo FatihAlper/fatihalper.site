@@ -82,7 +82,8 @@ if (count($items) === 0) return;
       <?php
       // Duplicate items for seamless infinite scroll
       $displayItems = array_merge($items, $items);
-      foreach ($displayItems as $item):
+      $totalOriginal = count($items);
+      foreach ($displayItems as $idx => $item):
         if ($img = $item['image']):
           $link = trim((string)$item['link']);
           if ($link === '' || $link === '#') {
@@ -92,9 +93,12 @@ if (count($items) === 0) return;
               $isLightbox = false;
           }
           $photoDate = $img->photo_date()->isNotEmpty() ? $img->photo_date()->toDate('d M Y') : '';
+          // Unique ID per original item (duplicates share same ID)
+          $lightboxId = $idx % $totalOriginal;
       ?>
         <a href="<?= $link ?>" 
            class="home-marquee-gallery__item <?= $isLightbox ? 'js-lightbox-trigger' : '' ?>"
+           data-lightbox-id="marquee-<?= $lightboxId ?>"
            <?php if ($isLightbox): ?>
            data-src="<?= esc($img->url(), 'attr') ?>"
            data-title="<?= esc($item['title'], 'attr') ?>"
